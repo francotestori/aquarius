@@ -1,10 +1,12 @@
 package models;
 
+import play.db.ebean.Model;
+
 import javax.persistence.*;
 
 
 @Entity
-public class Notification {
+public class Notification extends Model{
 
     //Constructor variables
     @Id

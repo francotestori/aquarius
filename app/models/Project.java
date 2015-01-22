@@ -3,7 +3,7 @@ package models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -30,11 +30,11 @@ public class Project {
     User user;
 
     @ManyToMany
-    Collection<Tag> tags;
+    List<Tag> tags;
 
     //Non-constructor variables
     @OneToMany(mappedBy = "project")
-    Collection<Update> updates;
+    List<Update> updates;
 
     public long getId() {
         return id;
@@ -80,42 +80,42 @@ public class Project {
         return user;
     }
 
-    public Collection<Tag> getTags() {
+    public List<Tag> getTags() {
         return tags;
     }
 
-    public Collection<Update> getUpdates() {
+    public List<Update> getUpdates() {
         return updates;
     }
 
-    public Collection<User> getFollowers() {
+    public List<User> getFollowers() {
         return followers;
     }
 
-    public Collection<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public Collection<Image> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public Collection<Fund> getFunds() {
+    public List<Fund> getFunds() {
         return funds;
     }
 
     @ManyToMany
     @JoinTable(name = "PROJECT_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
-    Collection<User> followers;
+    List<User> followers;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "project")
-    Collection<Comment> comments;
+    List<Comment> comments;
 
     @OneToMany
-    Collection<Image> images;
+    List<Image> images;
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
-    Collection<Fund> funds;
+    List<Fund> funds;
 
     public Project() {
         //Initialize
