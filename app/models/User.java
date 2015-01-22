@@ -1,12 +1,13 @@
 package models;
 
+import play.db.ebean.Model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class User implements Serializable {
+public class User extends Model implements Serializable {
 
     //Constructor variables
     @Id
@@ -54,20 +55,20 @@ public class User implements Serializable {
     long reputation;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
-    Collection<Project> projects;
+    List<Project> projects;
 
     @OneToMany
     @JoinTable(name = "USER_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
-    Collection<User> followers;
+    List<User> followers;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    Collection<Notification> notifications;
+    List<Notification> notifications;
 
     @OneToMany(mappedBy = "recipient")
-    Collection<Message> inbox;
+    List<Message> inbox;
 
     @OneToMany(mappedBy = "user")
-    Collection<Fund> funds;
+    List<Fund> funds;
 
 
     public User() {
@@ -139,23 +140,23 @@ public class User implements Serializable {
         return reputation;
     }
 
-    public Collection<Project> getProjects() {
+    public List<Project> getProjects() {
         return projects;
     }
 
-    public Collection<User> getFollowers() {
+    public List<User> getFollowers() {
         return followers;
     }
 
-    public Collection<Notification> getNotifications() {
+    public List<Notification> getNotifications() {
         return notifications;
     }
 
-    public Collection<Message> getInbox() {
+    public List<Message> getInbox() {
         return inbox;
     }
 
-    public Collection<Fund> getFunds() {
+    public List<Fund> getFunds() {
         return funds;
     }
 
@@ -163,7 +164,7 @@ public class User implements Serializable {
         return getUnreadNotifications().size();
     }
 
-    public Collection<Notification> getUnreadNotifications() {
+    public List<Notification> getUnreadNotifications() {
         ArrayList<Notification> unread = new ArrayList<>();
         for (Notification notification : notifications) {
             if (!notification.isRead()) unread.add(notification);
@@ -175,7 +176,7 @@ public class User implements Serializable {
         return getUnreadMessages().size();
     }
 
-    public Collection<Message> getUnreadMessages() {
+    public List<Message> getUnreadMessages() {
         ArrayList<Message> unread = new ArrayList<>();
         for (Message message : inbox) {
             if (!message.isRead()) unread.add(message);

@@ -1,9 +1,11 @@
 package models;
 
+import play.db.ebean.Model;
+
 import javax.persistence.*;
 
 @Entity
-public class Fund {
+public class Fund extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

@@ -1,12 +1,14 @@
 package models;
 
+import play.db.ebean.Model;
+
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 
 @Entity
-public class Comment {
+public class Comment extends Model {
 
     //Constructor variables
     @Id
@@ -25,7 +27,7 @@ public class Comment {
     //Non-constructor variables
     @OneToMany
     @JoinTable(name = "ANSWER", inverseJoinColumns = {@JoinColumn(name = "ANSWER_ID")})
-    Collection<Comment> answers;
+    List<Comment> answers;
 
     public Comment() {
     }
@@ -59,7 +61,7 @@ public class Comment {
         return project;
     }
 
-    public Collection<Comment> getAnswers() {
+    public List<Comment> getAnswers() {
         return answers;
     }
 }

@@ -1,5 +1,7 @@
 package models;
 
+import play.db.ebean.Model;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +9,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Type implements Serializable {
+public class Type extends Model implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

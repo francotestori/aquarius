@@ -1,10 +1,12 @@
 package models;
 
+import play.db.ebean.Model;
+
 import javax.persistence.*;
 
 
 @Entity
-public class Message {
+public class Message extends Model{
 
     //Constructor variables
     @Id
