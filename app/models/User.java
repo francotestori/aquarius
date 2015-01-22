@@ -1,12 +1,16 @@
 package models;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Entity
 public class User implements Serializable {
 
     //Constructor variables
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String userName;
     String firstName;
@@ -14,29 +18,90 @@ public class User implements Serializable {
     long birthday;
     String email;
     String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
     Image profilePicture;
 
-    public void setUserName(String userName) {this.userName = userName;}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public void setBirthday(long birthday){this.birthday = birthday;}
+    public void setBirthday(long birthday) {
+        this.birthday = birthday;
+    }
 
-    public void setEmail(String email) {this.email = email;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setPassword(String password) {this.password = password;}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public void setProfilePicture(Image profilePicture) {this.profilePicture = profilePicture;}
+    public void setProfilePicture(Image profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     //Non-constructor variables
     long reputation;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     Collection<Project> projects;
+
+    @OneToMany
+    @JoinTable(name = "USER_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
     Collection<User> followers;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Collection<Notification> notifications;
+
+    @OneToMany(mappedBy = "recipient")
     Collection<Message> inbox;
+
+    @OneToMany(mappedBy = "user")
     Collection<Fund> funds;
+
+
+    public User() {
+        //Initialize
+        notifications = new ArrayList<>();
+        followers = new ArrayList<>();
+        projects = new ArrayList<>();
+        inbox = new ArrayList<>();
+        funds = new ArrayList<>();
+        reputation = 0;
+    }
+
+    public User(String userName) {
+        this.userName = userName;
+    }
+
+    public User(String firstName, String lastName, long birthday, String userName, String email, String password, Image profilePicture) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.profilePicture = profilePicture;
+
+        //Initialize
+        notifications = new ArrayList<>();
+        followers = new ArrayList<>();
+        projects = new ArrayList<>();
+        inbox = new ArrayList<>();
+        funds = new ArrayList<>();
+        reputation = 0;
+
+    }
 
     public long getId() {
         return id;
@@ -128,6 +193,10 @@ public class User implements Serializable {
             total = total + fund.getAmount();
         }
         return total;
+    }
+
+    public void addFollower(User user) {
+        followers.add(user);
     }
 
 

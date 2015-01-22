@@ -1,12 +1,23 @@
 package models;
 
+import javax.persistence.*;
+
+
+@Entity
 public class Message {
 
     //Constructor variables
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private String message;
     private long date;
+
+    @ManyToOne
     private User sender;
+
+    @ManyToOne
     private User recipient;
 
     //Non-constructor variables
@@ -36,4 +47,16 @@ public class Message {
         return read;
     }
 
+    public Message(User recipient, User sender, long date, String message) {
+        this.recipient = recipient;
+        this.sender = sender;
+        this.date = date;
+        this.message = message;
+
+        //Initialize
+        read = false;
+    }
+
+    public Message() {
+    }
 }

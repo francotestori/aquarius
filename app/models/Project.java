@@ -1,11 +1,16 @@
 package models;
 
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Entity
 public class Project {
 
     //Constructor variables
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String name;
     String description;
@@ -14,12 +19,21 @@ public class Project {
     long end;
     int objective;
     String html;
+
+    @ManyToOne
     Country country;
+
+    @ManyToOne
     Type type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     User user;
+
+    @ManyToMany
     Collection<Tag> tags;
 
     //Non-constructor variables
+    @OneToMany(mappedBy = "project")
     Collection<Update> updates;
 
     public long getId() {
@@ -90,13 +104,50 @@ public class Project {
         return funds;
     }
 
+    @ManyToMany
+    @JoinTable(name = "PROJECT_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
     Collection<User> followers;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "project")
     Collection<Comment> comments;
 
+    @OneToMany
     Collection<Image> images;
 
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
     Collection<Fund> funds;
+
+    public Project() {
+        //Initialize
+        updates = new ArrayList<>();
+        followers = new ArrayList<>();
+        comments = new ArrayList<>();
+        images = new ArrayList<>();
+        funds = new ArrayList<>();
+        tags = new ArrayList<>();
+    }
+
+    public Project(String name, String description, String faq, long start, long end, int objective, String html, Country country, Type type, User user) {
+        this.name = name;
+        this.description = description;
+        this.faq = faq;
+        this.start = start;
+        this.end = end;
+        this.objective = objective;
+        this.html = html;
+        this.country = country;
+        this.type = type;
+        this.user = user;
+
+        //Initialize
+        updates = new ArrayList<>();
+        followers = new ArrayList<>();
+        comments = new ArrayList<>();
+        images = new ArrayList<>();
+        funds = new ArrayList<>();
+        tags = new ArrayList<>();
+
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -142,9 +193,10 @@ public class Project {
         return 100 * getFundsRaised() / objective;
     }
 
+    //TODO replantear los metodos de getDaysRemaining y getTimeCompletion
     public int getDaysRemaining() {
         if (end > System.currentTimeMillis()) {
-            return (int) (end - System.currentTimeMillis()) / (24 * 3600000) + 1;
+            return (int) (end - System.currentTimeMillis()) / (24 * 3600000);
         } else {
             return 0;
         }
@@ -181,12 +233,19 @@ public class Project {
     }
 
     public void addComment(String comment, User user, long time) {
-//        Comment com = new Comment(this, user, comment, time);
-//        comments.add(com);
+        Comment com = new Comment(this, user, comment, time);
+        comments.add(com);
     }
 
     public boolean isFollowedBy(User user) {
         return followers.contains(user);
+    }
+
+    public boolean isFollowedBy(String user) {
+        for (User follower : followers) {
+            if (follower.getUserName().equals(user)) return true;
+        }
+        return false;
     }
 
     public void addFund(Fund fund) {
