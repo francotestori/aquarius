@@ -1,0 +1,11 @@
+@(yeah : String)
+@import play.Routes
+@nav("New user"){
+  @helper.form(routes.Users.showNewUserForm){
+    <input type="text" name="userName">
+    <input type="text" name="password">
+    <input type="text" name="email">
+    <input type="submit" formmethod="post">
+
+  }
+}
