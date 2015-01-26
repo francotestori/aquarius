@@ -2,10 +2,14 @@
 @import play.Routes
 @nav("New user"){
   @helper.form(routes.Users.showNewUserForm){
-    <input type="text" name="userName">
-    <input type="text" name="password">
-    <input type="text" name="email">
-    <input type="submit" formmethod="post">
+
+      <input type="text" name="first_name">
+      <input type="text" name="last_name">
+      <input type="text" name="userName" placeholder="username">
+      <input type="text" name="password" placeholder="password">
+      <input type="date" name="birthday">
+      <input type="text" name="email" placeholder="email">
+      <input type="submit" formmethod="post">
 
   }
 }
