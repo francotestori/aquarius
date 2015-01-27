@@ -1,0 +1,17 @@
+@()
+@import play.Routes
+@nav("New user"){
+  @helper.form(routes.Application.register()){
+    <input type="number" name="id" class="hidden">
+    <input type="email" name="email" placeholder="Email">
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit">Create user</button>
+
+  }
+
+  <style>
+    .hidden{
+      display: none;
+    }
+  </style>
+}

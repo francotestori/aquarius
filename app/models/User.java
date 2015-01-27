@@ -23,6 +23,8 @@ public class User extends Model implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     Image profilePicture;
 
+    private static Finder<Long, User> find = new Finder<>(Long.class, User.class);
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -57,19 +59,18 @@ public class User extends Model implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
     List<Project> projects;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "USER_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
     List<User> followers;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Notification> notifications;
 
-    @OneToMany(mappedBy = "recipient")
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
     List<Message> inbox;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Fund> funds;
-
 
     public User() {
         //Initialize
@@ -200,5 +201,14 @@ public class User extends Model implements Serializable {
         followers.add(user);
     }
 
+    public static User getUserByUsername(String userName) {
+        return find.where().eq("userName", userName).findUnique();
+    }
 
+    public static User authenticate(String email, String password) {
+        User user = find.where().eq("email", email).findUnique();
+        if (user == null) return null;
+        else if (user.getPassword().equals(password)) return user;
+        else return null;
+    }
 }

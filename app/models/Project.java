@@ -33,7 +33,7 @@ public class Project extends Model {
     List<Tag> tags;
 
     //Non-constructor variables
-    @OneToMany(mappedBy = "project")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     List<Update> updates;
 
     public long getId() {
@@ -104,50 +104,19 @@ public class Project extends Model {
         return funds;
     }
 
-    @ManyToMany
-    @JoinTable(name = "PROJECT_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
+    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "PROJECT_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
     List<User> followers;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "project")
+//    @OneToMany(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "project")
+    @OneToMany(cascade = CascadeType.ALL)
     List<Comment> comments;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Image> images;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", fetch = FetchType.LAZY)
     List<Fund> funds;
-
-    public Project() {
-        //Initialize
-        updates = new ArrayList<>();
-        followers = new ArrayList<>();
-        comments = new ArrayList<>();
-        images = new ArrayList<>();
-        funds = new ArrayList<>();
-        tags = new ArrayList<>();
-    }
-
-    public Project(String name, String description, String faq, long start, long end, int objective, String html, Country country, Type type, User user) {
-        this.name = name;
-        this.description = description;
-        this.faq = faq;
-        this.start = start;
-        this.end = end;
-        this.objective = objective;
-        this.html = html;
-        this.country = country;
-        this.type = type;
-        this.user = user;
-
-        //Initialize
-        updates = new ArrayList<>();
-        followers = new ArrayList<>();
-        comments = new ArrayList<>();
-        images = new ArrayList<>();
-        funds = new ArrayList<>();
-        tags = new ArrayList<>();
-
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -230,11 +199,6 @@ public class Project extends Model {
 
     public void addFollower(User user) {
         followers.add(user);
-    }
-
-    public void addComment(String comment, User user, long time) {
-        Comment com = new Comment(this, user, comment, time);
-        comments.add(com);
     }
 
     public boolean isFollowedBy(User user) {

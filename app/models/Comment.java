@@ -25,21 +25,9 @@ public class Comment extends Model {
     Project project;
 
     //Non-constructor variables
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "ANSWER", inverseJoinColumns = {@JoinColumn(name = "ANSWER_ID")})
     List<Comment> answers;
-
-    public Comment() {
-    }
-
-    public Comment(Project project, User user, String comment, long date) {
-        this.project = project;
-        this.user = user;
-        this.comment = comment;
-        this.date = date;
-        //Initialize
-        answers = new ArrayList<Comment>();
-    }
 
     public long getId() {
         return id;
