@@ -1,11 +1,282 @@
-@(title : String)(contents : Html)
+@(title : String, style : Html = Html(""), scripts : Html = Html(""))(contents : Html)
 <!DOCTYPE html>
 <html>
 <head lang="en">
   <meta charset="UTF-8">
-  <title>@title</title>
+        <!-- BEGIN PLUGIN CSS -->
+    <link href="@routes.Assets.at("plugins/fullcalendar/fullcalendar.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("plugins/pace/pace-theme-flash.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("plugins/gritter/css/jquery.gritter.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-datepicker/css/datepicker.css")" rel="stylesheet" type="text/css" />
+    <link href="@routes.Assets.at("plugins/jquery-ricksaw-chart/css/rickshaw.css")" rel="stylesheet"  type="text/css" media="screen" >
+    <link href="@routes.Assets.at("plugins/jquery-morris-chart/css/morris.css")" rel="stylesheet"  type="text/css" media="screen">
+    <link href="@routes.Assets.at("plugins/jquery-slider/css/jquery.sidr.light.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-select2/select2.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("plugins/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css")" rel="stylesheet" type="text/css" media="screen"/>
+        <!-- END PLUGIN CSS -->
+        <!-- BEGIN CORE CSS FRAMEWsORK -->
+    <link href="@routes.Assets.at("plugins/boostrapv3/css/bootstrap.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/boostrapv3/css/bootstrap-theme.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/font-awesome/css/font-awesome.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("css/animate.min.css")" rel="stylesheet" type="text/css"/>
+        <!-- END CORE CSS FRAMEWORK -->
+        <!-- BEGIN CSS TEMPLATE -->
+    <link href="@routes.Assets.at("css/style.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("css/responsive.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("css/custom-icon-set.css")" rel="stylesheet" type="text/css"/>
+        <!-- END CSS TEMPLATE -->
+
+  @style
+
+    <title>@title</title>
 </head>
 <body>
-@contents
+
+    <style>
+    div.header-seperation {
+    background-color: #0aa699;
+    }
+
+    img.logo {
+    margin-top: 12px;
+    margin-left: 28px;
+    }
+
+    div.page-sidebar {
+    position: fixed;
+    }
+
+    span.space {
+    margin-left: 5px;
+    }
+
+    </style>
+
+        <!-- NAVBAR START -->
+    <div class="header navbar navbar-inverse " style="z-index: 9999999999999999999;">
+        <div class="navbar-inner">
+                <!--LOGO START-->
+            <div class="header-seperation">
+                <ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper"
+                style="display:none; background: none">
+                    <li class="dropdown"><a id="main-menu-toggle" href="#main-menu" class=""
+                    style="background-color: #80C9C3;">
+                        <div class="iconset top-menu-toggle-white"></div>
+                    </a></li>
+                </ul>
+                <a href=""><img src="@routes.Assets.at("assets/img/logo.png")" class="logo"></a>
+            </div>
+                <!--LOGO END-->
+
+            <div class="header-quick-nav">
+                <div class="pull-left">
+                    <ul class="nav quick-section">
+                        <li class="quicklinks"><a class="" id="layout-condensed-toggle">
+                            <div class="iconset top-menu-toggle-dark"></div>
+                        </a></li>
+                    </ul>
+                    <ul class="nav quick-section">
+
+                        <form name="searchForm" action="">
+                            <li class="m-r-10 input-prepend inside search-form no-boarder">
+                                <span class="add-on"> <span class="iconset top-search"></span></span>
+
+                                <input name="criteria" type="text" class="no-boarder " placeholder="Search Dashboard"
+                                style="width:250px;">
+                            </li>
+                        </form>
+                    </ul>
+                </div>
+                    <!-- END TOP NAVIGATION MENU -->
+
+                    <!-- BEGIN CHAT TOGGLER -->
+                <div class="pull-right">
+                    <div class="chat-toggler">
+                        <a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" data-content=''
+                        data-toggle="dropdown" data-original-title="Notifications">
+                            <div class="user-details">
+                                <div class="username">
+                                    <span class="badge badge-important" id="top-unread-notifications"></span>
+                                    FIRST NAME <span class="bold">LAST NAME</span>
+                                </div>
+                            </div>
+                            <div class="iconset top-down-arrow"></div>
+                        </a>
+
+                        <div class="profile-pic">
+                            @*PROFILE PIC <img src="" width="35" height="35"/>*@
+                        </div>
+                    </div>
+                    <ul class="nav quick-section ">
+                        <li class="quicklinks">
+                            <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="#" id="user-options">
+                                <div class="iconset top-settings-dark "></div>
+                            </a>
+                            <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
+                                <li><a href="#"> Profile</a>
+                                </li>
+                                <li><a href="#">Notifications</a>
+                                </li>
+                                <li><a href="#"> Messages</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href=""><i class="fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                    <!-- END CHAT TOGGLER -->
+            </div>
+            </div>
+        </div>
+
+        <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar" id="main-menu">
+            <!-- BEGIN SIDEBAR MENU -->
+        <br>
+        <ul>
+            <li id="sidenav-home">
+                <a href="">
+                    <i class="icon-custom-home"></i>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+            <li id="sidenav-notifications">
+                <a>
+                    <i class="fa fa-flag"></i>
+                    <span class="title">Notifications</span>
+                    <span class="badge badge-important pull-right" id="side-unread-notifications"></span>
+                </a>
+            </li>
+            <li id="sidenav-messages">
+                <a href="javascript:;">
+                    <i class="fa fa-envelope"></i>
+                    <span class="title">Messages</span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu" style="overflow: hidden;">
+                    <li><a> Inbox </a></li>
+                    <li><a> Sent </a></li>
+                    <li><a> Create new </a></li>
+                </ul>
+
+            </li>
+            <li id="sidenav-profile">
+                <a href="">
+                    <i class="fa fa-user"></i>
+                    <span class="title">Profile</span>
+                </a>
+            </li>
+            <li id="sidenav-projects">
+                <a href="javascript:;">
+                    <i class="icon-custom-chart"></i>
+                    <span class="title">Projects</span>
+                    <span class="arrow"></span>
+
+
+                    <ul class="sub-menu" style="overflow: hidden;">
+                        <li><a href="LINK TO PROJECTS"> My Projects </a></li>
+                        <li><a href="LINK TO FOLLOW PROJECTS"> Followed projects </a></li>
+                        <li><a href="LINK TO NEW PROJECT"> Create new project</a></li>
+                    </ul>
+                </a>
+            </li>
+            <li id="sidenav-community">
+            <a href="javascript:;">
+            <i class="fa fa-users"></i>
+            <span class="title">Community</span>
+            <span class="arrow"></span>
+            <ul class="sub-menu" style="overflow: hidden;">
+            <li><a> My Community </a></li>
+            <li><a> Followed users </a></li>
+            </ul>
+            </a>
+            </li>
+            <li id="sidenav-advanced_search">
+                <a>
+                    <i class="fa fa-search"></i>
+                    <span class="title">Search</span>
+                </a>
+            </li>
+            <li id="sidenav-settings">
+                <a>
+                    <i class="icon-custom-settings"></i>
+                    <span class="title">Settings</span>
+                </a>
+            </li>
+            <li id="sidenav-about">
+                <a>
+                    <i class="fa fa-info"></i>
+                    <span class="title">About</span>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+            <!-- END SIDEBAR MENU -->
+    </div>
+        <!-- END SIDEBAR -->
+
+    <div class="page-content" style="background-color: #f5f5f5;">
+        <div class="clearfix"></div>
+        <div class="content">
+
+            <div class="page-title">
+                <h3><span class="semi-bold">@title</span></h3>
+            </div>
+
+            <div class="container">
+            @contents
+            </div>
+
+        </div>
+    </div>
+
 </body>
+        <!--Lights up active in side menu-->
+    <script>
+    //Sets the corresponding section to the side nav as active
+    $("#sidenav-${active}").addClass("start active");
+    </script>
+
+        <!--Notifications-->
+    <script>
+    var unreadNotifications = <%=user.getUnreadNotificationsQty()%>;
+    if (unreadNotifications != 0) {
+    $("#side-unread-notifications").innerHTML(unreadNotifications);
+    $("#top-unread-notifications").innerHTML(unreadNotifications);
+    }
+    </script>
+        <!-- BEGIN CORE JS FRAMEWORK-->
+    <script src="@routes.Assets.at("plugins/jquery-1.8.3.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/boostrapv3/js/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/breakpoints.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-unveil/jquery.unveil.min.js")" type="text/javascript"></script>
+        <!-- END CORE JS FRAMEWORK -->
+        <!-- BEGIN PAGE LEVEL JS -->
+    <script src="@routes.Assets.at("plugins/pace/pace.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-slimscroll/jquery.slimscroll.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-numberAnimate/jquery.animateNumbers.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-slimscroll/jquery.slimscroll.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-block-ui/jqueryblockui.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-select2/select2.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-morris-chart/js/morris.min.js")"></script>
+    <script src="@routes.Assets.at("plugins/jquery-easy-pie-chart/js/jquery.easypiechart.min.js")"></script>
+    <script src="@routes.Assets.at("plugins/jquery-slider/jquery.sidr.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-jvectormap/js/jquery-jvectormap-us-lcc-en.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-sparkline/jquery-sparkline.js")"></script>
+    <script src="@routes.Assets.at("plugins/jquery-flot/jquery.flot.min.js")"></script>
+    <script src="@routes.Assets.at("plugins/jquery-flot/jquery.flot.animator.min.js")"></script>
+    <script src="@routes.Assets.at("plugins/skycons/skycons.js")"></script>
+        <!-- END PAGE LEVEL PLUGINS -->
+        <!-- PAGE JS -->
+    <script src="@routes.Assets.at("js/dashboard.js")" type="text/javascript"></script>
+        <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="@routes.Assets.at("js/core.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("js/chat.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("js/demo.js")" type="text/javascript"></script>
+        <!-- END CORE TEMPLATE JS -->
+@scripts
 </html>
