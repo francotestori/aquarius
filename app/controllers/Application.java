@@ -7,6 +7,8 @@ import play.*;
 import play.data.Form;
 import static play.data.Form.form;
 
+import play.libs.Crypto;
+
 import play.mvc.*;
 
 import views.html.*;
@@ -51,6 +53,9 @@ public class Application extends Controller {
             return badRequest(registerForm.render(form(User.class)));
         } else {
             final User user = userForm.get();
+            final String password = user.getPassword();
+            final String encryptedPassword = Crypto.encryptAES(password);
+            user.setPassword(encryptedPassword);
             user.save();
 
             return redirect(controllers.routes.Application.index());
@@ -62,7 +67,7 @@ public class Application extends Controller {
         public String password;
 
         public String validate() {
-            if (User.authenticate(email, password) == null) {
+            if (User.authenticate(email, Crypto.encryptAES(password)) == null) {
                 return "Invalid user or password";
             }
 
