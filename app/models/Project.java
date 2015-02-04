@@ -1,6 +1,7 @@
 package models;
 
 import play.db.ebean.Model;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,9 +107,9 @@ public class Project extends Model {
 
     @ManyToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "PROJECT_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
-    List<User> followers;
+            List<User> followers;
 
-//    @OneToMany(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "project")
+    //    @OneToMany(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "project")
     @OneToMany(cascade = CascadeType.ALL)
     List<Comment> comments;
 
@@ -205,12 +206,6 @@ public class Project extends Model {
         return followers.contains(user);
     }
 
-    public boolean isFollowedBy(String user) {
-        for (User follower : followers) {
-            if (follower.getUserName().equals(user)) return true;
-        }
-        return false;
-    }
 
     public void addFund(Fund fund) {
         funds.add(fund);

@@ -90,15 +90,13 @@ create table update (
 
 create table user (
   id                        bigint not null,
-  user_id                   bigint not null,
-  user_name                 varchar(255),
   first_name                varchar(255),
   last_name                 varchar(255),
   birthday                  bigint,
   email                     varchar(255),
   password                  varchar(255),
-  profile_picture_id        bigint,
   reputation                bigint,
+  profile_picture_id        bigint,
   constraint pk_user primary key (id))
 ;
 
@@ -113,6 +111,12 @@ create table project_user (
   project_id                     bigint not null,
   user_id                        bigint not null,
   constraint pk_project_user primary key (project_id, user_id))
+;
+
+create table USER_FOLLOWERS (
+  user_id                        bigint not null,
+  FOLLOWER_ID                    bigint not null,
+  constraint pk_USER_FOLLOWERS primary key (user_id, FOLLOWER_ID))
 ;
 create sequence comment_seq;
 
@@ -162,10 +166,8 @@ alter table project add constraint fk_project_user_12 foreign key (user_id) refe
 create index ix_project_user_12 on project (user_id);
 alter table update add constraint fk_update_project_13 foreign key (project_id) references project (id) on delete restrict on update restrict;
 create index ix_update_project_13 on update (project_id);
-alter table user add constraint fk_user_user_14 foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_user_user_14 on user (user_id);
-alter table user add constraint fk_user_profilePicture_15 foreign key (profile_picture_id) references image (id) on delete restrict on update restrict;
-create index ix_user_profilePicture_15 on user (profile_picture_id);
+alter table user add constraint fk_user_profilePicture_14 foreign key (profile_picture_id) references image (id) on delete restrict on update restrict;
+create index ix_user_profilePicture_14 on user (profile_picture_id);
 
 
 
@@ -176,6 +178,10 @@ alter table project_tag add constraint fk_project_tag_tag_02 foreign key (tag_id
 alter table project_user add constraint fk_project_user_project_01 foreign key (project_id) references project (id) on delete restrict on update restrict;
 
 alter table project_user add constraint fk_project_user_user_02 foreign key (user_id) references user (id) on delete restrict on update restrict;
+
+alter table USER_FOLLOWERS add constraint fk_USER_FOLLOWERS_user_01 foreign key (user_id) references user (id) on delete restrict on update restrict;
+
+alter table USER_FOLLOWERS add constraint fk_USER_FOLLOWERS_user_02 foreign key (FOLLOWER_ID) references user (id) on delete restrict on update restrict;
 
 # --- !Downs
 
@@ -206,6 +212,8 @@ drop table if exists type;
 drop table if exists update;
 
 drop table if exists user;
+
+drop table if exists USER_FOLLOWERS;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 

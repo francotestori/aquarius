@@ -9,8 +9,9 @@ GET         /                    controllers.Application.index()
 GET         /assets/*file        controllers.Assets.at(path="/public", file)
 
 # Users
-GET         /register            controllers.Application.showRegisterForm()
+GET         /register            controllers.Application.register()
 POST        /register            controllers.Application.register()
+POST        /create-user         controllers.Application.createUser()
 
 #Session
 GET         /login               controllers.Application.login
