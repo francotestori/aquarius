@@ -9,12 +9,10 @@ import javax.persistence.Id;
 
 
 @Entity
-public class Country extends Model{
-
+public class Country extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String name;
 
     public Country() {

@@ -6,17 +6,13 @@ import javax.persistence.*;
 
 
 @Entity
-public class Notification extends Model{
-
+public class Notification extends Model {
     //Constructor variables
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String message;
-
     private long date;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

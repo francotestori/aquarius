@@ -1,19 +1,65 @@
 package controllers;
 
 import models.User;
+
 import play.*;
+
 import play.data.Form;
-import play.mvc.*;
-import views.html.*;
 import static play.data.Form.form;
+
+import play.libs.Crypto;
+
+import play.mvc.*;
+
+import views.html.*;
+
 
 public class Application extends Controller {
     public static Result index() {
-        return ok(index.render("Your new application is ready."));
+        if (session().get("email") == null) {
+            return redirect(controllers.routes.Application.login());
+        } else {
+            return ok(index.render("Your new application is ready."));
+        }
     }
 
     public static Result login() {
         return ok(login.render(form(Login.class)));
+    }
+
+    public static Result authenticate() {
+        Form<Login> loginForm = form(Login.class).bindFromRequest();
+
+        if (loginForm.hasErrors()) {
+            return badRequest(login.render(loginForm));
+        } else {
+            session().clear();
+            session("email", loginForm.get().email);
+
+            return redirect(controllers.routes.Application.index());
+        }
+    }
+
+    public static Result register() {
+        Form<User> form = form(User.class).bindFromRequest();
+
+        return ok(registerForm.render(form));
+    }
+
+    public static Result createUser() {
+        final Form<User> userForm = form(User.class).bindFromRequest();
+
+        if (userForm.hasErrors()) {
+            return badRequest(registerForm.render(form(User.class)));
+        } else {
+            final User user = userForm.get();
+            final String password = user.getPassword();
+            final String encryptedPassword = Crypto.encryptAES(password);
+            user.setPassword(encryptedPassword);
+            user.save();
+
+            return redirect(controllers.routes.Application.index());
+        }
     }
 
     public static class Login {
@@ -21,9 +67,10 @@ public class Application extends Controller {
         public String password;
 
         public String validate() {
-            if (User.authenticate(email, password) == null) {
+            if (User.authenticate(email, Crypto.encryptAES(password)) == null) {
                 return "Invalid user or password";
             }
+
             return null;
         }
 
@@ -43,16 +90,4 @@ public class Application extends Controller {
             this.password = password;
         }
     }
-
-    public static Result authenticate() {
-        Form<Login> loginForm = form(Login.class).bindFromRequest();
-        if (loginForm.hasErrors()) {
-            return badRequest(login.render(loginForm));
-        } else {
-            session().clear();
-            session("email", loginForm.get().email);
-            return redirect(controllers.routes.Application.index());
-        }
-    }
-
 }

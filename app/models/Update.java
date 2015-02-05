@@ -1,19 +1,18 @@
 package models;
 
 import play.db.ebean.Model;
+
 import javax.persistence.*;
+
 
 @Entity
 public class Update extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     @ManyToOne
     private Project project;
-
     private long date;
-
     private String message;
 
     public Update(Project project, long date, String message) {

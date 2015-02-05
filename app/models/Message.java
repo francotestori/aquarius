@@ -6,24 +6,33 @@ import javax.persistence.*;
 
 
 @Entity
-public class Message extends Model{
-
+public class Message extends Model {
     //Constructor variables
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String message;
     private long date;
-
     @ManyToOne
     private User sender;
-
     @ManyToOne
     private User recipient;
 
     //Non-constructor variables
     private boolean read;
+
+    public Message(User recipient, User sender, long date, String message) {
+        this.recipient = recipient;
+        this.sender = sender;
+        this.date = date;
+        this.message = message;
+
+        //Initialize
+        read = false;
+    }
+
+    public Message() {
+    }
 
     public long getId() {
         return id;
@@ -47,18 +56,5 @@ public class Message extends Model{
 
     public boolean isRead() {
         return read;
-    }
-
-    public Message(User recipient, User sender, long date, String message) {
-        this.recipient = recipient;
-        this.sender = sender;
-        this.date = date;
-        this.message = message;
-
-        //Initialize
-        read = false;
-    }
-
-    public Message() {
     }
 }
