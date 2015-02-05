@@ -97,6 +97,8 @@ create table user (
   password                  varchar(255),
   reputation                bigint,
   profile_picture_id        bigint,
+  confirmed_email           boolean,
+  constraint uq_user_email unique (email),
   constraint pk_user primary key (id))
 ;
 

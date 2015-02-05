@@ -1,5 +1,6 @@
 import static org.fest.assertions.Assertions.*;
 
+
 import org.junit.*;
 import static play.test.Helpers.*;
 
@@ -29,5 +30,9 @@ public class ApplicationTest {
 
     @Test
     public void addedUserTest() {
+    }
+
+    @Test
+    public void sendMail() {
     }
 }

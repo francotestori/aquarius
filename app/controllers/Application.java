@@ -2,12 +2,13 @@ package controllers;
 
 import models.User;
 
-import play.*;
-
 import play.data.Form;
 import static play.data.Form.form;
 
 import play.libs.Crypto;
+
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerPlugin;
 
 import play.mvc.*;
 
@@ -53,13 +54,39 @@ public class Application extends Controller {
             return badRequest(registerForm.render(form(User.class)));
         } else {
             final User user = userForm.get();
+
+            if (User.findByEmail(user.getEmail()) != null) {
+                userForm.reject("Email address is already registered");
+
+                return badRequest(registerForm.render(userForm));
+            }
+
             final String password = user.getPassword();
             final String encryptedPassword = Crypto.encryptAES(password);
             user.setPassword(encryptedPassword);
+            user.setConfirmedEmail(false);
             user.save();
+
+            Email email = new Email();
+            email.setSubject("Aquarius Mail Verification");
+            email.setFrom("noreply@aquarius.com");
+            email.addTo(user.getEmail());
+            email.setBodyText("verify mother fucker");
+            MailerPlugin.send(email);
 
             return redirect(controllers.routes.Application.index());
         }
+    }
+
+    public static Result confirmEmail(String confirmationCode) {
+        final String email = Crypto.decryptAES(confirmationCode);
+        final User user = User.findByEmail(email);
+
+        if (user != null) {
+            user.setConfirmedEmail(true);
+        }
+
+        return login();
     }
 
     public static class Login {

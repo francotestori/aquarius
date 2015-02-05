@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -16,7 +17,10 @@ public class User extends Model implements Serializable {
     String firstName;
     String lastName;
     long birthday;
+    @Constraints.Required
+    @Column(unique = true)
     String email;
+    @Constraints.Required
     String password;
     long reputation;
     @OneToOne(cascade = CascadeType.ALL)
@@ -32,6 +36,15 @@ public class User extends Model implements Serializable {
     List<Message> inbox;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Fund> funds;
+    boolean confirmedEmail;
+
+    public boolean isConfirmedEmail() {
+        return confirmedEmail;
+    }
+
+    public void setConfirmedEmail(boolean confirmedEmail) {
+        this.confirmedEmail = confirmedEmail;
+    }
 
     private static Finder<Long, User> find = new Finder<>(Long.class, User.class);
 
@@ -147,10 +160,6 @@ public class User extends Model implements Serializable {
         followers.add(user);
     }
 
-    public static User getUserByUsername(String userName) {
-        return find.where().eq("userName", userName).findUnique();
-    }
-
     public static User authenticate(String email, String password) {
         User user = find.where().eq("email", email).findUnique();
         if (user == null) return null;
@@ -160,5 +169,9 @@ public class User extends Model implements Serializable {
 
     public static List<User> list() {
         return find.all();
+    }
+
+    public static User findByEmail(String email){
+        return find.where().eq("email", email).findUnique();
     }
 }

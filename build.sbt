@@ -1,6 +1,6 @@
 name := """aquarius"""
 
-version := "1.0-SNAPSHOT"
+version := "1.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
@@ -10,5 +10,6 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  javaWs
+  javaWs,
+  "com.typesafe.play" %% "play-mailer" % "2.4.0"
 )
