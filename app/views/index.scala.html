@@ -1,7 +1,4 @@
-@(message: String)
-
-@main("Welcome to Play") {
-
-    @play20.welcome(message, style = "Java")
-
+@(title : String)
+@nav(title){
+    <img src="@routes.Assets.at("img/welcome.png")" width="100%">
 }

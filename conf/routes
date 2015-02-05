@@ -8,9 +8,9 @@ GET         /                    controllers.Application.index()
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        controllers.Assets.at(path="/public", file)
 
-# Users
-GET         /register            controllers.Application.showRegisterForm()
-POST        /register            controllers.Application.register()
+#Register
+GET         /register            controllers.Users.showRegisterForm()
+POST        /register            controllers.Users.register()
 
 #Session
 GET         /login               controllers.Application.login
@@ -19,3 +19,6 @@ POST        /login               controllers.Application.authenticate
 # Projects
 GET         /project             controllers.Projects.showProjectForm()
 POST        /project             controllers.Projects.createProject()
+
+#Users
+GET         /profile             controllers.Users.showProfile()

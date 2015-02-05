@@ -1,7 +1,7 @@
 @()
 @import play.Routes
 @nav("New user"){
-  @helper.form(routes.Application.register()){
+  @helper.form(routes.Users.register()){
     <input type="number" name="id" class="hidden">
     <input type="email" name="email" placeholder="Email">
     <input type="password" name="password" placeholder="Password">
