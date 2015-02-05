@@ -1,0 +1,156 @@
+@()
+@import play.Routes
+@scripts = {
+    <script>
+    function follow() {
+    jQuery.ajax({
+    url: '/secured/ufollow',
+    type: 'post',
+    data: {profilingId: ${requestScope.profiling.userName}}
+    })
+    }
+    </script>
+}
+@nav("Profile", null, scripts){
+    <div class="page-content condensed">
+
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+        <div class="content" style="padding-top: 10px">
+            <div class="row">
+                <div class=" tiles white col-md-12 no-padding">
+                    <div class="tiles green cover-pic-wrapper">
+                        <div class="overlayer bottom-right">
+                            <div class="overlayer-wrapper">
+                                <div class="padding-10 hidden-xs">
+                                    @*<c:if test="${(requestScope.profiling.userName) != (requestScope.user.userName)}">*@
+                                        @*<button type="button" class="btn btn-primary btn-small" onclick="follow();"><i*@
+                                        @*class="fa fa-check"></i>&nbsp;&nbsp;Follow*@
+                                        @*</button>*@
+                                    @*</c:if>*@
+                                    @*<c:if test="${(requestScope.profiling.userName) != (requestScope.user.userName)}">*@
+                                        @*<button type="button" class="btn btn-primary btn-small">Send Message</button>*@
+                                    @*</c:if>*@
+                                    @*<c:if test="${(requestScope.profiling.userName) == (requestScope.user.userName)}">*@
+                                        @*<a href="/secured/edituser?id=${requestScope.user.id}" type="button"*@
+                                        @*class="btn btn-primary btn-small">Edit</a>*@
+                                    @*</c:if>*@
+                                </div>
+                            </div>
+                        </div>
+                        <img src="@routes.Assets.at("img/profile_cover.jpg")" alt="" width="100%">
+                    </div>
+                    <div class="tiles white">
+
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3">
+                                <div class="user-profile-pic">
+                                    <img width="69" height="69" data-src-retina="secured/media/img/defaultuserpic.png"
+                                    data-src="secured/media/img/defaultuserpic.png"
+                                    src="@routes.Assets.at("img/defaultuserpic.png")" alt="">
+                                </div>
+                                <div class="user-mini-description">
+                                    @*<h3 class="text-success semi-bold">*@
+                                        @*${requestScope.profiling.getFollowers().size()}*@
+                                    @*</h3>*@
+                                    <h5>Followers</h5>
+
+                                    @*<h3 class="text-success semi-bold">*@
+                                        @*${requestScope.followed}*@
+                                    @*</h3>*@
+                                    <h5>Following</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-8 user-description-box  col-sm-8">
+                                @*<h3 class="semi-bold no-margin">${requestScope.profiling.getFirstName()} ${requestScope.profiling.getLastName()}</h3>*@
+                                @*<h4 class="no-margin">${requestScope.profiling.getUserName()}</h4>*@
+                                @*<h6 class="no-margin">Reputation: ${requestScope.profiling.reputation}</h6>*@
+                            </div>
+                        </div>
+
+                            <!--TOP OWNED PROJECTS-->
+                        <div class="row" style="padding: 20px">
+                            <div class="col-md-12  col-sm-4">
+                                <h5><span class="semi-bold">Top Owned Projects</span>&nbsp;&nbsp; <a href="#"
+                                class="text-info normal-text">view
+                                    more</a></h5>
+
+                                <div class="row">
+                                        <!-- JSTL to display top 3 projects from progression standpoint-->
+                                    <c:forEach var="project" items="${requestScope.projects}">
+                                        <div class="col-md-4">
+                                            <div class="friend-list">
+
+                                                <div class="friend-profile-pic">
+                                                    <div class="user-profile-pic-normal">
+                                                        <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
+                                                    </div>
+                                                </div>
+                                                <div class="friend-details-wrapper">
+                                                    @*<div class="friend-name">*@
+                                                        @*${project.name}*@
+                                                    @*</div>*@
+                                                    @*<div class="friend-description">*@
+                                                        @*Objective: $ ${project.objective}*@
+                                                    @*</div>*@
+                                                    @*<div class="project-followers">*@
+                                                        @*Followers: ${project.getFollowersQty()}*@
+                                                    @*</div>*@
+                                                </div>
+                                                <div class="action-bar">
+                                                    <button class="btn btn-primary" type="button">Follow</button>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+
+
+                            <!-- Make TOP 3 projects following-->
+                        <div class="row" style="padding: 20px">
+                            <div class="col-md-12  col-sm-4">
+                                <h5><span class="semi-bold">Top Followed Projects</span>&nbsp;&nbsp; <a href="#"
+                                class="text-info normal-text">view
+                                    more</a></h5>
+
+                                <div class="row">
+                                        <!-- JSTL to display top 3 projects from progression standpoint-->
+                                    @*<c:forEach var="project" items="${requestScope.following}">*@
+                                        @*<div class="col-md-4">*@
+                                            @*<div class="friend-list">*@
+                                                @*<div class="friend-profile-pic">*@
+                                                    @*<div class="user-profile-pic-normal">*@
+                                                        @*<img width="35" height="35" src="../assets/img/briefcase.png">*@
+                                                    @*</div>*@
+                                                @*</div>*@
+                                                @*<div class="friend-details-wrapper">*@
+                                                    @*<div class="friend-name">*@
+                                                        @*${project.name}*@
+                                                    @*</div>*@
+                                                    @*<div class="friend-description">*@
+                                                        @*Objective: $ ${project.objective}*@
+                                                    @*</div>*@
+                                                    @*<div class="project-followers">*@
+                                                        @*Followers: ${project.getFollowersQty()}*@
+                                                    @*</div>*@
+                                                @*</div>*@
+                                                @*<div class="action-bar pull-right">*@
+                                                    @*<button class="btn btn-primary" type="button">Follow</button>*@
+                                                @*</div>*@
+                                                @*<div class="clearfix"></div>*@
+                                            @*</div>*@
+                                        @*</div>*@
+                                    @*</c:forEach>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}

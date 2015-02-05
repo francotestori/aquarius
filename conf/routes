@@ -12,6 +12,7 @@ GET         /assets/*file        controllers.Assets.at(path="/public", file)
 GET         /register            controllers.Application.register()
 POST        /register            controllers.Application.register()
 POST        /create-user         controllers.Application.createUser()
+GET         /profile             controllers.Users.showProfile()
 
 #Session
 GET         /login               controllers.Application.login
