@@ -7,20 +7,25 @@ import static play.data.Form.form;
 
 import play.libs.Crypto;
 
-import play.libs.mailer.Email;
-import play.libs.mailer.MailerPlugin;
-
 import play.mvc.*;
+
+import play.twirl.api.Html;
 
 import views.html.*;
 
 
 public class Application extends Controller {
+    @Security.Authenticated(Secured.class)
     public static Result index() {
-        if (session().get("email") == null) {
+        final String email = session().get("email");
+
+        if (email == null) {
             return redirect(controllers.routes.Application.login());
         } else {
-            return ok(index.render("Your new application is ready."));
+            final Html html = index.apply("Your new application is ready");
+            final User user = User.findByEmail(email);
+
+            return ok(nav.render("Home", null, null, user, html));
         }
     }
 
@@ -67,13 +72,12 @@ public class Application extends Controller {
             user.setConfirmedEmail(false);
             user.save();
 
-            Email email = new Email();
-            email.setSubject("Aquarius Mail Verification");
-            email.setFrom("noreply@aquarius.com");
-            email.addTo(user.getEmail());
-            email.setBodyText("verify mother fucker");
-            MailerPlugin.send(email);
-
+            //            Email email = new Email();
+            //            email.setSubject("Aquarius Mail Verification");
+            //            email.setFrom("noreply@aquarius.com");
+            //            email.addTo(user.getEmail());
+            //            email.setBodyText("verify mother fucker");
+            //            MailerPlugin.send(email);
             return redirect(controllers.routes.Application.index());
         }
     }

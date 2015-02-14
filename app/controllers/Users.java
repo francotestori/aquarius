@@ -1,14 +1,16 @@
 package controllers;
 
-import play.mvc.Controller;
 import play.mvc.Result;
+
+import play.twirl.api.Html;
+
 import views.html.*;
 
-/**
- * Created by nicolas on 22/01/15.
- */
-public class Users extends Controller{
 
-    public static Result showProfile(){return ok(profile.render());}
+public class Users extends Navigation {
+    public static Result showProfile() {
+        final Html profileHtml = profile.apply();
 
+        return display("Profile", profileHtml);
+    }
 }
