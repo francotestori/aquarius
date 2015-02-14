@@ -30,7 +30,7 @@
 				
 				/* 	
 				*	The desired behaviour of multi-dimensional filtering can differ greatly 
-				*	from project to project. MixItUp's built in filter button handlers are best
+				*	from projectView to projectView. MixItUp's built in filter button handlers are best
 				*	suited to simple filter operations, so we will need to build our own handlers
 				*	for this demo to achieve the precise behaviour we need.
 				*/

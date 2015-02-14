@@ -4,7 +4,7 @@ import play.mvc.Result;
 
 import play.twirl.api.Html;
 
-import views.html.profile;
+import views.html.user.profile;
 
 
 public class Users extends Navigation {

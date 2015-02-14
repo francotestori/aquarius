@@ -37,6 +37,8 @@ public class Project extends Model {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     List<Update> updates;
 
+    static Finder<Long, Project> find = new Finder<Long, Project>(Long.class, Project.class);
+
     public long getId() {
         return id;
     }
@@ -109,7 +111,7 @@ public class Project extends Model {
 //    @JoinTable(name = "PROJECT_FOLLOWERS", inverseJoinColumns = {@JoinColumn(name = "FOLLOWER_ID")})
             List<User> followers;
 
-    //    @OneToMany(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "project")
+    //    @OneToMany(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(cascade = CascadeType.ALL)(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "projectView")
     @OneToMany(cascade = CascadeType.ALL)
     List<Comment> comments;
 
@@ -206,9 +208,19 @@ public class Project extends Model {
         return followers.contains(user);
     }
 
-
     public void addFund(Fund fund) {
         funds.add(fund);
+    }
+
+    /**
+     * Finder for advanced queries on controllers
+     */
+    public static Finder<Long, Project> find(){
+        return find;
+    }
+
+    public static Project find(long id){
+        return find.byId(id);
     }
 
 }

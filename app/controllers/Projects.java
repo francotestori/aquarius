@@ -9,7 +9,10 @@ import play.mvc.Result;
 
 import play.twirl.api.Html;
 
-import views.html.newProject;
+import views.html.project.newProject;
+import views.html.project.projectView;
+
+
 public class Projects extends Navigation {
     public static Result showProjectForm() {
         final Html content = newProject.apply();
@@ -29,5 +32,11 @@ public class Projects extends Navigation {
 
             return redirect(controllers.routes.Application.index());
         }
+    }
+
+    public static Result showProject(long id) {
+        final Project project = Project.find(id);
+
+        return ok(projectView.render(project));
     }
 }

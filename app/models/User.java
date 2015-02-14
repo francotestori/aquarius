@@ -174,4 +174,15 @@ public class User extends Model implements Serializable {
     public static User findByEmail(String email){
         return find.where().eq("email", email).findUnique();
     }
+
+    public static User find(long id){
+        return find.byId(id);
+    }
+
+    /**
+     * Finder for advanced queries in controllers
+     */
+    public static Finder<Long, User> find(){
+        return find;
+    }
 }
