@@ -29,7 +29,7 @@
   @style
 
 
-    <title>@title</title>
+    <title>Aquarius</title>
 </head>
 <body>
 
@@ -98,7 +98,11 @@
                             <div class="user-details">
                                 <div class="username">
                                     <span class="badge badge-important" id="top-unread-notifications"></span>
-                                    FIRST NAME <span class="bold">LAST NAME</span>
+                                    @if(user.getFirstName == null || user.getLastName == null) {
+                                        <span class="bold">@user.getEmail</span>
+                                    } else {
+                                        @user.getFirstName <span class="bold">@user.getLastName</span>
+                                    }
                                 </div>
                             </div>
                             <div class="iconset top-down-arrow"></div>
@@ -121,7 +125,7 @@
                                 <li><a href="#"> Messages</a>
                                 </li>
                                 <li class="divider"></li>
-                                <li><a href=""><i class="fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                                <li><a href="@routes.Application.logout()"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
                             </ul>
                         </li>
                     </ul>

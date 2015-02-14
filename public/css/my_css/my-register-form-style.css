@@ -18,4 +18,8 @@ div.form-col {
     font-size: 14px;
 }
 
+button.btn:focus{
+    background-color: #c7254e;
+}
+
 

@@ -34,6 +34,6 @@ public abstract class Navigation extends Controller {
         final String email = session().get("email");
         final User user = User.findByEmail(email);
 
-        return ok(nav.render("Aquarius", null, null, user, content));
+        return ok(nav.render("", null, null, user, content));
     }
 }

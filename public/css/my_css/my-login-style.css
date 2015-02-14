@@ -2,3 +2,9 @@
     margin-top: 20px;
     font-size: 14px;
 }
+button.btn:focus{
+    background-color: #c7254e;
+}
+input:focus{
+    background-color: #c7254e;
+}

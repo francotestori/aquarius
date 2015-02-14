@@ -2,18 +2,23 @@ package controllers;
 
 import models.User;
 
+import play.api.mvc.Call;
+
 import play.data.Form;
 import static play.data.Form.form;
 
 import play.libs.Crypto;
 
-import play.mvc.*;
+import play.mvc.Controller;
+import play.mvc.Result;
+import play.mvc.Security;
 
 import play.twirl.api.Html;
 
-import views.html.*;
-
-
+import views.html.index;
+import views.html.login;
+import views.html.nav;
+import views.html.registerForm;
 public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index() {
@@ -25,12 +30,16 @@ public class Application extends Controller {
             final Html html = index.apply("Your new application is ready");
             final User user = User.findByEmail(email);
 
-            return ok(nav.render("Home", null, null, user, html));
+            return ok(nav.render("Welcome!", null, null, user, html));
         }
     }
 
     public static Result login() {
-        return ok(login.render(form(Login.class)));
+        if (session().get("email") == null) {
+            return ok(login.render(form(Login.class)));
+        } else {
+            return redirect("/");
+        }
     }
 
     public static Result authenticate() {
@@ -42,7 +51,9 @@ public class Application extends Controller {
             session().clear();
             session("email", loginForm.get().email);
 
-            return redirect(controllers.routes.Application.index());
+            final Call index = Call.apply("GET", "/");
+
+            return redirect(index);
         }
     }
 
@@ -91,6 +102,12 @@ public class Application extends Controller {
         }
 
         return login();
+    }
+
+    public static Result logout() {
+        session().clear();
+
+        return redirect("/login");
     }
 
     public static class Login {

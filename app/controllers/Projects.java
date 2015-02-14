@@ -5,7 +5,7 @@ import models.Project;
 import play.data.Form;
 import static play.data.Form.form;
 
-import play.mvc.*;
+import play.mvc.Result;
 
 import play.twirl.api.Html;
 

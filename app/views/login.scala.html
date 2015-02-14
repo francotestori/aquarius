@@ -35,10 +35,10 @@
                         <a href="#">Sign up Now!</a> for a webarch account,It's free and always will be..</p>
                     <br>
 
-                    <button class="btn btn-block btn-info col-md-8" type="button">
+                    <button class="btn btn-block btn-info col-md-8" type="button" tabindex="6">
                         <span class="pull-left"><i class="icon-facebook"></i></span>
                         <span class="bold">Login with Facebook</span> </button>
-                    <button class="btn btn-block btn-success col-md-8" type="button">
+                    <button class="btn btn-block btn-success col-md-8" type="button" tabindex="7">
                         <span class="pull-left"><i class="icon-twitter"></i></span>
                         <span class="bold">Login with Twitter</span>
                     </button>
@@ -52,7 +52,7 @@
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
                                         <input type="email" name="email" id="txtusername" class="form-control"
-                                        value="@form("email").value">
+                                        value="@form("email").value" tabindex="1">
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                 <div class="controls">
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
-                                        <input type="password" name="password" id="txtpassword" class="form-control">
+                                        <input type="password" name="password" id="txtpassword" class="form-control" tabindex="2">
                                     </div>
                                 </div>
                                 @if(form.hasGlobalErrors){
@@ -75,15 +75,15 @@
                         <div class="row">
                             <div class="control-group  col-md-10">
                                 <div class="checkbox checkbox check-success"> <a href="#">Trouble login in?</a>&nbsp;&nbsp;
-                                    <input type="checkbox" id="checkbox1" value="1">
+                                    <input type="checkbox" id="checkbox1" value="1" tabindex="3">
                                     <label for="checkbox1">Keep me reminded </label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10">
-                                <button class="btn btn-primary btn-cons pull-right" type="submit">Login</button>
-                                <button class="btn btn-info btn-cons pull-right" type="button" id="register-button">Register</button>
+                                <button class="btn btn-primary btn-cons pull-right" type="submit" tabindex="4">Login</button>
+                                <button class="btn btn-info btn-cons pull-right" type="button" id="register-button" tabindex="5">Register</button>
                             </div>
                         </div>
                     }

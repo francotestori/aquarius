@@ -9,15 +9,17 @@ GET         /                    controllers.Application.index()
 GET         /assets/*file        controllers.Assets.at(path="/public", file)
 
 # Users
-GET         /register            controllers.Application.register()
-POST        /register            controllers.Application.register()
-POST        /create-user         controllers.Application.createUser()
-GET         /profile             controllers.Users.showProfile()
+GET         /register            controllers.Application.register
+POST        /register            controllers.Application.register
+POST        /create-user         controllers.Application.createUser
+GET         /profile             controllers.Users.showProfile
 
 #Session
 GET         /login               controllers.Application.login
 POST        /login               controllers.Application.authenticate
+GET         /logout              controllers.Application.logout
 
 # Projects
-GET         /project             controllers.Projects.showProjectForm()
-POST        /project             controllers.Projects.createProject()
+GET         /project             controllers.Projects.showProjectForm
+POST        /project             controllers.Projects.createProject
+
