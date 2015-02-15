@@ -6,6 +6,7 @@ import play.db.ebean.Model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class User extends Model implements Serializable {
     long id;
     String firstName;
     String lastName;
-    long birthday;
+    Date birthday;
     @Constraints.Required
     @Column(unique = true)
     String email;
@@ -56,10 +57,6 @@ public class User extends Model implements Serializable {
         this.lastName = lastName;
     }
 
-    public void setBirthday(long birthday) {
-        this.birthday = birthday;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -82,10 +79,6 @@ public class User extends Model implements Serializable {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public long getBirthday() {
-        return birthday;
     }
 
     public String getEmail() {

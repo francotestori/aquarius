@@ -7,7 +7,7 @@ create table comment (
   id                        bigint not null,
   comment_id                bigint not null,
   comment                   varchar(255),
-  date                      bigint,
+  date                      timestamp,
   user_id                   bigint,
   project_id                bigint,
   constraint pk_comment primary key (id))
@@ -37,7 +37,7 @@ create table image (
 create table message (
   id                        bigint not null,
   message                   varchar(255),
-  date                      bigint,
+  date                      timestamp,
   sender_id                 bigint,
   recipient_id              bigint,
   read                      boolean,
@@ -47,7 +47,7 @@ create table message (
 create table notification (
   id                        bigint not null,
   message                   varchar(255),
-  date                      bigint,
+  date                      timestamp,
   user_id                   bigint,
   read                      boolean,
   constraint pk_notification primary key (id))
@@ -58,8 +58,8 @@ create table project (
   name                      varchar(255),
   description               varchar(255),
   faq                       varchar(255),
-  start                     bigint,
-  end                       bigint,
+  start                     timestamp,
+  end                       timestamp,
   objective                 integer,
   html                      varchar(255),
   country_id                bigint,
@@ -83,7 +83,7 @@ create table type (
 create table update (
   id                        bigint not null,
   project_id                bigint,
-  date                      bigint,
+  date                      timestamp,
   message                   varchar(255),
   constraint pk_update primary key (id))
 ;
@@ -92,7 +92,7 @@ create table user (
   id                        bigint not null,
   first_name                varchar(255),
   last_name                 varchar(255),
-  birthday                  bigint,
+  birthday                  timestamp,
   email                     varchar(255),
   password                  varchar(255),
   reputation                bigint,

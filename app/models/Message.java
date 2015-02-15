@@ -2,6 +2,8 @@ package models;
 
 import play.db.ebean.Model;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 
@@ -12,24 +14,12 @@ public class Message extends Model {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String message;
-    private long date;
+    private Date date;
     @ManyToOne
     private User sender;
     @ManyToOne
     private User recipient;
-
-    //Non-constructor variables
     private boolean read;
-
-    public Message(User recipient, User sender, long date, String message) {
-        this.recipient = recipient;
-        this.sender = sender;
-        this.date = date;
-        this.message = message;
-
-        //Initialize
-        read = false;
-    }
 
     public Message() {
     }
@@ -40,10 +30,6 @@ public class Message extends Model {
 
     public String getMessage() {
         return message;
-    }
-
-    public long getDate() {
-        return date;
     }
 
     public User getSender() {

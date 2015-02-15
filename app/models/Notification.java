@@ -2,6 +2,8 @@ package models;
 
 import play.db.ebean.Model;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 
@@ -12,7 +14,7 @@ public class Notification extends Model {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String message;
-    private long date;
+    private Date date;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
@@ -22,25 +24,12 @@ public class Notification extends Model {
     public Notification() {
     }
 
-    public Notification(String message, long date, User user) {
-        this.message = message;
-        this.date = date;
-        this.user = user;
-
-        //Initialize
-        read = false;
-    }
-
     public long getId() {
         return id;
     }
 
     public String getMessage() {
         return message;
-    }
-
-    public long getDate() {
-        return date;
     }
 
     public User getUser() {

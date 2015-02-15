@@ -5,6 +5,7 @@ import play.db.ebean.Model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 @Entity
 public class Project extends Model {
@@ -16,8 +17,8 @@ public class Project extends Model {
     String name;
     String description;
     String faq;
-    long start;
-    long end;
+    Date start;
+    Date end;
     int objective;
     String html;
 
@@ -53,14 +54,6 @@ public class Project extends Model {
 
     public String getFaq() {
         return faq;
-    }
-
-    public long getStart() {
-        return start;
-    }
-
-    public long getEnd() {
-        return end;
     }
 
     public int getObjective() {
@@ -133,10 +126,6 @@ public class Project extends Model {
         this.faq = faq;
     }
 
-    public void setEnd(long end) {
-        this.end = end;
-    }
-
     public void setObjective(int objective) {
         this.objective = objective;
     }
@@ -165,35 +154,12 @@ public class Project extends Model {
         return 100 * getFundsRaised() / objective;
     }
 
-    //TODO replantear los metodos de getDaysRemaining y getTimeCompletion
-    public int getDaysRemaining() {
-        if (end > System.currentTimeMillis()) {
-            return (int) (end - System.currentTimeMillis()) / (24 * 3600000);
-        } else {
-            return 0;
-        }
-
-    }
-
-    public int getTimeCompletion() {
-        if (end > System.currentTimeMillis()) {
-            final long dummy = 100 * (end - System.currentTimeMillis()) / (end - start);
-            return (int) (100 - dummy);
-        } else {
-            return 100;
-        }
-    }
-
     public int getFollowersQty() {
         return followers.size();
     }
 
     public void addTag(Tag tag) {
         tags.add(tag);
-    }
-
-    public void setStart(long start) {
-        this.start = start;
     }
 
     public void deleteAllTags() {

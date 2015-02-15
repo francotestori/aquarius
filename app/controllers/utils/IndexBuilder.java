@@ -1,4 +1,4 @@
-package controllers;
+package controllers.utils;
 
 import models.Project;
 

@@ -2,6 +2,8 @@ package models;
 
 import play.db.ebean.Model;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 
@@ -12,14 +14,8 @@ public class Update extends Model {
     private long id;
     @ManyToOne
     private Project project;
-    private long date;
+    private Date date;
     private String message;
-
-    public Update(Project project, long date, String message) {
-        this.project = project;
-        this.date = date;
-        this.message = message;
-    }
 
     public Update() {
     }
@@ -30,10 +26,6 @@ public class Update extends Model {
 
     public Project getProject() {
         return project;
-    }
-
-    public long getDate() {
-        return date;
     }
 
     public String getMessage() {
