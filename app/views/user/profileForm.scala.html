@@ -1,0 +1,92 @@
+@(user : User,  form: Form[User])
+@nav("Profile form", user){
+    @helper.form(routes.Users.updateProfile(), 'id -> "profile-form") {
+    <div class="grid simple">
+        <div class="grid-title no-border">
+            <h4>
+                Personal <span class="semi-bold">Information</span>
+            </h4>
+        </div>
+        <div class="grid-body no-border">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-8">
+                    <div class="form-group">
+                        <label class="form-label">First Name</label>
+                        <span class="help">e.g. "John"</span>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="firstName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name</label>
+                        <span class="help">e.g. "Smith"</span>
+                        <div class="controls">
+                            <input type="text" class="form-control" name="lastName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Birthday</label>
+                        <span class="help"> MM/dd/yyyy</span>
+                        <div class="controls">
+                            <div class="input-append success date col-md-3 col-lg-3 no-padding">
+                                <input type="text" class="form-control" placeholder="MM/dd/yyyy" name="birthday">
+                                <span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                        <label class="form-label">Country</label>
+                        <span class="help"> e.g. Argentina</span>
+                        <div class="controls">
+                            <select name="country">
+                                @for(country : Country <- Country.list()){
+                                    <option value="@country.getId">@country.getName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="row-fluid">
+                        <form action="/file-upload" class="dropzone no-margin dz-clickable">
+                            <div class="dz-default dz-message">
+                                <span>Drop files here to upload</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit">Update</button>
+            </div>
+        </div>
+    </div>
+}}{
+    <link href="@routes.Assets.at("plugins/pace/pace-theme-flash.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/dropzone/css/dropzone.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-datepicker/css/datepicker.css")" rel="stylesheet" type="text/css" />
+    <link href="@routes.Assets.at("plugins/bootstrap-timepicker/css/bootstrap-timepicker.css")" rel="stylesheet" type="text/css" />
+    <link href="@routes.Assets.at("plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css")" rel="stylesheet" type="text/css" />
+    <link href="@routes.Assets.at("plugins/ios-switch/ios7-switch.css")" rel="stylesheet" type="text/css" media="screen">
+    <link href="@routes.Assets.at("plugins/bootstrap-select2/select2.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("plugins/jquery-slider/css/jquery.sidr.light.css")" rel="stylesheet" type="text/css" media="screen"/>
+}{
+    <script src="@routes.Assets.at("plugins/pace/pace.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-block-ui/jqueryblockui.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-inputmask/jquery.inputmask.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-autonumeric/autoNumeric.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/ios-switch/ios7-switch.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-select2/select2.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/dropzone/dropzone.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("js/form_elements.js")" type="text/javascript"></script>
+}

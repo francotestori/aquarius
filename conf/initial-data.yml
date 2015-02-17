@@ -1,15 +1,5 @@
-users:
+countries:
 
-    - !!models.User
+    - !!models.Country
         id:         1
-        userName:   nschejtman
-        password:   nico1993
-        firstName:  Nicolas
-        lastName:   Schejtman
-
-    - !!models.User
-        id:         2
-        username:   ftestori
-        password:   mecabeelchori
-        firstName:  Franco
-        lastName:   Testori
+        name:       argentina

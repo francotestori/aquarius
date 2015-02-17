@@ -98,6 +98,7 @@ create table user (
   reputation                bigint,
   profile_picture_id        bigint,
   confirmed_email           boolean,
+  country_id                bigint,
   constraint uq_user_email unique (email),
   constraint pk_user primary key (id))
 ;
@@ -170,6 +171,8 @@ alter table update add constraint fk_update_project_13 foreign key (project_id) 
 create index ix_update_project_13 on update (project_id);
 alter table user add constraint fk_user_profilePicture_14 foreign key (profile_picture_id) references image (id) on delete restrict on update restrict;
 create index ix_user_profilePicture_14 on user (profile_picture_id);
+alter table user add constraint fk_user_country_15 foreign key (country_id) references country (id) on delete restrict on update restrict;
+create index ix_user_country_15 on user (country_id);
 
 
 

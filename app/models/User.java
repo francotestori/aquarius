@@ -38,6 +38,8 @@ public class User extends Model implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Fund> funds;
     boolean confirmedEmail;
+    @ManyToOne
+    Country country;
 
     public boolean isConfirmedEmail() {
         return confirmedEmail;
@@ -164,18 +166,34 @@ public class User extends Model implements Serializable {
         return find.all();
     }
 
-    public static User findByEmail(String email){
+    public static User findByEmail(String email) {
         return find.where().eq("email", email).findUnique();
     }
 
-    public static User find(long id){
+    public static User find(long id) {
         return find.byId(id);
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     /**
      * Finder for advanced queries in controllers
      */
-    public static Finder<Long, User> find(){
+    public static Finder<Long, User> find() {
         return find;
     }
 }

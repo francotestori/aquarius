@@ -19,6 +19,8 @@ import views.html.index;
 import views.html.login;
 import views.html.nav;
 import views.html.registerForm;
+
+
 public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result index() {
@@ -30,7 +32,7 @@ public class Application extends Controller {
             final Html html = index.apply("Your new application is ready");
             final User user = User.findByEmail(email);
 
-            return ok(nav.render("Welcome!", null, null, user, html));
+            return ok(nav.render("Welcome!", user, html, null, null));
         }
     }
 

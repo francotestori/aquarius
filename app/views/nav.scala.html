@@ -1,4 +1,4 @@
-@(title : String, style : Html = Html(""), scripts : Html = Html(""), user : User)(contents : Html)
+@(title : String, user : User)(contents : Html)(style : Html = Html(""))(scripts : Html = Html(""))
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,20 +10,10 @@
         <meta content="" name="author" />
 
             <!-- BEGIN PLUGIN CSS -->
-        <link href="@routes.Assets.at("plugins/fullcalendar/fullcalendar.css")" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="@routes.Assets.at("plugins/pace/pace-theme-flash.css")" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="@routes.Assets.at("plugins/gritter/css/jquery.gritter.css")" rel="stylesheet" type="text/css"/>
-        <link href="@routes.Assets.at("plugins/bootstrap-datepicker/css/datepicker.css")" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="@routes.Assets.at("plugins/jquery-ricksaw-chart/css/rickshaw.css")" type="text/css" media="screen" >
-        <link rel="stylesheet" href="@routes.Assets.at("plugins/jquery-morris-chart/css/morris.css")" type="text/css" media="screen">
-        <link href="@routes.Assets.at("plugins/jquery-slider/css/jquery.sidr.light.css")" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="@routes.Assets.at("plugins/bootstrap-select2/select2.css")" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="@routes.Assets.at("plugins/jquery-jvectormap/css/jquery-jvectormap-1.2.2.css")" rel="stylesheet" type="text/css" media="screen"/>
-        <link href="@routes.Assets.at("plugins/boostrap-checkbox/css/bootstrap-checkbox.css")" rel="stylesheet" type="text/css" media="screen"/>
+                @style
             <!-- END PLUGIN CSS -->
 
-            <!-- BEGIN CORE CSS FRAMEWsORK -->
-
+            <!-- BEGIN CORE CSS FRAMEWORK -->
         <link href="@routes.Assets.at("plugins/boostrapv3/css/bootstrap.min.css")" rel="stylesheet" type="text/css"/>
         <link href="@routes.Assets.at("plugins/boostrapv3/css/bootstrap-theme.min.css")" rel="stylesheet" type="text/css"/>
         <link href="@routes.Assets.at("plugins/font-awesome/css/font-awesome.css")" rel="stylesheet" type="text/css"/>
@@ -36,10 +26,8 @@
         <link href="@routes.Assets.at("css/custom-icon-set.css")" rel="stylesheet" type="text/css"/>
             <!-- END CSS TEMPLATE -->
 
-        @style
     </head>
         <!-- END HEAD -->
-
         <!-- BEGIN BODY -->
     <body class="">
             <!-- BEGIN HEADER -->
@@ -51,10 +39,10 @@
                         <li class="dropdown"> <a id="main-menu-toggle" href="#main-menu"  class="" > <div class="iconset top-menu-toggle-white"></div> </a> </li>
                     </ul>
                         <!-- BEGIN LOGO -->
-                    <a href="index.html"><img src="assets/img/logo.png" class="logo" alt=""  data-src="assets/img/logo.png" data-src-retina="assets/img/logo2x.png" width="106" height="21"/></a>
+                    <a href="@routes.Application.index()"><img src="@routes.Assets.at("img/logo.png")" class="logo" alt=""  data-src="@routes.Assets.at("img/logo.png")" data-src-retina="@routes.Assets.at("img/logo2x.png")" width="106" height="21"/></a>
                         <!-- END LOGO -->
                     <ul class="nav pull-right notifcation-center">
-                        <li class="dropdown" id="header_task_bar"> <a href="index.html" class="dropdown-toggle active" data-toggle=""> <div class="iconset top-home"></div> </a> </li>
+                        <li class="dropdown" id="header_task_bar"> <a href="@routes.Application.index()" class="dropdown-toggle active" data-toggle=""> <div class="iconset top-home"></div> </a> </li>
                         <li class="dropdown" id="header_inbox_bar" > <a href="email.html" class="dropdown-toggle" > <div class="iconset top-messages"></div>  <span class="badge" id="msgs-badge">2</span> </a></li>
                         <li class="dropdown" id="portrait-chat-toggler" style="display:none"> <a href="#sidr" class="chat-menu-toggle"> <div class="iconset top-chat-white "></div> </a> </li>
                     </ul>
@@ -89,8 +77,14 @@
                             <a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom"  data-content='' data-toggle="dropdown" data-original-title="Notifications">
                                 <div class="user-details">
                                     <div class="username">
-                                        <span class="badge badge-important">3</span>
-                                        John <span class="bold">Smith</span>
+                                        @if(user.getUnreadNotificationsQty != 0){
+                                            <span class="badge badge-important">@user.getUnreadNotificationsQty</span>
+                                        }
+                                        @if(user.getFirstName != null || user.getLastName != null) {
+                                            @user.getFirstName <span class="bold">@user.getLastName</span>
+                                        } else {
+                                            <span class="bold">@user.getEmail</span>
+                                        }
                                     </div>
                                 </div>
                                 <div class="iconset top-down-arrow"></div>
@@ -99,7 +93,7 @@
                                 <div style="width:300px">
                                     <div class="notification-messages info">
                                         <div class="user-profile">
-                                            <img src="assets/img/profiles/d.jpg"  alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35">
+                                            <img src="@routes.Assets.at("img/profiles/d.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/d.jpg")" data-src-retina="@routes.Assets.at("img/profiles/d2x.jpg")" width="35" height="35">
                                         </div>
                                         <div class="message-wrapper">
                                             <div class="heading">
@@ -133,7 +127,7 @@
                                     </div>
                                     <div class="notification-messages success">
                                         <div class="user-profile">
-                                            <img src="assets/img/profiles/h.jpg"  alt="" data-src="assets/img/profiles/h.jpg" data-src-retina="assets/img/profiles/h2x.jpg" width="35" height="35">
+                                            <img src="@routes.Assets.at("img/profiles/h.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/h.jpg")" data-src-retina="@routes.Assets.at("img/profiles/h2x.jpg")" width="35" height="35">
                                         </div>
                                         <div class="message-wrapper">
                                             <div class="heading">
@@ -151,7 +145,7 @@
                                 </div>
                             </div>
                             <div class="profile-pic">
-                                <img src="assets/img/profiles/avatar_small.jpg"  alt="" data-src="assets/img/profiles/avatar_small.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg" width="35" height="35" />
+                                <img src="@routes.Assets.at("img/profiles/avatar_small.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/avatar_small.jpg")" data-src-retina="@routes.Assets.at("img/profiles/avatar_small2x.jpg")" width="35" height="35" />
                             </div>
                         </div>
                         <ul class="nav quick-section ">
@@ -160,16 +154,17 @@
                                     <div class="iconset top-settings-dark "></div>
                                 </a>
                                 <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
-                                    <li><a href="user-profile.html"> My Account</a>
+                                    <li><a href="@routes.Users.showProfileForm()"> Edit profile</a>
                                     </li>
                                     <li><a href="calender.html">My Calendar</a>
                                     </li>
                                     <li><a href="email.html"> My Inbox&nbsp;&nbsp;<span class="badge badge-important animated bounceIn">2</span></a>
                                     </li>
                                     <li class="divider"></li>
-                                    <li><a href="login.html"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                                    <li><a href="@routes.Application.logout()"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
                                 </ul>
                             </li>
+                            <!--
                             <li class="quicklinks"> <span class="h-seperate"></span></li>
                             <li class="quicklinks">
                                 <a id="chat-menu-toggle" href="#sidr" class="chat-menu-toggle" ><div class="iconset top-chat-dark "><span class="badge badge-important hide" id="chat-message-count">1</span></div>
@@ -183,6 +178,7 @@
                                 </div>
                                 </div>
                             </li>
+                            -->
                         </ul>
                     </div>
                         <!-- END CHAT TOGGLER -->
@@ -198,23 +194,11 @@
         <div class="page-container row">
                 <!-- BEGIN SIDEBAR -->
             <div class="page-sidebar" id="main-menu">
-                    <!-- BEGIN MINI-PROFILE -->
-                <div class="user-info-wrapper">
-                    <div class="profile-wrapper">
-                        <img src="assets/img/profiles/avatar.jpg"  alt="" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar2x.jpg" width="69" height="69" />
-                    </div>
-                    <div class="user-info">
-                        <div class="greeting">Welcome</div>
-                        <div class="username">John <span class="semi-bold">Smith</span></div>
-                        <div class="status">Status<a href="#"><div class="status-icon green"></div>Online</a></div>
-                    </div>
-                </div>
-                    <!-- END MINI-PROFILE -->
 
                     <!-- BEGIN SIDEBAR MENU -->
                 <p class="menu-title">BROWSE <span class="pull-right"><a href="javascript:;"><i class="fa fa-refresh"></i></a></span></p>
                 <ul>
-                    <li class="start active "> <a href="index.html"> <i class="icon-custom-home"></i> <span class="title">Dashboard</span> <span class="selected"></span> <span class="badge badge-important pull-right">5</span></a> </li>
+                    <li class="start active "> <a href="@routes.Application.index()"> <i class="icon-custom-home"></i> <span class="title">Dashboard</span> <span class="selected"></span> <span class="badge badge-important pull-right">5</span></a> </li>
                     <li class=""> <a href="email.html"> <i class="fa fa-envelope"></i> <span class="title">Email</span>  <span class=" badge badge-disable pull-right ">203</span></a> </li>
                     <li class=""> <a href="../frontend/index.html"> <i class="fa fa-flag"></i>  <span class="title">Frontend</span></a></li>
                     <li class=""> <a href="javascript:;"> <i class="icon-custom-ui"></i> <span class="title">UI Elements</span> <span class="arrow "></span> </a>
@@ -358,10 +342,10 @@
                 <div class="clearfix"></div>
                 <div class="content">
                     <div class="page-title">
-                        <h3>Dashboard </h3>
+                        <h3>@title </h3>
                     </div>
                     <div id="container">
-
+                        @contents
                     </div>
                         <!-- END PAGE -->
                 </div>
@@ -393,9 +377,9 @@
                             <div class="side-widget-title">favourites</div>
                             <div id="favourites-list">
                                 <div class="side-widget-content" >
-                                    <div class="user-details-wrapper active" data-chat-status="online" data-chat-user-pic="assets/img/profiles/d.jpg" data-chat-user-pic-retina="assets/img/profiles/d2x.jpg" data-user-name="Jane Smith">
+                                    <div class="user-details-wrapper active" data-chat-status="online" data-chat-user-pic="@routes.Assets.at("img/profiles/d.jpg")" data-chat-user-pic-retina="@routes.Assets.at("img/profiles/d2x.jpg")" data-user-name="Jane Smith">
                                         <div class="user-profile">
-                                            <img src="assets/img/profiles/d.jpg"  alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35">
+                                            <img src="@routes.Assets.at("img/profiles/d.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/d.jpg")" data-src-retina="@routes.Assets.at("img/profiles/d2x.jpg")" width="35" height="35">
                                         </div>
                                         <div class="user-details">
                                             <div class="user-name">
@@ -413,9 +397,9 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="user-details-wrapper" data-chat-status="busy" data-chat-user-pic="assets/img/profiles/d.jpg" data-chat-user-pic-retina="assets/img/profiles/d2x.jpg" data-user-name="David Nester">
+                                    <div class="user-details-wrapper" data-chat-status="busy" data-chat-user-pic="@routes.Assets.at("img/profiles/d.jpg")" data-chat-user-pic-retina="@routes.Assets.at("img/profiles/d2x.jpg")" data-user-name="David Nester">
                                         <div class="user-profile">
-                                            <img src="assets/img/profiles/c.jpg"  alt="" data-src="assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/c2x.jpg" width="35" height="35">
+                                            <img src="@routes.Assets.at("img/profiles/c.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/c.jpg")" data-src-retina="@routes.Assets.at("img/profiles/c2x.jpg")" width="35" height="35">
                                         </div>
                                         <div class="user-details">
                                             <div class="user-name">
@@ -439,9 +423,9 @@
                         <div class="side-widget">
                             <div class="side-widget-title">more friends</div>
                             <div class="side-widget-content" id="friends-list">
-                                <div class="user-details-wrapper" data-chat-status="online" data-chat-user-pic="assets/img/profiles/d.jpg" data-chat-user-pic-retina="assets/img/profiles/d2x.jpg" data-user-name="Jane Smith">
+                                <div class="user-details-wrapper" data-chat-status="online" data-chat-user-pic="@routes.Assets.at("img/profiles/d.jpg")" data-chat-user-pic-retina="@routes.Assets.at("img/profiles/d2x.jpg")" data-user-name="Jane Smith">
                                     <div class="user-profile">
-                                        <img src="assets/img/profiles/d.jpg"  alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35">
+                                        <img src="@routes.Assets.at("img/profiles/d.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/d.jpg")" data-src-retina="@routes.Assets.at("img/profiles/d2x.jpg")" width="35" height="35">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">
@@ -459,9 +443,9 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="user-details-wrapper" data-chat-status="busy" data-chat-user-pic="assets/img/profiles/d.jpg" data-chat-user-pic-retina="assets/img/profiles/d2x.jpg" data-user-name="David Nester">
+                                <div class="user-details-wrapper" data-chat-status="busy" data-chat-user-pic="@routes.Assets.at("img/profiles/d.jpg")" data-chat-user-pic-retina="@routes.Assets.at("img/profiles/d2x.jpg")" data-user-name="David Nester">
                                     <div class="user-profile">
-                                        <img src="assets/img/profiles/h.jpg"  alt="" data-src="assets/img/profiles/h.jpg" data-src-retina="assets/img/profiles/h2x.jpg" width="35" height="35">
+                                        <img src="@routes.Assets.at("img/profiles/h.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/h.jpg")" data-src-retina="@routes.Assets.at("img/profiles/h2x.jpg")" width="35" height="35">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">
@@ -479,9 +463,9 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="user-details-wrapper" data-chat-status="online" data-chat-user-pic="assets/img/profiles/d.jpg" data-chat-user-pic-retina="assets/img/profiles/d2x.jpg" data-user-name="Jane Smith">
+                                <div class="user-details-wrapper" data-chat-status="online" data-chat-user-pic="@routes.Assets.at("img/profiles/d.jpg")" data-chat-user-pic-retina="@routes.Assets.at("img/profiles/d2x.jpg")" data-user-name="Jane Smith">
                                     <div class="user-profile">
-                                        <img src="assets/img/profiles/c.jpg"  alt="" data-src="assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/c2x.jpg" width="35" height="35">
+                                        <img src="@routes.Assets.at("img/profiles/c.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/c.jpg")" data-src-retina="@routes.Assets.at("img/profiles/c2x.jpg")" width="35" height="35">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">
@@ -499,9 +483,9 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
-                                <div class="user-details-wrapper" data-chat-status="busy" data-chat-user-pic="assets/img/profiles/d.jpg" data-chat-user-pic-retina="assets/img/profiles/d2x.jpg" data-user-name="David Nester">
+                                <div class="user-details-wrapper" data-chat-status="busy" data-chat-user-pic="@routes.Assets.at("img/profiles/d.jpg")" data-chat-user-pic-retina="@routes.Assets.at("img/profiles/d2x.jpg")" data-user-name="David Nester">
                                     <div class="user-profile">
-                                        <img src="assets/img/profiles/h.jpg"  alt="" data-src="assets/img/profiles/h.jpg" data-src-retina="assets/img/profiles/h2x.jpg" width="35" height="35">
+                                        <img src="@routes.Assets.at("img/profiles/h.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/h.jpg")" data-src-retina="@routes.Assets.at("img/profiles/h2x.jpg")" width="35" height="35">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">
@@ -541,7 +525,7 @@
                             <div class="sent_time">Yesterday 11:25pm</div>
                             <div class="user-details-wrapper " >
                                 <div class="user-profile">
-                                    <img src="assets/img/profiles/d.jpg"  alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35">
+                                    <img src="@routes.Assets.at("img/profiles/d.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/d.jpg")" data-src-retina="@routes.Assets.at("img/profiles/d2x.jpg")" width="35" height="35">
                                 </div>
                                 <div class="user-details">
                                     <div class="bubble">
@@ -553,7 +537,7 @@
                             </div>
                             <div class="user-details-wrapper ">
                                 <div class="user-profile">
-                                    <img src="assets/img/profiles/d.jpg"  alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35">
+                                    <img src="@routes.Assets.at("img/profiles/d.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/d.jpg")" data-src-retina="@routes.Assets.at("img/profiles/d2x.jpg")" width="35" height="35">
                                 </div>
                                 <div class="user-details">
                                     <div class="bubble">
@@ -565,7 +549,7 @@
                             </div>
                             <div class="user-details-wrapper ">
                                 <div class="user-profile">
-                                    <img src="assets/img/profiles/d.jpg"  alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35">
+                                    <img src="@routes.Assets.at("img/profiles/d.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/d.jpg")" data-src-retina="@routes.Assets.at("img/profiles/d2x.jpg")")" width="35" height="35">
                                 </div>
                                 <div class="user-details">
                                     <div class="bubble">
@@ -602,36 +586,21 @@
         <script src="@routes.Assets.at("plugins/boostrapv3/js/bootstrap.min.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("plugins/breakpoints.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("plugins/jquery-unveil/jquery.unveil.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("plugins/jquery-slimscroll/jquery.slimscroll.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("plugins/jquery-slider/jquery.sidr.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("plugins/jquery-numberAnimate/jquery.animateNumbers.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("plugins/jquery-slimscroll/jquery.slimscroll.min.js")" type="text/javascript"></script>
             <!-- END CORE JS FRAMEWORK -->
 
             <!-- BEGIN PAGE LEVEL JS -->
-        <script src="@routes.Assets.at("plugins/pace/pace.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/jquery-slimscroll/jquery.slimscroll.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/jquery-numberAnimate/jquery.animateNumbers.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/jquery-slimscroll/jquery.slimscroll.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/jquery-block-ui/jqueryblockui.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/bootstrap-select2/select2.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/jquery-ricksaw-chart/js/raphael-min.js")"></script>
-        <script src="@routes.Assets.at("plugins/jquery-ricksaw-chart/js/d3.v2.js")"></script>
-        <script src="@routes.Assets.at("plugins/jquery-ricksaw-chart/js/rickshaw.min.js")"></script>
-        <script src="@routes.Assets.at("plugins/jquery-morris-chart/js/morris.min.js")"></script>
-        <script src="@routes.Assets.at("plugins/jquery-easy-pie-chart/js/jquery.easypiechart.min.js")"></script>
-        <script src="@routes.Assets.at("plugins/jquery-slider/jquery.sidr.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/jquery-jvectormap/js/jquery-jvectormap-1.2.2.min.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/jquery-jvectormap/js/jquery-jvectormap-us-lcc-en.js")" type="text/javascript"></script>
-        <script src="@routes.Assets.at("plugins/jquery-sparkline/jquery-sparkline.js")"></script>
-        <script src="@routes.Assets.at("plugins/jquery-flot/jquery.flot.min.js")"></script>
-        <script src="@routes.Assets.at("plugins/jquery-flot/jquery.flot.animator.min.js")"></script>
-        <script src="@routes.Assets.at("plugins/skycons/skycons.js")"></script>
+            @scripts
             <!-- END PAGE LEVEL PLUGINS   -->
-            <!-- PAGE JS -->
-        <script src="@routes.Assets.at("js/dashboard.js")" type="text/javascript"></script>
+
             <!-- BEGIN CORE TEMPLATE JS -->
         <script src="@routes.Assets.at("js/core.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("js/chat.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("js/demo.js")" type="text/javascript"></script>
             <!-- END CORE TEMPLATE JS -->
-        @scripts
+
     </body>
 </html>

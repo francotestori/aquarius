@@ -18,7 +18,7 @@ public abstract class Navigation extends Controller {
         final String email = session().get("email");
         final User user = User.findByEmail(email);
 
-        return ok(nav.render(title, style, scripts, user, content));
+        return ok(nav.render(title, user, content, style, scripts));
     }
 
     @Security.Authenticated(Secured.class)
@@ -26,7 +26,7 @@ public abstract class Navigation extends Controller {
         final String email = session().get("email");
         final User user = User.findByEmail(email);
 
-        return ok(nav.render(title, null, null, user, content));
+        return ok(nav.render(title, user, content, null, null));
     }
 
     @Security.Authenticated(Secured.class)
@@ -34,6 +34,6 @@ public abstract class Navigation extends Controller {
         final String email = session().get("email");
         final User user = User.findByEmail(email);
 
-        return ok(nav.render("", null, null, user, content));
+        return ok(nav.render("", user, content, null, null));
     }
 }
