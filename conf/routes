@@ -13,8 +13,8 @@ GET         /register            controllers.Application.register
 POST        /register            controllers.Application.register
 GET         /profile/:id         controllers.Users.showProfile(id: Long)
 POST        /create-user         controllers.Application.createUser
-GET         /profile/edit        controllers.Users.showProfileForm
-POST        /profile/edit        controllers.Users.updateProfile
+GET         /edit/profile        controllers.Users.showProfileForm
+POST        /edit/profile        controllers.Users.updateProfile
 
 #Session
 GET         /login               controllers.Application.login
