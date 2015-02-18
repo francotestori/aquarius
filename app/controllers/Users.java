@@ -8,6 +8,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import views.html.user.profile;
 import views.html.user.profileForm;
 
 import java.text.ParseException;
@@ -48,5 +49,15 @@ public class Users extends Controller {
         user.update();
 
         return redirect("/");
+    }
+
+    public static Result showProfile(long id) {
+        final User user = User.find(id);
+
+        if (user != null) {
+            return ok(profile.render(user));
+        } else {
+            return Application.index();
+        }
     }
 }

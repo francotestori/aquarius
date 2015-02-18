@@ -1,4 +1,4 @@
-@(title : String, user : User)(contents : Html)(style : Html = Html(""))(scripts : Html = Html(""))
+@(title : String, user : User, style : Html = Html(""), scripts : Html = Html(""))(contents : Html)
 <!DOCTYPE html>
 <html>
     <head>
@@ -200,6 +200,7 @@
                 <ul>
                     <li class="start active "> <a href="@routes.Application.index()"> <i class="icon-custom-home"></i> <span class="title">Dashboard</span> <span class="selected"></span> <span class="badge badge-important pull-right">5</span></a> </li>
                     <li class=""> <a href="email.html"> <i class="fa fa-envelope"></i> <span class="title">Email</span>  <span class=" badge badge-disable pull-right ">203</span></a> </li>
+                    <li class=""> <a href="@routes.Users.showProfile(user.getId)"> <i class="fa fa-user"></i> <span class="title">Profile</span> </a> </li>
                     <li class=""> <a href="../frontend/index.html"> <i class="fa fa-flag"></i>  <span class="title">Frontend</span></a></li>
                     <li class=""> <a href="javascript:;"> <i class="icon-custom-ui"></i> <span class="title">UI Elements</span> <span class="arrow "></span> </a>
                         <ul class="sub-menu">

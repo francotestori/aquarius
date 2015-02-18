@@ -1,5 +1,34 @@
 @(user : User,  form: Form[User])
-@nav("Profile form", user){
+@style = {
+    <link href="@routes.Assets.at("plugins/pace/pace-theme-flash.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/dropzone/css/dropzone.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-datepicker/css/datepicker.css")" rel="stylesheet" type="text/css" />
+    <link href="@routes.Assets.at("plugins/bootstrap-timepicker/css/bootstrap-timepicker.css")" rel="stylesheet" type="text/css" />
+    <link href="@routes.Assets.at("plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css")" rel="stylesheet" type="text/css" />
+    <link href="@routes.Assets.at("plugins/ios-switch/ios7-switch.css")" rel="stylesheet" type="text/css" media="screen">
+    <link href="@routes.Assets.at("plugins/bootstrap-select2/select2.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("plugins/jquery-slider/css/jquery.sidr.light.css")" rel="stylesheet" type="text/css" media="screen"/>
+}
+
+@scripts = {
+    <script src="@routes.Assets.at("plugins/pace/pace.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-block-ui/jqueryblockui.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-inputmask/jquery.inputmask.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/jquery-autonumeric/autoNumeric.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/ios-switch/ios7-switch.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-select2/select2.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/dropzone/dropzone.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("js/form_elements.js")" type="text/javascript"></script>
+}
+@nav("Profile form", user, style, scripts){
     @helper.form(routes.Users.updateProfile(), 'id -> "profile-form") {
     <div class="grid simple">
         <div class="grid-title no-border">
@@ -63,30 +92,4 @@
             </div>
         </div>
     </div>
-}}{
-    <link href="@routes.Assets.at("plugins/pace/pace-theme-flash.css")" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.css")" rel="stylesheet" type="text/css"/>
-    <link href="@routes.Assets.at("plugins/dropzone/css/dropzone.css")" rel="stylesheet" type="text/css"/>
-    <link href="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css")" rel="stylesheet" type="text/css"/>
-    <link href="@routes.Assets.at("plugins/bootstrap-datepicker/css/datepicker.css")" rel="stylesheet" type="text/css" />
-    <link href="@routes.Assets.at("plugins/bootstrap-timepicker/css/bootstrap-timepicker.css")" rel="stylesheet" type="text/css" />
-    <link href="@routes.Assets.at("plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css")" rel="stylesheet" type="text/css" />
-    <link href="@routes.Assets.at("plugins/ios-switch/ios7-switch.css")" rel="stylesheet" type="text/css" media="screen">
-    <link href="@routes.Assets.at("plugins/bootstrap-select2/select2.css")" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="@routes.Assets.at("plugins/jquery-slider/css/jquery.sidr.light.css")" rel="stylesheet" type="text/css" media="screen"/>
-}{
-    <script src="@routes.Assets.at("plugins/pace/pace.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/jquery-block-ui/jqueryblockui.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/jquery-inputmask/jquery.inputmask.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/jquery-autonumeric/autoNumeric.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/ios-switch/ios7-switch.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-select2/select2.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/dropzone/dropzone.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("js/form_elements.js")" type="text/javascript"></script>
-}
+}}

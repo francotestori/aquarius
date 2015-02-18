@@ -1,16 +1,12 @@
-@()
-@import play.Routes
-@scripts = {
-    <script>
-    function follow() {
-    jQuery.ajax({
-    url: '/secured/ufollow',
-    type: 'post',
-    data: {profilingId: ${requestScope.profiling.userName}}
-    })
+@(user : User)
+@username={
+    @if(user.getFirstName == null || user.getLastName == null){
+        @user.getEmail
+    } else {
+        @user.getFirstName @user.getLastName
     }
-    </script>
 }
+@nav(username.toString,user){
     <div class="page-content condensed">
 
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -36,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                        <img src="@routes.Assets.at("../../../public/img/profile_cover.jpg")" alt="" width="100%">
+                        <img src="@routes.Assets.at("img/profile_cover.jpg")" alt="" width="100%">
                     </div>
                     <div class="tiles white">
 
@@ -45,7 +41,7 @@
                                 <div class="user-profile-pic">
                                     <img width="69" height="69" data-src-retina="secured/media/img/defaultuserpic.png"
                                     data-src="secured/media/img/defaultuserpic.png"
-                                    src="@routes.Assets.at("../../../public/img/defaultuserpic.png")" alt="">
+                                    src="@routes.Assets.at("img/defaultuserpic.png")" alt="">
                                 </div>
                                 <div class="user-mini-description">
                                     @*<h3 class="text-success semi-bold">*@
@@ -66,33 +62,33 @@
                             </div>
                         </div>
 
-                            <!--TOP OWNED PROJECTS-->
+                            <!--TOP PROJECTS-->
                         <div class="row" style="padding: 20px">
                             <div class="col-md-12  col-sm-4">
-                                <h5><span class="semi-bold">Top Owned Projects</span>&nbsp;&nbsp; <a href="#"
+                                <h5><span class="semi-bold">Top Projects</span>&nbsp;&nbsp; <a href="#"
                                 class="text-info normal-text">view
                                     more</a></h5>
 
                                 <div class="row">
                                         <!-- JSTL to display top 3 projects from progression standpoint-->
-                                    <c:forEach var="projectView" items="${requestScope.projects}">
+                                    <c:forEach var="project" items="${requestScope.projects}">
                                         <div class="col-md-4">
                                             <div class="friend-list">
 
                                                 <div class="friend-profile-pic">
                                                     <div class="user-profile-pic-normal">
-                                                        <img width="35" height="35" src="@routes.Assets.at("../../../public/img/briefcase.png")">
+                                                        <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
                                                     </div>
                                                 </div>
                                                 <div class="friend-details-wrapper">
                                                     @*<div class="friend-name">*@
-                                                        @*${projectView.name}*@
+                                                        @*${project.name}*@
                                                     @*</div>*@
                                                     @*<div class="friend-description">*@
-                                                        @*Objective: $ ${projectView.objective}*@
+                                                        @*Objective: $ ${project.objective}*@
                                                     @*</div>*@
-                                                    @*<div class="projectView-followers">*@
-                                                        @*Followers: ${projectView.getFollowersQty()}*@
+                                                    @*<div class="project-followers">*@
+                                                        @*Followers: ${project.getFollowersQty()}*@
                                                     @*</div>*@
                                                 </div>
                                                 <div class="action-bar">
@@ -116,7 +112,7 @@
 
                                 <div class="row">
                                         <!-- JSTL to display top 3 projects from progression standpoint-->
-                                    @*<c:forEach var="projectView" items="${requestScope.following}">*@
+                                    @*<c:forEach var="project" items="${requestScope.following}">*@
                                         @*<div class="col-md-4">*@
                                             @*<div class="friend-list">*@
                                                 @*<div class="friend-profile-pic">*@
@@ -126,13 +122,13 @@
                                                 @*</div>*@
                                                 @*<div class="friend-details-wrapper">*@
                                                     @*<div class="friend-name">*@
-                                                        @*${projectView.name}*@
+                                                        @*${project.name}*@
                                                     @*</div>*@
                                                     @*<div class="friend-description">*@
-                                                        @*Objective: $ ${projectView.objective}*@
+                                                        @*Objective: $ ${project.objective}*@
                                                     @*</div>*@
-                                                    @*<div class="projectView-followers">*@
-                                                        @*Followers: ${projectView.getFollowersQty()}*@
+                                                    @*<div class="project-followers">*@
+                                                        @*Followers: ${project.getFollowersQty()}*@
                                                     @*</div>*@
                                                 @*</div>*@
                                                 @*<div class="action-bar pull-right">*@
@@ -151,3 +147,5 @@
             </div>
         </div>
     </div>
+
+}
