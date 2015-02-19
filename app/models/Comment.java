@@ -1,9 +1,8 @@
 package models;
 
+import org.joda.time.DateTime;
 import play.db.ebean.Model;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -16,7 +15,7 @@ public class Comment extends Model {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
     String comment;
-    Date date;
+    DateTime date;
     @ManyToOne
     User user;
     @ManyToOne

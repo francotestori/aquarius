@@ -15,6 +15,8 @@ public class Tag extends Model {
     private long id;
     private String name;
 
+    static Finder<Long, Tag> find = new Finder<Long, Tag>(Long.class, Tag.class);
+
     public Tag(String name) {
         this.name = name;
     }
@@ -29,4 +31,9 @@ public class Tag extends Model {
     public String getName() {
         return name;
     }
+
+    public static Finder<Long, Tag> getFinder() {
+        return find;
+    }
+
 }

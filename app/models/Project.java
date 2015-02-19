@@ -1,5 +1,7 @@
 package models;
 
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -132,6 +134,27 @@ public class Project extends Model {
 
     public void setHtml(String html) {
         this.html = html;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public int getDaysRemaining(){
+        Period period = new Period(this.start.getTime(),this.end.getTime(), PeriodType.days());
+        return period.getDays();
     }
 
     public void setType(Type type) {

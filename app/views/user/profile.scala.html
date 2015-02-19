@@ -6,7 +6,7 @@
         @user.getFirstName @user.getLastName
     }
 }
-@nav(username.toString,user){
+@nav(username.toString ,user){
     <div class="page-content condensed">
 
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
@@ -71,7 +71,7 @@
 
                                 <div class="row">
                                         <!-- JSTL to display top 3 projects from progression standpoint-->
-                                    <c:forEach var="project" items="${requestScope.projects}">
+                                    <c:forEach var="projectView" items="${requestScope.projects}">
                                         <div class="col-md-4">
                                             <div class="friend-list">
 
@@ -82,13 +82,13 @@
                                                 </div>
                                                 <div class="friend-details-wrapper">
                                                     @*<div class="friend-name">*@
-                                                        @*${project.name}*@
+                                                        @*${projectView.name}*@
                                                     @*</div>*@
                                                     @*<div class="friend-description">*@
-                                                        @*Objective: $ ${project.objective}*@
+                                                        @*Objective: $ ${projectView.objective}*@
                                                     @*</div>*@
-                                                    @*<div class="project-followers">*@
-                                                        @*Followers: ${project.getFollowersQty()}*@
+                                                    @*<div class="projectView-followers">*@
+                                                        @*Followers: ${projectView.getFollowersQty()}*@
                                                     @*</div>*@
                                                 </div>
                                                 <div class="action-bar">
@@ -112,7 +112,7 @@
 
                                 <div class="row">
                                         <!-- JSTL to display top 3 projects from progression standpoint-->
-                                    @*<c:forEach var="project" items="${requestScope.following}">*@
+                                    @*<c:forEach var="projectView" items="${requestScope.following}">*@
                                         @*<div class="col-md-4">*@
                                             @*<div class="friend-list">*@
                                                 @*<div class="friend-profile-pic">*@
@@ -122,13 +122,13 @@
                                                 @*</div>*@
                                                 @*<div class="friend-details-wrapper">*@
                                                     @*<div class="friend-name">*@
-                                                        @*${project.name}*@
+                                                        @*${projectView.name}*@
                                                     @*</div>*@
                                                     @*<div class="friend-description">*@
-                                                        @*Objective: $ ${project.objective}*@
+                                                        @*Objective: $ ${projectView.objective}*@
                                                     @*</div>*@
-                                                    @*<div class="project-followers">*@
-                                                        @*Followers: ${project.getFollowersQty()}*@
+                                                    @*<div class="projectView-followers">*@
+                                                        @*Followers: ${projectView.getFollowersQty()}*@
                                                     @*</div>*@
                                                 @*</div>*@
                                                 @*<div class="action-bar pull-right">*@

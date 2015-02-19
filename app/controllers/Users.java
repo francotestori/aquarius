@@ -19,6 +19,7 @@ import java.util.Map;
 
 
 public class Users extends Controller {
+
     public static Result showProfileForm() {
         Form<User> form = Form.form(User.class);
         final String email = session("email");
