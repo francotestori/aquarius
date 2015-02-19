@@ -159,7 +159,7 @@
         </div>
         <div class="col-md-6">
             @if(project.getUser.getEmail == user.getEmail){
-                <a href="" type="button" class="btn btn-success btn-cons" style="width: 100%; height: 35px; font-size: 35px">Edit</a>
+                <a href="/project/edit/@project.getId" type="button" class="btn btn-success btn-cons" style="width: 100%; height: 35px; font-size: 35px">Edit</a>
             }
             @if(project.getUser.getEmail != user.getEmail){
                 <button type="button" class="btn btn-success btn-cons" style="width: 100%; height: 35px" onclick="follow(this);">Follow</button>

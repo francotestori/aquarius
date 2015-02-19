@@ -25,4 +25,5 @@ GET         /logout              controllers.Application.logout
 GET         /new-project         controllers.Projects.showProjectForm
 POST        /new-project         controllers.Projects.createProject
 GET         /project/:id         controllers.Projects.showProject(id : Long)
+GET         /project/edit/:id    controllers.Projects.update(id : Long)
 

@@ -13,6 +13,7 @@ import views.html.project.projectView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 public class Projects extends Navigation {
@@ -70,9 +71,35 @@ public class Projects extends Navigation {
         final User user = User.findByEmail(email);
 
         if (project != null) {
-            return ok(projectView.render(project,user));
+            return ok(projectView.render(project, user));
         } else {
             return Application.index();
         }
+    }
+
+    public static Result update(long id){
+        final Project project = Project.find(id);
+        final String email = session().get("email");
+        final User user = User.findByEmail(email);
+
+        Form<Project> form = Form.form(Project.class).fill(project);
+
+        return ok(projectForm.render(user,form));
+    }
+
+    public static String parseDate(Date date){
+        return new SimpleDateFormat("MM/dd/yyyy").format(date);
+    }
+
+    public static String getStringTag(List<Tag> tags){
+        String strTag = "";
+        for (Tag tag: tags){
+            strTag += tag.getName() + ",";
+        }
+        return strTag;
+    }
+
+    public static String getName(Boolean isNew){
+        return isNew == true ? "New" : "Edit";
     }
 }
