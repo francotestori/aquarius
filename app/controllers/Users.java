@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Country;
+import models.Project;
 import models.User;
 
 import play.data.Form;
@@ -14,7 +15,9 @@ import views.html.user.profileForm;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -22,15 +25,12 @@ public class Users extends Controller {
 
     public static Result showProfileForm() {
         Form<User> form = Form.form(User.class);
-        final String email = session("email");
-        final User user = User.findByEmail(email);
-
+        final User user = getLoggedUser();
         return ok(profileForm.render(user, form));
     }
 
     public static Result updateProfile() {
-        final String email = session().get("email");
-        final User user = User.findByEmail(email);
+        final User user = getLoggedUser();
         final Map<String, String> data = Form.form().bindFromRequest().data();
         Date birthday;
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -60,5 +60,24 @@ public class Users extends Controller {
         } else {
             return Application.index();
         }
+    }
+
+    public static User getLoggedUser(){
+        return User.findByEmail(session().get("email"));
+    }
+
+    public static List<Project> getTopProjectsFollow(User user){
+        List<Project> topFollow = Projects.getFollowedProjects(user);
+        topFollow.sort(new Comparator<Project>() {
+            @Override
+            public int compare(Project o1, Project o2) {
+                return o1.getFundsRaised() - o2.getFundsRaised();
+            }
+        });
+        return topFollow.subList(0,3);
+    }
+
+    public static List<User> getFollowedUsers(User user){
+        return User.find().where().like("follower", String.valueOf(user.getId())).findList();
     }
 }

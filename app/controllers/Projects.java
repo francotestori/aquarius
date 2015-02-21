@@ -100,6 +100,12 @@ public class Projects extends Navigation {
     }
 
     public static String getName(Boolean isNew){
-        return isNew == true ? "New" : "Edit";
+        return isNew ? "New" : "Edit";
     }
+
+    public static List<Project> getFollowedProjects(User user){
+        return Project.find().where().like("followers", String.valueOf(user.getId())).findList();
+    }
+
+//    public static List<Project> getUserProjects(User user){}
 }

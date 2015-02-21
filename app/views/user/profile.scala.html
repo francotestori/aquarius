@@ -17,18 +17,16 @@
                         <div class="overlayer bottom-right">
                             <div class="overlayer-wrapper">
                                 <div class="padding-10 hidden-xs">
-                                    @*<c:if test="${(requestScope.profiling.userName) != (requestScope.user.userName)}">*@
-                                        @*<button type="button" class="btn btn-primary btn-small" onclick="follow();"><i*@
-                                        @*class="fa fa-check"></i>&nbsp;&nbsp;Follow*@
-                                        @*</button>*@
-                                    @*</c:if>*@
-                                    @*<c:if test="${(requestScope.profiling.userName) != (requestScope.user.userName)}">*@
-                                        @*<button type="button" class="btn btn-primary btn-small">Send Message</button>*@
-                                    @*</c:if>*@
-                                    @*<c:if test="${(requestScope.profiling.userName) == (requestScope.user.userName)}">*@
-                                        @*<a href="/secured/edituser?id=${requestScope.user.id}" type="button"*@
-                                        @*class="btn btn-primary btn-small">Edit</a>*@
-                                    @*</c:if>*@
+                                    @if(!username.equals(Users.getLoggedUser.getEmail)){
+
+                                        <button type="button" class="btn btn-primary btn-small" onclick="follow();">
+                                            <i class="fa fa-check"></i>&nbsp;&nbsp;Follow </button>
+                                        <button type="button" class="btn btn-primary btn-small">Send Message</button>
+                                    }
+                                    @if(username.equals(Users.getLoggedUser.getEmail)){
+                                        <a href="/secured/edituser?id=${requestScope.user.id}" type="button"
+                                        class="btn btn-primary btn-small">Edit</a>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -44,21 +42,17 @@
                                     src="@routes.Assets.at("img/defaultuserpic.png")" alt="">
                                 </div>
                                 <div class="user-mini-description">
-                                    @*<h3 class="text-success semi-bold">*@
-                                        @*${requestScope.profiling.getFollowers().size()}*@
-                                    @*</h3>*@
+                                    <h3 class="text-success semi-bold"> @user.getFollowers </h3>
                                     <h5>Followers</h5>
 
-                                    @*<h3 class="text-success semi-bold">*@
-                                        @*${requestScope.followed}*@
-                                    @*</h3>*@
+                                    <h3 class="text-success semi-bold">@Users.getFollowedUsers(user) </h3>
                                     <h5>Following</h5>
                                 </div>
                             </div>
                             <div class="col-md-8 user-description-box  col-sm-8">
-                                @*<h3 class="semi-bold no-margin">${requestScope.profiling.getFirstName()} ${requestScope.profiling.getLastName()}</h3>*@
-                                @*<h4 class="no-margin">${requestScope.profiling.getUserName()}</h4>*@
-                                @*<h6 class="no-margin">Reputation: ${requestScope.profiling.reputation}</h6>*@
+                                <h3 class="semi-bold no-margin">@user.getFirstName @user.getLastName </h3>
+                                <h4 class="no-margin">@username</h4>
+                                <h6 class="no-margin">Reputation: @user.getReputation </h6>
                             </div>
                         </div>
 
@@ -70,7 +64,7 @@
                                     more</a></h5>
 
                                 <div class="row">
-                                        <!-- JSTL to display top 3 projects from progression standpoint-->
+                                    @for(project : Project <- ){
                                     <c:forEach var="projectView" items="${requestScope.projects}">
                                         <div class="col-md-4">
                                             <div class="friend-list">
@@ -97,7 +91,7 @@
                                                 <div class="clearfix"></div>
                                             </div>
                                         </div>
-                                    </c:forEach>
+                                        }
                                 </div>
                             </div>
                         </div>
