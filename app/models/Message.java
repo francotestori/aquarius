@@ -43,4 +43,36 @@ public class Message extends Model {
     public boolean isRead() {
         return read;
     }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public void setRecipient(User recipient) {
+        this.recipient = recipient;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
+    }
+
+    public String validate() {
+        final User recipient = User.findByEmail(this.recipient.getEmail());
+
+        if (recipient == null) {
+            return "user does not exist";
+        } else {
+            this.recipient = recipient;
+        }
+
+        return null;
+    }
 }

@@ -1,0 +1,11 @@
+@(user: User, form : Form[Message])
+@nav("New message", user){
+
+    @helper.form(routes.Messages.postMessageForm()){
+        <input type="number" name="id" class="hidden">
+        <input type="text" name="recipient.email"><br>
+        <textarea name="message"></textarea>
+        <input type="submit">
+    }
+
+}
