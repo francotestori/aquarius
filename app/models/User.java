@@ -190,6 +190,14 @@ public class User extends Model implements Serializable {
         this.country = country;
     }
 
+    public Message getMessage(Long messageId){
+        Message message = null;
+        for (Message auxMessage : inbox) {
+            if (messageId.equals(auxMessage.getId())) message = auxMessage;
+        }
+        return message;
+    }
+
     /**
      * Finder for advanced queries in controllers
      */

@@ -36,6 +36,7 @@ create table image (
 
 create table message (
   id                        bigint not null,
+  subject                   varchar(255),
   message                   varchar(255),
   date                      timestamp,
   sender_id                 bigint,

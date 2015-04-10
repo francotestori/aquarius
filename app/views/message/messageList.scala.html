@@ -1,10 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-  <meta charset="UTF-8">
-  <title></title>
-</head>
-<body>
+@(user: User, messages: List[Message])
+@styles={
+    <script type="text/javascript">
+        console.log("hello");
+    </script>
+}
+@nav("Inbox", user) {
+    <div class="row" id="inbox-wrapper">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="grid simple" >
+                        <div class="grid-body no-border email-body" >
+                            <br>
+                            <div class="row-fluid" >
+                                <div class="row-fluid dataTables_wrapper" >
+                                    <h2 class=" inline">Actions </h2>
+                                    <div class="btn-group m-l-10 m-b-10">
+                                        <a href="#" data-toggle="dropdown" class="btn btn-white btn-mini dropdown-toggle"><span class="caret single"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Action</a></li>
+                                            <li><a href="#">Another action</a></li>
+                                            <li><a href="#">Something else here</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                    <button type="button" class="btn btn-success btn-cons"><a href="@routes.Messages.showMessageForm()">
+                                        Compose</a></button>
 
-</body>
-</html>
+                                </div>
+
+                                <div id="email-list">
+                                    <table class="table table-striped table-fixed-layout table-hover" id="emails" >
+                                        <thead>
+                                            <tr>
+                                                <th class="small-cell"></th>
+                                                <th>Sender</th>
+                                                <th>Subject</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @for(message: Message <- messages) {
+                                            <tr >
+                                                <td class="small-cell">
+                                                    <div class="checkbox check-success ">
+                                                        <input id="checkbox8" type="checkbox" value="1" >
+                                                        <label for="checkbox8"></label>
+                                                    </div>
+                                                </td>
+                                                <td class="tablefull">@message.getSender.getEmail</td>
+                                                <td>
+                                                    <a href="@routes.Messages.showMessage(message.getId)">
+                                                        <span class="muted">
+                                                        @message.getSubject
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span class="muted">
+                                                    @message.getDate().format("MM/dd/yyyy")
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

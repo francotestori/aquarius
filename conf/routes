@@ -30,4 +30,6 @@ GET         /project/edit/:id        controllers.Projects.update(id : Long)
 # Messages
 GET         /messages/new            controllers.Messages.showMessageForm()
 POST        /messages/new            controllers.Messages.postMessageForm()
+GET         /inbox                   controllers.Messages.showInbox()
+GET         /inbox/:id               controllers.Messages.showMessage(id : Long)
 

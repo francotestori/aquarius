@@ -4,6 +4,7 @@ import play.db.ebean.Model;
 
 import java.util.Date;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 
 
@@ -13,6 +14,7 @@ public class Message extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private String subject;
     private String message;
     private Date date;
     @ManyToOne
@@ -20,6 +22,7 @@ public class Message extends Model {
     @ManyToOne
     private User recipient;
     private boolean read;
+    private static Finder<Long, Message> find = new Finder<>(Long.class, Message.class);
 
     public Message() {
     }
@@ -64,15 +67,27 @@ public class Message extends Model {
         this.read = read;
     }
 
-    public String validate() {
-        final User recipient = User.findByEmail(this.recipient.getEmail());
+    public String getSubject() {
+        return subject;
+    }
 
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String validate() {
         if (recipient == null) {
             return "user does not exist";
-        } else {
-            this.recipient = recipient;
         }
-
         return null;
+    }
+
+    @Nullable
+    public static Message find(Long id){
+        return find.byId(id);
     }
 }
