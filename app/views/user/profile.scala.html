@@ -42,10 +42,10 @@
                                     src="@routes.Assets.at("img/defaultuserpic.png")" alt="">
                                 </div>
                                 <div class="user-mini-description">
-                                    <h3 class="text-success semi-bold"> @user.getFollowers </h3>
+                                    <h3 class="text-success semi-bold"> @user.getFollowers.size </h3>
                                     <h5>Followers</h5>
 
-                                    <h3 class="text-success semi-bold">@Users.getFollowedUsers(user) </h3>
+                                    <h3 class="text-success semi-bold">@Users.getFollowedUsers(user).size </h3>
                                     <h5>Following</h5>
                                 </div>
                             </div>
@@ -64,34 +64,34 @@
                                     more</a></h5>
 
                                 <div class="row">
-                                    @for(project : Project <- ){
-                                    <c:forEach var="projectView" items="${requestScope.projects}">
                                         <div class="col-md-4">
                                             <div class="friend-list">
-
+                                                @if(Users.getTopProjectsFollow(user) != null ){
+                                                @for(project : Project <-  Users.getTopProjectsFollow(user)){
                                                 <div class="friend-profile-pic">
                                                     <div class="user-profile-pic-normal">
                                                         <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
                                                     </div>
                                                 </div>
                                                 <div class="friend-details-wrapper">
-                                                    @*<div class="friend-name">*@
-                                                        @*${projectView.name}*@
-                                                    @*</div>*@
-                                                    @*<div class="friend-description">*@
-                                                        @*Objective: $ ${projectView.objective}*@
-                                                    @*</div>*@
-                                                    @*<div class="projectView-followers">*@
-                                                        @*Followers: ${projectView.getFollowersQty()}*@
-                                                    @*</div>*@
+                                                    <div class="friend-name">
+                                                        @project.getName
+                                                   </div>
+                                                    <div class="friend-description">
+                                                        Objective: $ @project.getObjective
+                                                    </div>
+                                                    <div class="projectView-followers">
+                                                        Followers: @project.getFollowersQty
+                                                    </div>
                                                 </div>
                                                 <div class="action-bar">
                                                     <button class="btn btn-primary" type="button">Follow</button>
                                                 </div>
                                                 <div class="clearfix"></div>
+                                                }
+                                                }
                                             </div>
                                         </div>
-                                        }
                                 </div>
                             </div>
                         </div>

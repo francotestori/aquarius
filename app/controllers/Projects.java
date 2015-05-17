@@ -104,8 +104,10 @@ public class Projects extends Navigation {
     }
 
     public static List<Project> getFollowedProjects(User user){
-        return Project.find().where().like("followers", String.valueOf(user.getId())).findList();
+        return Project.find().where().eq("followers.id", user.getId()).findList();
     }
 
-//    public static List<Project> getUserProjects(User user){}
+    public static List<Project> getUserProjects(User user){
+        return Project.find().where().eq("user.id",user.getId()).findList();
+    }
 }

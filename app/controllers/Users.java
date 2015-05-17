@@ -68,6 +68,7 @@ public class Users extends Controller {
 
     public static List<Project> getTopProjectsFollow(User user){
         List<Project> topFollow = Projects.getFollowedProjects(user);
+        if(topFollow.isEmpty()) return null;
         topFollow.sort(new Comparator<Project>() {
             @Override
             public int compare(Project o1, Project o2) {
@@ -78,6 +79,6 @@ public class Users extends Controller {
     }
 
     public static List<User> getFollowedUsers(User user){
-        return User.find().where().like("follower", String.valueOf(user.getId())).findList();
+        return User.find().where().eq("followers.id", user.getId()).findList();
     }
 }
