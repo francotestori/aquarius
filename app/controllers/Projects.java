@@ -96,7 +96,7 @@ public class Projects extends AbstractController {
     }
 
     public static String getName(Boolean isNew){
-        return isNew ? "New" : "Edit";
+        return isNew ? "Edit" : "New";
     }
 
     public static List<Project> getFollowedProjects(User user){
