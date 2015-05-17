@@ -15,11 +15,14 @@ GET         /profile/:id             controllers.Users.showProfile(id: Long)
 POST        /create-user             controllers.Application.createUser
 GET         /edit/profile            controllers.Users.showProfileForm
 POST        /edit/profile            controllers.Users.updateProfile
+GET         /confirm/:id             controllers.Application.confirmEmail(id : String)
+GET         /post-register           controllers.Application.postRegister()
 
 #Session
 GET         /login                   controllers.Application.login
 POST        /login                   controllers.Application.authenticate
 GET         /logout                  controllers.Application.logout
+POST        /resend-conf             controllers.Application.resendConfirmEmail
 
 # Projects
 GET         /new-project             controllers.Projects.showProjectForm
