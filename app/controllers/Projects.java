@@ -16,19 +16,17 @@ import java.util.Date;
 import java.util.List;
 
 
-public class Projects extends Navigation {
+public class Projects extends AbstractController {
 
     public static Result showProjectForm() {
         Form<Project> form = Form.form(Project.class);
-        final String email = session("email");
-        final User user = User.findByEmail(email);
+        final User user = getSessionUser();
 
         return ok(projectForm.render(user,form));
     }
 
     public static Result createProject() {
-        final String email = session().get("email");
-        final User user = User.findByEmail(email);
+        final User user = getSessionUser();
         final Form<Project> myProjectForm = Form.form(Project.class).bindFromRequest();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         Date endDate;
@@ -67,8 +65,7 @@ public class Projects extends Navigation {
 
     public static Result showProject(long id) {
         final Project project = Project.find(id);
-        final String email = session().get("email");
-        final User user = User.findByEmail(email);
+        final User user = getSessionUser();
 
         if (project != null) {
             return ok(projectView.render(project, user));
@@ -79,8 +76,7 @@ public class Projects extends Navigation {
 
     public static Result update(long id){
         final Project project = Project.find(id);
-        final String email = session().get("email");
-        final User user = User.findByEmail(email);
+        final User user = getSessionUser();
 
         Form<Project> form = Form.form(Project.class).fill(project);
 
@@ -104,10 +100,12 @@ public class Projects extends Navigation {
     }
 
     public static List<Project> getFollowedProjects(User user){
-        return Project.find().where().eq("followers.id", user.getId()).findList();
+        return  null;
+//        return Project.find().where().eq("followers.id", user.getId()).findList();
     }
 
     public static List<Project> getUserProjects(User user){
-        return Project.find().where().eq("user.id",user.getId()).findList();
+        return null;
+//        return Project.find().where().eq("user.id",user.getId()).findList();
     }
 }

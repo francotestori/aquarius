@@ -29,7 +29,7 @@
     <script src="@routes.Assets.at("js/form_elements.js")" type="text/javascript"></script>
 }
 
-@nav(projectName.toString,user,style,scripts){
+@nav(projectName.toString(),user,style,scripts){
     @helper.form(routes.Projects.createProject()){
 
     <!-- BEGIN BASIC FORM ELEMENTS-->
@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label class="form-label">Project Name</label>
                             <div class="controls">
-                                <input name="name" type="text" class="form-control" value="@form.value.get.getName">
+                                <input name="name" type="text" class="form-control" value="@form.get.getName">
                             </div>
                         </div>
 

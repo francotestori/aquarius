@@ -40,7 +40,7 @@ public class Project extends Model {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     List<Update> updates;
 
-    static Finder<Long, Project> find = new Finder<Long, Project>(Long.class, Project.class);
+    static Finder<Long, Project> find = new Finder<>(Long.class, Project.class);
 
     public long getId() {
         return id;
