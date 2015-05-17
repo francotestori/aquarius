@@ -1,4 +1,5 @@
 @(form : Form[Application.Login])
+@import _root_.utils.AqMessage
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,6 +70,9 @@
                                 </div>
                                 @if(form.hasGlobalErrors){
                                     <label class="error">@form.globalError.message</label>
+                                    @if(form.globalError.message == AqMessage.EMAIL_CONF_REQ.en()){
+                                        <button type="button" class="btn btn-info" id="resend-conf-btn">Resend confirmation</button>
+                                    }
                                 }
                             </div>
                         </div>

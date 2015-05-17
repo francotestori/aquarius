@@ -4,10 +4,14 @@ import models.User;
 
 import play.api.mvc.Call;
 
+import play.data.DynamicForm;
 import play.data.Form;
 import static play.data.Form.form;
 
 import play.libs.Crypto;
+
+import play.libs.mailer.Email;
+import play.libs.mailer.MailerPlugin;
 
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -15,6 +19,7 @@ import play.mvc.Security;
 
 import play.twirl.api.Html;
 
+import utils.AqMessage;
 import views.html.index;
 import views.html.login;
 import views.html.nav;
@@ -85,25 +90,60 @@ public class Application extends Controller {
             user.setConfirmedEmail(false);
             user.save();
 
-            //            Email email = new Email();
-            //            email.setSubject("Aquarius Mail Verification");
-            //            email.setFrom("noreply@aquarius.com");
-            //            email.addTo(user.getEmail());
-            //            email.setBodyText("verify mother fucker");
-            //            MailerPlugin.send(email);
-            return redirect(controllers.routes.Application.index());
+            sendEmailConf(user.getEmail());
+
+            return redirect(controllers.routes.Application.postRegister());
         }
     }
 
-    public static Result confirmEmail(String confirmationCode) {
-        final String email = Crypto.decryptAES(confirmationCode);
-        final User user = User.findByEmail(email);
+    /**
+     * Sends and email to the user with a link for confirming his account
+     * @param user user to send mail
+     */
+    private static void sendEmailConf(String email) {
+        final Email emailObj = new Email();
+        emailObj.setSubject("Aquarius Mail Verification");
+        emailObj.setFrom("noreply@aquarius.com");
+        emailObj.addTo(email);
+        emailObj.setBodyHtml("<h3>Thank you for registering</h3>" +
+                "<p>To activate your email please click on the follwing link</p>" +
+                "/confirm/" + Crypto.encryptAES(email));
+        MailerPlugin.send(emailObj);
+    }
 
+    /**
+     * Given an email confirmation link, confirms the account and logs in the user
+     * @param encryptedEmail
+     * @return
+     */
+    public static Result confirmEmail(String encryptedEmail) {
+        final String email = Crypto.decryptAES(encryptedEmail);
+        final User user = User.findByEmail(email);
         if (user != null) {
             user.setConfirmedEmail(true);
+            user.save();
+            session().clear();
+            session("email", email);
+            final Call index = Call.apply("GET", "/");
+            return redirect(index);
+        } else {
+            return login();
         }
+    }
 
-        return login();
+    public static Result resendConfirmEmail(){
+        final DynamicForm dForm = form().bindFromRequest();
+        final String email = dForm.get("email");
+        if (email == null) {
+            return login();
+        } else {
+            sendEmailConf(email);
+            return login();
+        }
+    }
+
+    public static Result postRegister() {
+        return ok(views.html.confirmEmail.render());
     }
 
     public static Result logout() {
@@ -119,6 +159,12 @@ public class Application extends Controller {
         public String validate() {
             if (User.authenticate(email, Crypto.encryptAES(password)) == null) {
                 return "Invalid user or password";
+            }
+
+            final User user = User.findByEmail(email);
+
+            if ((user != null) && !user.isConfirmedEmail()) {
+                return AqMessage.EMAIL_CONF_REQ.en();
             }
 
             return null;
