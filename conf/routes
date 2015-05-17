@@ -3,27 +3,33 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index()
+GET         /                        controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file        controllers.Assets.at(path="/public", file)
+GET         /assets/*file            controllers.Assets.at(path="/public", file)
 
 # Users
-GET         /register            controllers.Application.register
-POST        /register            controllers.Application.register
-GET         /profile/:id         controllers.Users.showProfile(id: Long)
-POST        /create-user         controllers.Application.createUser
-GET         /edit/profile        controllers.Users.showProfileForm
-POST        /edit/profile        controllers.Users.updateProfile
+GET         /register                controllers.Application.register
+POST        /register                controllers.Application.register
+GET         /profile/:id             controllers.Users.showProfile(id: Long)
+POST        /create-user             controllers.Application.createUser
+GET         /edit/profile            controllers.Users.showProfileForm
+POST        /edit/profile            controllers.Users.updateProfile
 
 #Session
-GET         /login               controllers.Application.login
-POST        /login               controllers.Application.authenticate
-GET         /logout              controllers.Application.logout
+GET         /login                   controllers.Application.login
+POST        /login                   controllers.Application.authenticate
+GET         /logout                  controllers.Application.logout
 
 # Projects
-GET         /new-project         controllers.Projects.showProjectForm
-POST        /new-project         controllers.Projects.createProject
-GET         /project/:id         controllers.Projects.showProject(id : Long)
-GET         /project/edit/:id    controllers.Projects.update(id : Long)
+GET         /new-project             controllers.Projects.showProjectForm
+POST        /new-project             controllers.Projects.createProject
+GET         /project/:id             controllers.Projects.showProject(id : Long)
+GET         /project/edit/:id        controllers.Projects.update(id : Long)
+
+# Messages
+GET         /messages/new            controllers.Messages.showMessageForm()
+POST        /messages/new            controllers.Messages.postMessageForm()
+GET         /inbox                   controllers.Messages.showInbox()
+GET         /inbox/:id               controllers.Messages.showMessage(id : Long)
 
