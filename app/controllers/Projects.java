@@ -96,7 +96,16 @@ public class Projects extends AbstractController {
     }
 
     public static String getName(Boolean isNew){
-        return isNew ? "Edit" : "New";
+        return isNew ? "New" : "Edit";
+    }
+
+    public static Result addFollower(long id){
+        final Project project = Project.find(id);
+        final User user = getSessionUser();
+
+        project.addFollower(user);
+
+        return ok(projectView.render(project,user));
     }
 
     public static List<Project> getFollowedProjects(User user){

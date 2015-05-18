@@ -1,7 +1,7 @@
 @(user : User, form: Form[Project])
 
 @projectName ={
-    @Projects.getName(form.value != None)
+    @Projects.getName(form("name").value == null)
 }
 
 @style = {
@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <label class="form-label">Project Name</label>
                             <div class="controls">
-                                <input name="name" type="text" class="form-control" >
+                                <input name="name" type="text" class="form-control" value="@form("name").value" >
                             </div>
                         </div>
 
@@ -50,7 +50,7 @@
                             <label class="form-label">Objective</label>
                             <span class="help">e.g. "$10000.00"</span>
                             <div class="controls">
-                                <input name="objective" type="number" class="form-control" data-a-sign="$ ">
+                                <input name="objective" type="number" class="form-control" data-a-sign="$ " value="@form("objective").value">
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                             <label class="form-label">Description</label>
 
                             <div class="controls">
-                                <textarea name="description" style="width: 100%; height: 80px"></textarea>
+                                <textarea name="description" style="width: 100%; height: 80px">@form("description").value</textarea>
                             </div>
                         </div>
 
@@ -80,6 +80,7 @@
                     <div class="grid-body no-border">
                         <h3>Write your <span class="semi-bold">Html</span></h3>
                         <textarea id="text-editor" name="html" placeholder="Enter text ..." class="form-control" rows="10">
+                            @form("html").value
                         </textarea>
                     </div>
 
@@ -126,7 +127,11 @@
                         <div class="col-md-12">
 
                             <div class="input-append success date col-md-10 col-lg-6 no-padding">
+                                @if(form("name").value == null){
                                 <input type="text" class="form-control" name="aux-end">
+                                } else{
+                                <input type="text" class="form-control" name="aux-end" value="@Projects.parseDate(form.get.getEnd)">
+                                    }
                                 <span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
                             </div>
                         </div>
@@ -144,7 +149,11 @@
                 </div>
                 <div class="grid-body no-border">
                     <div class="row-fluid">
-                        <input class="tags" id="source-tags" type="text" name="source-tags"/>
+                        @if(form("name").value == null) {
+                            <input class="tags" id="source-tags" type="text" name="source-tags"/>
+                        } else{
+                            <input class="tags" id="source-tags" type="text" name="source-tags" value="@Projects.getStringTag(form.get.getTags)"/>
+                        }
                     </div>
                 </div>
             </div>
@@ -156,7 +165,7 @@
     </div>
     <!-- END DROPDOWN CONTROLS-->
 
-    <input type="hidden" name="id">
+    <input type="hidden" name="id" value="@form("id").value">
     <button type="submit" class="btn btn-primary btn-cons"><i class="fa fa-check"></i>&nbsp;Submit</button>
 }
 }
