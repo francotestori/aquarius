@@ -92,7 +92,7 @@ public class Application extends Controller {
 
             sendEmailConf(user.getEmail());
 
-            return redirect(controllers.routes.Application.postRegister());
+            return redirect(controllers.routes.Application.afterRegister());
         }
     }
 
@@ -142,7 +142,7 @@ public class Application extends Controller {
         }
     }
 
-    public static Result postRegister() {
+    public static Result afterRegister() {
         return ok(views.html.confirmEmail.render());
     }
 

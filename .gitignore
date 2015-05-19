@@ -5,7 +5,7 @@ target
 tmp
 .history
 dist
-db/
+db/*
 /.idea
 /*.iml
 /out

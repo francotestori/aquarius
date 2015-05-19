@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Users extends Controller {
+public class Users extends AbstractController {
 
     public static Result showProfileForm() {
         Form<User> form = Form.form(User.class);
@@ -45,18 +45,21 @@ public class Users extends Controller {
         user.setLastName(data.get("lastName"));
         user.setBirthday(birthday);
 
-        final Country country = Country.find(Long.parseLong(data.get("country")));
-        user.setCountry(country);
-        user.update();
+        final String countryName = data.get("country");
+        if (countryName != null) {
+            final Country country = Country.find(Long.parseLong(countryName));
+            user.setCountry(country);
+            user.update();
+        }
 
         return redirect("/");
     }
 
     public static Result showProfile(long id) {
         final User user = User.find(id);
-
+        final User loggedUser = getLoggedUser();
         if (user != null) {
-            return ok(profile.render(user));
+            return ok(profile.render(user, id == loggedUser.getId()));
         } else {
             return Application.index();
         }
@@ -67,15 +70,16 @@ public class Users extends Controller {
     }
 
     public static List<Project> getTopProjectsFollow(User user){
-        List<Project> topFollow = Projects.getFollowedProjects(user);
-        if(topFollow.isEmpty()) return null;
-        topFollow.sort(new Comparator<Project>() {
-            @Override
-            public int compare(Project o1, Project o2) {
-                return o1.getFundsRaised() - o2.getFundsRaised();
-            }
-        });
-        return topFollow.subList(0,3);
+        return user.getFollowedProjects();
+//        final List<Project> topFollow = Projects.getFollowedProjects(user);
+//        if(topFollow.isEmpty()) return null;
+//        topFollow.sort(new Comparator<Project>() {
+//            @Override
+//            public int compare(Project o1, Project o2) {
+//                return o1.getFundsRaised() - o2.getFundsRaised();
+//            }
+//        });
+//        return topFollow.subList(0,3);
     }
 
     public static List<User> getFollowedUsers(User user){
