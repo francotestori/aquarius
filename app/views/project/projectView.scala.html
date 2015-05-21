@@ -10,6 +10,7 @@
 @scripts={
     <script src="@routes.Assets.at("plugins/jquery-superbox/js/superbox.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("js/tabs_accordian.js")" type="text/javascript" rel="script"></script>
+    <script src="@routes.Assets.at("js/my_js/projectView.js")" type="text/javascript" rel="script"></script>
     @*<script>*@
     @*function submitComment() {*@
     @*jQuery.ajax({*@
@@ -122,14 +123,15 @@
                 <div id="comment-wrapper">
                     @for(comment : Comment <- project.getComments){
                         <div class="row" style="padding-left: 20px">
-                            <h6>@comment.getUser</h6>
-
+                            <h6>@comment.getUser.getUsername</h6>
                             <p>@comment.getComment</p>
                         </div>
                     }
                 </div>
-                <form name="comment-form">
                     <div class="col-md-12 no-padding">
+                        <input type="text" class="hidden" id="userId" value="@user.getId">
+                        <input type="text" class="hidden" id="projectId" value="@project.getId">
+                        <input type="text" class="hidden" id="lastCommentsUpdate">
                         <div class="tiles white">
                             <textarea rows="3" id="comment" class="form-control user-status-box post-input"
                             placeholder="Comment"
@@ -137,8 +139,7 @@
                         </div>
                         <div class="tiles grey padding-10">
                             <div class="pull-right">
-                                <button onclick="submitComment();" class="btn btn-primary btn-sm btn-small"
-                                type="button">
+                                <button onclick="submitComment();" class="btn btn-primary btn-sm btn-small" type="button">
                                     POST
                                 </button>
 
@@ -146,7 +147,6 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
     </div>

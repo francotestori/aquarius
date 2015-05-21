@@ -162,6 +162,14 @@ public class User extends Model implements Serializable {
         else return null;
     }
 
+    /**
+     * If has first name & last name returns "FirstName LastName" else returns email
+     */
+    public String getUsername(){
+        if(firstName != null && lastName != null) return firstName + " " + lastName;
+        else return email;
+    }
+
     public static List<User> list() {
         return find.all();
     }

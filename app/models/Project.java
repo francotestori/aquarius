@@ -3,8 +3,10 @@ package models;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import play.db.ebean.Model;
+import play.db.ebean.Model.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -15,7 +17,7 @@ public class Project extends Model {
     //Constructor variables
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    Long id;
     String name;
     String description;
     String faq;
@@ -200,6 +202,11 @@ public class Project extends Model {
     public void addFund(Fund fund) {
         funds.add(fund);
     }
+
+    public void addComment(@NotNull Comment comment){
+        comments.add(comment);
+    }
+
 
     /**
      * Finder for advanced queries on controllers

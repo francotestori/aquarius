@@ -59,7 +59,7 @@ public class Users extends AbstractController {
         final User user = User.find(id);
         final User loggedUser = getLoggedUser();
         if (user != null) {
-            return ok(profile.render(user, id == loggedUser.getId()));
+            return ok(profile.render(user));
         } else {
             return Application.index();
         }
@@ -70,7 +70,7 @@ public class Users extends AbstractController {
     }
 
     public static List<Project> getTopProjectsFollow(User user){
-        return user.getFollowedProjects();
+//        return user.getFollowedProjects();
 //        final List<Project> topFollow = Projects.getFollowedProjects(user);
 //        if(topFollow.isEmpty()) return null;
 //        topFollow.sort(new Comparator<Project>() {
@@ -80,6 +80,7 @@ public class Users extends AbstractController {
 //            }
 //        });
 //        return topFollow.subList(0,3);
+        return null;
     }
 
     public static List<User> getFollowedUsers(User user){

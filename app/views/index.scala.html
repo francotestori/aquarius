@@ -1,2 +1,13 @@
 @(title : String)
+<!--
 <img src="@routes.Assets.at("img/welcome.png")" width="100%">
+-->
+<ul>
+@for(project : Project <- Project.find().all()){
+    <li>
+        <a href="@routes.Projects.showProject(project.getId)">
+            @project.getName
+        </a>
+    </li>
+}
+</ul>

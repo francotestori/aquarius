@@ -13,7 +13,7 @@ public class Comment extends Model {
     //Constructor variables
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    Long id;
     String comment;
     DateTime date;
     @ManyToOne
@@ -21,13 +21,7 @@ public class Comment extends Model {
     @ManyToOne
     Project project;
 
-    //Non-constructor variables
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "ANSWER", inverseJoinColumns =  {
-        @JoinColumn(name = "ANSWER_ID")
-    }
-    )
-    List<Comment> answers;
+    static final Finder<Long, Comment> find = new Finder(Long.class, Comment.class);
 
     public long getId() {
         return id;
@@ -45,7 +39,28 @@ public class Comment extends Model {
         return project;
     }
 
-    public List<Comment> getAnswers() {
-        return answers;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
+
+    public void setDate(DateTime date) {
+        this.date = date;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public static Finder<Long, Comment> find() {
+        return find;
+    }
+
 }
