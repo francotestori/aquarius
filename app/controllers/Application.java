@@ -25,6 +25,9 @@ import views.html.login;
 import views.html.nav;
 import views.html.registerForm;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 
 public class Application extends Controller {
     @Security.Authenticated(Secured.class)
@@ -98,16 +101,27 @@ public class Application extends Controller {
 
     /**
      * Sends and email to the user with a link for confirming his account
-     * @param user user to send mail
+     * @param email email address to send mail
      */
     private static void sendEmailConf(String email) {
         final Email emailObj = new Email();
+        String ip = null;
+        try {
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         emailObj.setSubject("Aquarius Mail Verification");
         emailObj.setFrom("noreply@aquarius.com");
         emailObj.addTo(email);
+
+        final String link = (ip != null) ?
+                ip + ":9000/confirm/" + Crypto.encryptAES(email) :
+                "/confirm/" + Crypto.encryptAES(email);
+
         emailObj.setBodyHtml("<h3>Thank you for registering</h3>" +
                 "<p>To activate your email please click on the follwing link</p>" +
-                "/confirm/" + Crypto.encryptAES(email));
+                "<a href=\"" + link + "\" target=_blank>" + link + "</a>");
         MailerPlugin.send(emailObj);
     }
 
