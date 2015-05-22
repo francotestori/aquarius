@@ -1,5 +1,4 @@
-$("#lastCommentsUpdate").val(new Date().getTime());
-
+var lUpdate = new Date().getTime();
 function submitComment() {
     $.post(
         "/project/comment",
@@ -22,10 +21,10 @@ window.setInterval(function () {
         "/project/update/comments",
         {
             projectId: $("#projectId").val(),
-            lastUpdate: $("#lastCommentsUpdate").val()
+            lastUpdate: lUpdate
         },
         function (data) {
-            $("#lastCommentsUpdate").val(new Date().getTime());
+            lUpdate = new Date().getTime();
             data.forEach(function(entry){
                 newCommentRow(entry.t1, entry.t2)
             })
