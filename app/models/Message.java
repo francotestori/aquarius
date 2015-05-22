@@ -3,6 +3,7 @@ package models;
 import play.db.ebean.Model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
@@ -19,8 +20,8 @@ public class Message extends Model {
     private Date date;
     @ManyToOne
     private User sender;
-    @ManyToOne
-    private User recipient;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<User> recipients;
     private boolean read;
     private static Finder<Long, Message> find = new Finder<>(Long.class, Message.class);
 
@@ -39,8 +40,8 @@ public class Message extends Model {
         return sender;
     }
 
-    public User getRecipient() {
-        return recipient;
+    public List<User> getRecipient() {
+        return recipients;
     }
 
     public boolean isRead() {
@@ -59,9 +60,11 @@ public class Message extends Model {
         this.sender = sender;
     }
 
-    public void setRecipient(User recipient) {
-        this.recipient = recipient;
+    public void setRecipient(List<User> recipients) {
+        this.recipients = recipients;
     }
+
+    public void addRecipient(User recipient){recipients.add(recipient);}
 
     public void setRead(boolean read) {
         this.read = read;
@@ -80,8 +83,10 @@ public class Message extends Model {
     }
 
     public String validate() {
-        if (recipient == null) {
-            return "user does not exist";
+        for(User recipient : recipients) {
+            if (recipient == null) {
+                return "user does not exist";
+            }
         }
         return null;
     }

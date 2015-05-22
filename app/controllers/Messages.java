@@ -9,6 +9,7 @@ import play.mvc.Result;
 
 import views.html.message.messageForm;
 import views.html.message.messageList;
+import views.html.message.messageView;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,6 +18,7 @@ import java.util.List;
 
 
 public class Messages extends AbstractController {
+
     public static Result showMessageForm() {
         final User user = getSessionUser();
         final Form<Message> form = Form.form(Message.class);
@@ -38,9 +40,17 @@ public class Messages extends AbstractController {
         message.setRead(false);
         message.setDate(new Date(System.currentTimeMillis()));
 
-        final String recipientEmail = message.getRecipient().getEmail();
-        final User recipient = User.findByEmail(recipientEmail);
-        message.setRecipient(recipient);
+        // Add recipients
+        if(form.data().get("source-tags") != null){
+            String[] recipients = form.data().get("source-tags").split(",");
+            for(String recipientString : recipients){
+                User recipient = User.findByEmail(recipientString);
+                if(recipient != null){
+                    message.addRecipient(recipient);
+                }
+            }
+        }
+
         message.save();
 
         return showInbox();
@@ -78,7 +88,7 @@ public class Messages extends AbstractController {
                 message.update();
             }
 
-            return ok();
+            return ok(messageView.render(user,message));
         }
     }
 }

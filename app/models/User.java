@@ -33,7 +33,7 @@ public class User extends Model implements Serializable {
     List<User> followers;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Notification> notifications;
-    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     List<Message> inbox;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Fund> funds;

@@ -4,24 +4,24 @@ $(document).ready(function() {
 			//Table Row Click Event
 			$('.clickable').click( function() {
 				$('#inbox-wrapper').addClass('animated fadeOut');
-				$('#inbox-wrapper').hide();					
-				$('#preview-email-wrapper').addClass('animated fadeIn ');			
-				$('#preview-email-wrapper').show();			
-				$('.page-title').show();	
+				$('#inbox-wrapper').hide();
+				$('#preview-email-wrapper').addClass('animated fadeIn ');
+				$('#preview-email-wrapper').show();
+				$('.page-title').show();
 				//Load email details
-				$('#inbox-wrapper').removeClass('animated fadeOut');			
-				$('#inbox-wrapper').removeClass('animated fadeIn');			
+				$('#inbox-wrapper').removeClass('animated fadeOut');
+				$('#inbox-wrapper').removeClass('animated fadeIn');
 			});
-			
-			//Back Button Event 
-			$('#btn-back').click( function() {							
+
+			//Back Button Event
+			$('#btn-back').click( function() {
 				$('#inbox-wrapper').addClass('animated fadeIn');
-				$('#inbox-wrapper').show();									
-				$('#preview-email-wrapper').addClass('animated fadeOut');			
-				$('#preview-email-wrapper').hide();			
-				$('.page-title').hide();				
-				$('#preview-email-wrapper').removeClass('animated fadeIn ');				
-				$('#preview-email-wrapper').removeClass('animated fadeOut ');				
+				$('#inbox-wrapper').show();
+				$('#preview-email-wrapper').addClass('animated fadeOut');
+				$('#preview-email-wrapper').hide();
+				$('.page-title').hide();
+				$('#preview-email-wrapper').removeClass('animated fadeIn ');
+				$('#preview-email-wrapper').removeClass('animated fadeOut ');
 			});
 			
 			//Check box select Event

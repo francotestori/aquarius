@@ -1,11 +1,69 @@
 @(user: User, form : Form[Message])
-@nav("New message", user){
+
+@style={
+    <link href="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css")" rel="stylesheet" type="text/css"/>
+    <link href="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.css")" rel="stylesheet" type="text/css"/>
+}
+
+@scripts={
+    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.min.js")" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <script src="@routes.Assets.at("js/my_js/message-form.js")" type="text/javascript"></script>
+}
+
+@nav("New message", user,style,scripts){
 
     @helper.form(routes.Messages.postMessageForm()){
         <input type="number" name="id" class="hidden">
-        <input type="text" name="recipient.email" placeholder="to"><br>
-        <input type="text" name="subject" placeholder="subject"><br>
-        <textarea name="message" placeholder="message"></textarea><br>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="grid simple">
+                    <div class="grid-title no-border">
+                    </div>
+                    <div class="grid-body no-border">
+                        <div class="row-fluid">
+                            <label>Recipients</label>
+                            <input class="tags" id="source-tags" type="text" name="source-tags"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="grid simple">
+                    <div class="grid-title no-border">
+                    </div>
+                    <div class="grid-body no-border">
+                        <div class="row-fluid">
+                            <label>Subject</label>
+                            <input name="subject" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEGIN HTML5 WYSIWG CONTROLS-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="grid simple">
+                    <div class="grid-title no-border">
+                        <h4>Write a new <span class="semi-bold">Email</span></h4>
+                    </div>
+
+                    <div class="grid-body no-border">
+                        <textarea id="text-editor" name="message" placeholder="Enter text ..." class="form-control" rows="10">
+                        </textarea>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- END HTML5 WYSIWG CONTROLS-->
         <input type="submit">
     }
 

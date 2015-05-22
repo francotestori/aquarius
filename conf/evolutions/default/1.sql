@@ -39,7 +39,6 @@ create table message (
   message                   varchar(255),
   date                      timestamp,
   sender_id                 bigint,
-  recipient_id              bigint,
   read                      boolean,
   constraint pk_message primary key (id))
 ;
@@ -104,6 +103,12 @@ create table user (
 ;
 
 
+create table message_user (
+  message_id                     bigint not null,
+  user_id                        bigint not null,
+  constraint pk_message_user primary key (message_id, user_id))
+;
+
 create table project_tag (
   project_id                     bigint not null,
   tag_id                         bigint not null,
@@ -120,6 +125,12 @@ create table USER_FOLLOWERS (
   user_id                        bigint not null,
   FOLLOWER_ID                    bigint not null,
   constraint pk_USER_FOLLOWERS primary key (user_id, FOLLOWER_ID))
+;
+
+create table user_message (
+  user_id                        bigint not null,
+  message_id                     bigint not null,
+  constraint pk_user_message primary key (user_id, message_id))
 ;
 create sequence comment_seq;
 
@@ -155,24 +166,26 @@ alter table image add constraint fk_image_project_5 foreign key (project_id) ref
 create index ix_image_project_5 on image (project_id);
 alter table message add constraint fk_message_sender_6 foreign key (sender_id) references user (id) on delete restrict on update restrict;
 create index ix_message_sender_6 on message (sender_id);
-alter table message add constraint fk_message_recipient_7 foreign key (recipient_id) references user (id) on delete restrict on update restrict;
-create index ix_message_recipient_7 on message (recipient_id);
-alter table notification add constraint fk_notification_user_8 foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_notification_user_8 on notification (user_id);
-alter table project add constraint fk_project_country_9 foreign key (country_id) references country (id) on delete restrict on update restrict;
-create index ix_project_country_9 on project (country_id);
-alter table project add constraint fk_project_type_10 foreign key (type_id) references type (id) on delete restrict on update restrict;
-create index ix_project_type_10 on project (type_id);
-alter table project add constraint fk_project_user_11 foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_project_user_11 on project (user_id);
-alter table update add constraint fk_update_project_12 foreign key (project_id) references project (id) on delete restrict on update restrict;
-create index ix_update_project_12 on update (project_id);
-alter table user add constraint fk_user_profilePicture_13 foreign key (profile_picture_id) references image (id) on delete restrict on update restrict;
-create index ix_user_profilePicture_13 on user (profile_picture_id);
-alter table user add constraint fk_user_country_14 foreign key (country_id) references country (id) on delete restrict on update restrict;
-create index ix_user_country_14 on user (country_id);
+alter table notification add constraint fk_notification_user_7 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_notification_user_7 on notification (user_id);
+alter table project add constraint fk_project_country_8 foreign key (country_id) references country (id) on delete restrict on update restrict;
+create index ix_project_country_8 on project (country_id);
+alter table project add constraint fk_project_type_9 foreign key (type_id) references type (id) on delete restrict on update restrict;
+create index ix_project_type_9 on project (type_id);
+alter table project add constraint fk_project_user_10 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_project_user_10 on project (user_id);
+alter table update add constraint fk_update_project_11 foreign key (project_id) references project (id) on delete restrict on update restrict;
+create index ix_update_project_11 on update (project_id);
+alter table user add constraint fk_user_profilePicture_12 foreign key (profile_picture_id) references image (id) on delete restrict on update restrict;
+create index ix_user_profilePicture_12 on user (profile_picture_id);
+alter table user add constraint fk_user_country_13 foreign key (country_id) references country (id) on delete restrict on update restrict;
+create index ix_user_country_13 on user (country_id);
 
 
+
+alter table message_user add constraint fk_message_user_message_01 foreign key (message_id) references message (id) on delete restrict on update restrict;
+
+alter table message_user add constraint fk_message_user_user_02 foreign key (user_id) references user (id) on delete restrict on update restrict;
 
 alter table project_tag add constraint fk_project_tag_project_01 foreign key (project_id) references project (id) on delete restrict on update restrict;
 
@@ -185,6 +198,10 @@ alter table project_user add constraint fk_project_user_user_02 foreign key (use
 alter table USER_FOLLOWERS add constraint fk_USER_FOLLOWERS_user_01 foreign key (user_id) references user (id) on delete restrict on update restrict;
 
 alter table USER_FOLLOWERS add constraint fk_USER_FOLLOWERS_user_02 foreign key (FOLLOWER_ID) references user (id) on delete restrict on update restrict;
+
+alter table user_message add constraint fk_user_message_user_01 foreign key (user_id) references user (id) on delete restrict on update restrict;
+
+alter table user_message add constraint fk_user_message_message_02 foreign key (message_id) references message (id) on delete restrict on update restrict;
 
 # --- !Downs
 
@@ -199,6 +216,8 @@ drop table if exists fund;
 drop table if exists image;
 
 drop table if exists message;
+
+drop table if exists message_user;
 
 drop table if exists notification;
 
@@ -217,6 +236,8 @@ drop table if exists update;
 drop table if exists user;
 
 drop table if exists USER_FOLLOWERS;
+
+drop table if exists user_message;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 

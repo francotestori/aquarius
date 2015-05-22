@@ -1,0 +1,52 @@
+@(user: User, message : Message)
+
+@styles={
+  <link href="@routes.Assets.at("plugins/boostrap-checkbox/css/bootstrap-checkbox.css")" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="@routes.Assets.at("plugins/jquery-datatable/css/jquery.dataTables.css")" rel="stylesheet" type="text/css"/>
+
+}
+
+@nav("Email", user,styles){
+
+  <div class="row">
+    <div class="col-md-11">
+      <div class="grid simple">
+        <div class="grid-body no-border invoice-body"> <br>
+          <div class="pull-left">
+            <div class="user-info-wrapper">
+              <div class="profile-wrapper">
+                <img src="@routes.Assets.at("img/profiles/avatar.jpg")"width="69" height="69" />
+              </div>
+              <div class="user-details">
+                <div class="username">Nombre @message.getSender.getFirstName <span class="semi-bold"> Apellido @message.getSender.getLastName</span></div>
+              </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <h5>From: @message.getSender.getEmail</h5>
+            <h5>To: @for(recipient : User <- message.getRecipient){recipient.getEmail}</h5>
+          </div>
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-9">
+              <h4 class="semi-bold">@message.getSubject</h4>
+                <hr> @message.getMessage
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+      <div class="invoice-button-action-set">
+        <p>
+          <button class="btn btn-primary" type="button"><i class="fa fa-print"></i></button>
+        </p>
+        <p>
+          <button class="btn " type="button"><i class="fa fa-cloud-download"></i></button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+}

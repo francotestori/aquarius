@@ -93,8 +93,7 @@
                         <p style="text-align: justify">@project.getDescription</p>
                     </div>
                     <div class="col-md-4" style="border-radius: 5px; background-color: lightgray; text-align: right">
-                        <h3><span style="color:#0aa699" id="fundsraised">@project.getFundsRaised</span>
-                            FUNDS</h3>
+                        <h3><span style="color:#0aa699" id="fundsraised">@project.getFundsRaised</span> FUNDS</h3>
 
                         <h3><span style="color:#0aa699">@project.getObjective</span> OBJECTIVE</h3>
 
@@ -105,8 +104,10 @@
                     </div>
                 </div>
 
+
                 <hr>
                 @Html.apply(project.getHtml)
+
             </div>
                 <!--FAQ-->
             <div class="tab-pane" id="faq">
