@@ -11,10 +11,7 @@ import views.html.message.messageForm;
 import views.html.message.messageList;
 import views.html.message.messageView;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 public class Messages extends AbstractController {
@@ -40,6 +37,8 @@ public class Messages extends AbstractController {
         message.setRead(false);
         message.setDate(new Date(System.currentTimeMillis()));
 
+        List<User> receptors = new ArrayList<>();
+
         // Add recipients
         if(form.data().get("source-tags") != null){
             String[] recipients = form.data().get("source-tags").split(",");
@@ -47,8 +46,14 @@ public class Messages extends AbstractController {
                 User recipient = User.findByEmail(recipientString);
                 if(recipient != null){
                     message.addRecipient(recipient);
+                    receptors.add(recipient);
                 }
             }
+        }
+
+        // Update inboxes
+        for(User receptor : receptors){
+            receptor.addMessageToInbox(message);
         }
 
         message.save();

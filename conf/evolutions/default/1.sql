@@ -103,10 +103,10 @@ create table user (
 ;
 
 
-create table message_user (
+create table MESSAGE_USER (
   message_id                     bigint not null,
-  user_id                        bigint not null,
-  constraint pk_message_user primary key (message_id, user_id))
+  RECIPIENT_ID                   bigint not null,
+  constraint pk_MESSAGE_USER primary key (message_id, RECIPIENT_ID))
 ;
 
 create table project_tag (
@@ -183,9 +183,9 @@ create index ix_user_country_13 on user (country_id);
 
 
 
-alter table message_user add constraint fk_message_user_message_01 foreign key (message_id) references message (id) on delete restrict on update restrict;
+alter table MESSAGE_USER add constraint fk_MESSAGE_USER_message_01 foreign key (message_id) references message (id) on delete restrict on update restrict;
 
-alter table message_user add constraint fk_message_user_user_02 foreign key (user_id) references user (id) on delete restrict on update restrict;
+alter table MESSAGE_USER add constraint fk_MESSAGE_USER_user_02 foreign key (RECIPIENT_ID) references user (id) on delete restrict on update restrict;
 
 alter table project_tag add constraint fk_project_tag_project_01 foreign key (project_id) references project (id) on delete restrict on update restrict;
 
@@ -217,7 +217,7 @@ drop table if exists image;
 
 drop table if exists message;
 
-drop table if exists message_user;
+drop table if exists MESSAGE_USER;
 
 drop table if exists notification;
 

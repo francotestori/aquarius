@@ -111,6 +111,8 @@ public class User extends Model implements Serializable {
         return inbox;
     }
 
+    public void addMessageToInbox(Message message){inbox.add(message);}
+
     public List<Fund> getFunds() {
         return funds;
     }

@@ -21,6 +21,7 @@ public class Message extends Model {
     @ManyToOne
     private User sender;
     @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "MESSAGE_USER", inverseJoinColumns={@JoinColumn(name = "RECIPIENT_ID")})
     private List<User> recipients;
     private boolean read;
     private static Finder<Long, Message> find = new Finder<>(Long.class, Message.class);
@@ -94,5 +95,10 @@ public class Message extends Model {
     @Nullable
     public static Message find(Long id){
         return find.byId(id);
+    }
+
+    @Nullable
+    public static List<Message> findUserInbox(Long userId){
+        return find.where().like("recipients.id","" + userId).findList();
     }
 }
