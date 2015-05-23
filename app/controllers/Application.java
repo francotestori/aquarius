@@ -21,6 +21,7 @@ import play.mvc.Security;
 import play.twirl.api.Html;
 
 import utils.AqMessage;
+import utils.ProjectRecomendator;
 import views.html.index;
 import views.html.login;
 import views.html.nav;
@@ -38,10 +39,8 @@ public class Application extends Controller {
         if (email == null) {
             return redirect(controllers.routes.Application.login());
         } else {
-            final Html html = index.apply("Your new application is ready");
             final User user = User.findByEmail(email);
-
-            return ok(nav.render("Welcome!", user, null, null, html));
+            return ok(index.render(ProjectRecomendator.recommendMeSomeProjects(user), user));
         }
     }
 

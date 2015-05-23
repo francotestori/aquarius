@@ -3,14 +3,12 @@ package models;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import play.db.ebean.Model;
-import play.db.ebean.Model.*;
 
-import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Project extends Model {
@@ -18,7 +16,7 @@ public class Project extends Model {
     //Constructor variables
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    long id;
     String name;
     String description;
     String faq;
@@ -155,8 +153,8 @@ public class Project extends Model {
         this.start = start;
     }
 
-    public int getDaysRemaining(){
-        Period period = new Period(this.start.getTime(),this.end.getTime(), PeriodType.days());
+    public int getDaysRemaining() {
+        Period period = new Period(this.start.getTime(), this.end.getTime(), PeriodType.days());
         return period.getDays();
     }
 
@@ -204,24 +202,27 @@ public class Project extends Model {
         funds.add(fund);
     }
 
-    public void addComment(@NotNull Comment comment){
+    public void addComment(@NotNull Comment comment) {
         comments.add(comment);
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     /**
      * Finder for advanced queries on controllers
      */
-    public static Finder<Long, Project> find(){
+    public static Finder<Long, Project> find() {
         return find;
     }
 
-    public static Project find(long id){
+    public static Project find(long id) {
         return find.byId(id);
     }
 
-    public static List<Project> findProjectsByUserID(long userID){
-        return find.where().like("user.id","" + userID).findList();
+    public static List<Project> findProjectsByUserID(long userID) {
+        return find.where().like("user.id", "" + userID).findList();
     }
 
 }

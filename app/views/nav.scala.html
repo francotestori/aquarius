@@ -349,9 +349,11 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="content">
-                    <div class="page-title">
-                        <h3>@title </h3>
-                    </div>
+                    @if(title != null) {
+                        <div class="page-title">
+                            <h3>@title </h3>
+                        </div>
+                    }
                     <div id="container">
                         @contents
                     </div>
