@@ -40,3 +40,7 @@ POST        /messages/new                   controllers.Messages.postMessageForm
 GET         /inbox                          controllers.Messages.showInbox()
 GET         /inbox/:id                      controllers.Messages.showMessage(id : Long)
 
+# Search
+POST        /search                         controllers.Search.search()
+GET         /search                         controllers.Search.search()
+

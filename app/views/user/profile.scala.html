@@ -10,14 +10,14 @@
                         <div class="overlayer bottom-right">
                             <div class="overlayer-wrapper">
                                 <div class="padding-10 hidden-xs">
-                                    @if(!user.getUsername.equals(Users.getLoggedUser.getEmail)) {
+                                    @if(!user.getUsername.equals(Users.getLoggedUser.getUsername)) {
 
                                         <button type="button" class="btn btn-primary btn-small" onclick="follow();">
                                             <i class="fa fa-check"></i>&nbsp;&nbsp;Follow </button>
                                         <button type="button" class="btn btn-primary btn-small">Send Message</button>
                                     }
-                                    @if(user.getUsername.equals(Users.getLoggedUser.getEmail)) {
-                                        <a href="/secured/edituser?id=${requestScope.user.id}" type="button"
+                                    @if(user.getUsername.equals(Users.getLoggedUser.getUsername)) {
+                                        <a href="@routes.Users.showProfileForm()" type="button"
                                         class="btn btn-primary btn-small">Edit</a>
                                     }
                                 </div>

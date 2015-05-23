@@ -86,7 +86,20 @@ public class Projects extends AbstractController {
         if (myProjectForm.hasErrors()) {
             return badRequest(projectForm.render(user, Form.form(Project.class)));
         } else {
-            final Project project = myProjectForm.get();
+            final String id = myProjectForm.data().get("id");
+            final Project project;
+
+            if((id != null) || !("".equals(id))) {
+                project = Project.find(Long.valueOf(id));
+                project.setName(myProjectForm.data().get("name"));
+                project.setObjective(Integer.valueOf(myProjectForm.data().get("objective")));
+                project.setDescription(myProjectForm.data().get("description"));
+                project.setHtml(myProjectForm.data().get("html"));
+            }
+            else {
+                project = myProjectForm.get();
+                project.setStart(new Date(System.currentTimeMillis()));
+            }
 
             project.setUser(user);
 
@@ -101,10 +114,9 @@ public class Projects extends AbstractController {
                         tag = new Tag(strTag);
                         tag.save();
                     }
-                    project.addTag(tag);
+                    if(!project.getTags().contains(tag)) project.addTag(tag);
                 }
             }
-            project.setStart(new Date(System.currentTimeMillis()));
             project.setEnd(endDate);
             project.save();
             return redirect("/project/" + project.getId());
