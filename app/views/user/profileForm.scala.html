@@ -34,7 +34,7 @@
 
 }
 @nav("Profile form", user, style, scripts){
-    @helper.form(routes.Users.updateProfile(), 'id -> "profile-form") {
+    @helper.form(routes.Users.updateProfile(), 'id -> "profile-form", 'enctype -> "multipart/form-data") {
     <div class="grid simple">
         <div class="grid-title no-border">
             <h4>
@@ -75,6 +75,7 @@
                         <span class="help"> e.g. Argentina</span>
                         <div class="controls">
                             <select name="country">
+                                    <option value="" selected="selected">&nbsp; - </option>
                                 @for(country : Country <- Country.list()){
                                     <option value="@country.getId">@country.getName</option>
                                 }

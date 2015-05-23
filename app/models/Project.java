@@ -5,6 +5,7 @@ import org.joda.time.PeriodType;
 import play.db.ebean.Model;
 import play.db.ebean.Model.*;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -112,7 +113,7 @@ public class Project extends Model {
     @OneToMany(cascade = CascadeType.ALL)
     List<Comment> comments;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     List<Image> images;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", fetch = FetchType.LAZY)

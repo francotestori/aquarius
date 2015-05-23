@@ -30,9 +30,9 @@
                         <div class="row">
                             <div class="col-md-3 col-sm-3">
                                 <div class="user-profile-pic">
-                                    <img width="69" height="69" data-src-retina="secured/media/img/defaultuserpic.png"
-                                    data-src="secured/media/img/defaultuserpic.png"
-                                    src="@routes.Assets.at("img/defaultuserpic.png")" alt="">
+                                    <img width="69" height="69" data-src-retina="@routes.Assets.at(user.getProfilePicture.getPath)"
+                                    data-src="@routes.Assets.at(user.getProfilePicture.getPath)"
+                                    src="@routes.Assets.at(user.getProfilePicture.getPath)" alt="">
                                 </div>
                                 <div class="user-mini-description">
                                     <h3 class="text-success semi-bold"> @user.getFollowers.size </h3>
