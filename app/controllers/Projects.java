@@ -11,6 +11,7 @@ import play.mvc.Result;
 import utils.Function;
 import utils.Tuple2;
 import views.html.project.projectForm;
+import views.html.project.projectList;
 import views.html.project.projectView;
 
 import java.text.ParseException;
@@ -88,7 +89,9 @@ public class Projects extends AbstractController {
             final Project project = myProjectForm.get();
 
             project.setUser(user);
+
             // Add Types TODO
+
             // Add tags
             if (myProjectForm.data().get("source-tags") != null) {
                 String[] strTags = myProjectForm.data().get("source-tags").split(",");
@@ -114,6 +117,17 @@ public class Projects extends AbstractController {
 
         if (project != null) {
             return ok(projectView.render(project, user));
+        } else {
+            return Application.index();
+        }
+    }
+
+    public static Result showProjectList(){
+        final User user = getSessionUser();
+        final List<Project> projects = Project.findProjectsByUserID(user.getId());
+
+        if (!projects.isEmpty()) {
+            return ok(projectList.render(user, projects));
         } else {
             return Application.index();
         }

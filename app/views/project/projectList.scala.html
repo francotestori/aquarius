@@ -1,0 +1,75 @@
+@(user: User, projects : List[Project])
+
+@styles={
+  <link href="@routes.Assets.at("plugins/bootstrap-select2/select2.css")" rel="stylesheet" type="text/css"/>
+  <link href="@routes.Assets.at("plugins/jquery-slider/css/jquery.sidr.light.css")" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="@routes.Assets.at("plugins/jquery-datatable/css/jquery.dataTables.css")" rel="stylesheet" type="text/css"/>
+  <link href="@routes.Assets.at("plugins/boostrap-checkbox/css/bootstrap-checkbox.css")" rel="stylesheet" type="text/css" media="screen"/>
+  <link href="@routes.Assets.at("plugins/datatables-responsive/css/datatables.responsive.css")" rel="stylesheet" type="text/css" media="screen"/>
+}
+
+@scripts={
+  <!-- BEGIN PAGE LEVEL JS -->
+  <script src="@routes.Assets.at("plugins/bootstrap-select2/select2.min.js")" type="text/javascript"></script>
+  <script src="@routes.Assets.at("plugins/jquery-datatable/js/jquery.dataTables.js")" type="text/javascript" ></script>
+  <script src="@routes.Assets.at("plugins/jquery-datatable/js/jquery.dataTables.min.js")" type="text/javascript" ></script>
+  <script src="@routes.Assets.at("plugins/jquery-datatable/extra/js/TableTools.min.js")" type="text/javascript" ></script>
+  <script type="text/javascript" src="@routes.Assets.at("plugins/datatables-responsive/js/datatables.responsive.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("plugins/datatables-responsive/js/lodash.min.js")"></script>
+  <!-- END PAGE LEVEL PLUGINS -->
+  <script src="@routes.Assets.at("js/datatables.js")" type="text/javascript"></script>
+  <script>
+    var i = 2;
+    function name(element) {
+        $("element").attr("id", "checkbox" + i);
+        i++;
+    }
+  </script>
+}
+
+@nav("Projects",user,styles,scripts){
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="grid simple ">
+        <h4><span class="semi-bold">Projects</span></h4>
+        <div class="tools"><a href="javascript:;" class="collapse"></a> <a href="javascript:;" class="reload"></a></div>
+        <div class="grid-body ">
+          <table class="table table-hover table-condensed" id="example">
+            <thead>
+              <tr>
+                <th style="width:1%"><div class="checkbox check-default" style="margin-right:auto;margin-left:auto;">
+                  <input type="checkbox" value="1" id="checkbox1">
+                  <label for="checkbox1"></label>
+                </div></th>
+                <th style="width:10%">Project Name</th>
+                <th style="width:22%" data-hide="phone,tablet">Description</th>
+                <th style="width:6%">Objective</th>
+                <th style="width:10%" data-hide="phone,tablet">Progress</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(project : Project <- projects){
+              <tr >
+                <td class="v-align-middle"><div class="checkbox check-default">
+                  <input type="checkbox" value="3" onload="name(this)">
+                </div></td>
+                <td class="v-align-middle">@project.getName</td>
+                <td class="v-align-middle"><span class="muted">@project.getDescription</span></td>
+                <td><span class="muted">@project.getObjective</span></td>
+                <td class="v-align-middle">
+                  <div class="progress ">
+                    <div data-percentage="@project.getObjectiveCompletion"  class="progress-bar progress-bar-success animate-progress-bar"></div>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+}

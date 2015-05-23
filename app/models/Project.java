@@ -219,4 +219,8 @@ public class Project extends Model {
         return find.byId(id);
     }
 
+    public static List<Project> findProjectsByUserID(long userID){
+        return find.where().like("user.id","" + userID).findList();
+    }
+
 }
