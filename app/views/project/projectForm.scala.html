@@ -105,8 +105,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <select id="source" name="type" style="width:100%">
-                                <optgroup label="TYPES">
-
+                                <optgroup>
+                                    <option value="" selected="selected">&nbsp; - </option>
+                                    @for(typeString : Type <- Type.list()){
+                                        <option>@typeString.getName</option>
+                                    }
                                 </optgroup>
                             </select>
                         </div>

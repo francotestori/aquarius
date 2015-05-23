@@ -1,9 +1,6 @@
 package controllers;
 
-import models.Comment;
-import models.Project;
-import models.Tag;
-import models.User;
+import models.*;
 import org.joda.time.DateTime;
 import play.data.Form;
 import play.libs.Json;
@@ -104,6 +101,7 @@ public class Projects extends AbstractController {
             project.setUser(user);
 
             // Add Types TODO
+            project.setType(Type.find(myProjectForm.data().get("type")));
 
             // Add tags
             if (myProjectForm.data().get("source-tags") != null) {
