@@ -6,7 +6,7 @@
 
 }
 
-@nav("Email", user,styles){
+@nav("", user,styles){
 
   <div class="row">
     <div class="col-md-11">
@@ -15,10 +15,10 @@
           <div class="pull-left">
             <div class="user-info-wrapper">
               <div class="profile-wrapper">
-                <img src="@routes.Assets.at("img/profiles/avatar.jpg")"width="69" height="69" />
+                <img src="@routes.Assets.at(user.getProfilePicture.getPath)"  alt="" data-src="@routes.Assets.at(user.getProfilePicture.getPath)" data-src-retina="@routes.Assets.at(user.getProfilePicture.getPath)" width="69" height="69" />
               </div>
               <div class="user-details">
-                <div class="username">Nombre @message.getSender.getFirstName <span class="semi-bold"> Apellido @message.getSender.getLastName</span></div>
+                <div class="username">@message.getSender.getFirstName <span class="semi-bold">@message.getSender.getLastName</span></div>
               </div>
             </div>
             <br>
