@@ -1,29 +1,22 @@
-@(user : User)
-@username={
-    @if(user.getFirstName == null || user.getLastName == null){
-        @user.getEmail
-    } else {
-        @user.getFirstName @user.getLastName
-    }
-}
-@nav(username.toString ,user){
+@(user: User)
+@nav(user.getUsername, user) {
     <div class="page-content condensed">
 
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-        <div class="content" style="padding-top: 10px">
+        <div class="content" style="padding-top : 10 px">
             <div class="row">
                 <div class=" tiles white col-md-12 no-padding">
                     <div class="tiles green cover-pic-wrapper">
                         <div class="overlayer bottom-right">
                             <div class="overlayer-wrapper">
                                 <div class="padding-10 hidden-xs">
-                                    @if(!username.equals(Users.getLoggedUser.getEmail)){
+                                    @if(!user.getUsername.equals(Users.getLoggedUser.getEmail)) {
 
                                         <button type="button" class="btn btn-primary btn-small" onclick="follow();">
                                             <i class="fa fa-check"></i>&nbsp;&nbsp;Follow </button>
                                         <button type="button" class="btn btn-primary btn-small">Send Message</button>
                                     }
-                                    @if(username.equals(Users.getLoggedUser.getEmail)){
+                                    @if(user.getUsername.equals(Users.getLoggedUser.getEmail)) {
                                         <a href="/secured/edituser?id=${requestScope.user.id}" type="button"
                                         class="btn btn-primary btn-small">Edit</a>
                                     }
@@ -51,23 +44,22 @@
                             </div>
                             <div class="col-md-8 user-description-box  col-sm-8">
                                 <h3 class="semi-bold no-margin">@user.getFirstName @user.getLastName </h3>
-                                <h4 class="no-margin">@username</h4>
+                                <h4 class="no-margin">@user.getUsername</h4>
                                 <h6 class="no-margin">Reputation: @user.getReputation </h6>
                             </div>
                         </div>
 
                             <!--TOP PROJECTS-->
-                        <div class="row" style="padding: 20px">
+                        <div class="row" style="padding : 20px">
                             <div class="col-md-12  col-sm-4">
                                 <h5><span class="semi-bold">Top Projects</span>&nbsp;&nbsp; <a href="#"
                                 class="text-info normal-text">view
                                     more</a></h5>
 
                                 <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="friend-list">
-                                                @if(Users.getTopProjectsFollow(user) != null ){
-                                                @for(project : Project <-  Users.getTopProjectsFollow(user)){
+                                    <div class="col-md-4">
+                                        <div class="friend-list">
+                                            @for(project : Project <- user.getProjects){
                                                 <div class="friend-profile-pic">
                                                     <div class="user-profile-pic-normal">
                                                         <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
@@ -75,8 +67,8 @@
                                                 </div>
                                                 <div class="friend-details-wrapper">
                                                     <div class="friend-name">
-                                                        @project.getName
-                                                   </div>
+                                                    @project.getName
+                                                    </div>
                                                     <div class="friend-description">
                                                         Objective: $ @project.getObjective
                                                     </div>
@@ -88,17 +80,15 @@
                                                     <button class="btn btn-primary" type="button">Follow</button>
                                                 </div>
                                                 <div class="clearfix"></div>
-                                                }
-                                                }
-                                            </div>
-                                        </div>
+                                            }
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
 
                             <!-- Make TOP 3 projects following-->
-                        <div class="row" style="padding: 20px">
+                        <div class="row" style="padding : 20px">
                             <div class="col-md-12  col-sm-4">
                                 <h5><span class="semi-bold">Top Followed Projects</span>&nbsp;&nbsp; <a href="#"
                                 class="text-info normal-text">view
@@ -107,30 +97,30 @@
                                 <div class="row">
                                         <!-- JSTL to display top 3 projects from progression standpoint-->
                                     @*<c:forEach var="projectView" items="${requestScope.following}">*@
-                                        @*<div class="col-md-4">*@
-                                            @*<div class="friend-list">*@
-                                                @*<div class="friend-profile-pic">*@
-                                                    @*<div class="user-profile-pic-normal">*@
-                                                        @*<img width="35" height="35" src="../assets/img/briefcase.png">*@
-                                                    @*</div>*@
-                                                @*</div>*@
-                                                @*<div class="friend-details-wrapper">*@
-                                                    @*<div class="friend-name">*@
-                                                        @*${projectView.name}*@
-                                                    @*</div>*@
-                                                    @*<div class="friend-description">*@
-                                                        @*Objective: $ ${projectView.objective}*@
-                                                    @*</div>*@
-                                                    @*<div class="projectView-followers">*@
-                                                        @*Followers: ${projectView.getFollowersQty()}*@
-                                                    @*</div>*@
-                                                @*</div>*@
-                                                @*<div class="action-bar pull-right">*@
-                                                    @*<button class="btn btn-primary" type="button">Follow</button>*@
-                                                @*</div>*@
-                                                @*<div class="clearfix"></div>*@
-                                            @*</div>*@
-                                        @*</div>*@
+                                    @*<div class="col-md-4">*@
+                                    @*<div class="friend-list">*@
+                                    @*<div class="friend-profile-pic">*@
+                                    @*<div class="user-profile-pic-normal">*@
+                                    @*<img width="35" height="35" src="../assets/img/briefcase.png">*@
+                                    @*</div>*@
+                                    @*</div>*@
+                                    @*<div class="friend-details-wrapper">*@
+                                    @*<div class="friend-name">*@
+                                    @*${projectView.name}*@
+                                    @*</div>*@
+                                    @*<div class="friend-description">*@
+                                    @*Objective: $ ${projectView.objective}*@
+                                    @*</div>*@
+                                    @*<div class="projectView-followers">*@
+                                    @*Followers: ${projectView.getFollowersQty()}*@
+                                    @*</div>*@
+                                    @*</div>*@
+                                    @*<div class="action-bar pull-right">*@
+                                    @*<button class="btn btn-primary" type="button">Follow</button>*@
+                                    @*</div>*@
+                                    @*<div class="clearfix"></div>*@
+                                    @*</div>*@
+                                    @*</div>*@
                                     @*</c:forEach>*@
                                 </div>
                             </div>

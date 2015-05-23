@@ -10,6 +10,8 @@
     <link href="@routes.Assets.at("plugins/ios-switch/ios7-switch.css")" rel="stylesheet" type="text/css" media="screen">
     <link href="@routes.Assets.at("plugins/bootstrap-select2/select2.css")" rel="stylesheet" type="text/css" media="screen"/>
     <link href="@routes.Assets.at("plugins/jquery-slider/css/jquery.sidr.light.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("css/jquery.guillotine.css")" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="@routes.Assets.at("css/my_css/profileForm.css")" rel="stylesheet" type="text/css" media="screen"/>
 }
 
 @scripts = {
@@ -27,6 +29,9 @@
     <script src="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("plugins/dropzone/dropzone.min.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("js/form_elements.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("js/jquery.guillotine.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("js/my_js/profileForm.js")" type="text/javascript"></script>
+
 }
 @nav("Profile form", user, style, scripts){
     @helper.form(routes.Users.updateProfile(), 'id -> "profile-form") {
@@ -79,11 +84,21 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-4">
                     <div class="row-fluid">
-                        <form action="/file-upload" class="dropzone no-margin dz-clickable">
-                            <div class="dz-default dz-message">
-                                <span>Drop files here to upload</span>
+                        <div class='frame'>
+                            <img id='preview' src=''>
+                        </div>
+                        <div class="controls-container">
+                            <div id='profpic-controls'>
+                                <button id='rotate_left' type='button' title='Rotate left'><i class="fa fa-undo"></i></button>
+                                <button id='zoom_out' type='button' title='Zoom out'><b> - </b></button>
+                                <button id='fit' type='button' title='Fit image'><i class="fa fa-arrows-alt"></i></button>
+                                <button id='zoom_in' type='button' title='Zoom in'><b> + </b></button>
+                                <button id='rotate_right' type='button' title='Rotate right'><i class="fa fa-repeat"></i></button>
                             </div>
-                        </form>
+                            <button type="button" class="btn btn-info centered" onclick="clickUploadFile();"><i class="fa fa-picture-o"></i>
+                                Choose image</button>
+                        </div>
+                        <input type="file" id="profile-pic" name="profile-pic" class="hidden">
                     </div>
                 </div>
             </div>

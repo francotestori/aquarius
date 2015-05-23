@@ -1,0 +1,45 @@
+.controls-container{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#profpic-controls{
+    margin-bottom: 10px;
+}
+#profpic-controls button {
+    border: none;
+    padding: 10px;
+    width: 40px;
+    background-color: #0b9c8f;
+    display: inline-block;
+    color: #fff;
+}
+
+#rotate_left{
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+#zoom_out{
+    margin-left: -4px;
+}
+
+#fit{
+    margin-right: -4px;
+    margin-left: -4px;
+}
+
+#zoom_in{
+    margin-right: -4px;
+}
+
+#rotate_right{
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.centered{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}

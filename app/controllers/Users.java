@@ -3,19 +3,13 @@ package controllers;
 import models.Country;
 import models.Project;
 import models.User;
-
 import play.data.Form;
-
-import play.mvc.Controller;
 import play.mvc.Result;
-
 import views.html.user.profile;
 import views.html.user.profileForm;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +18,8 @@ import java.util.Map;
 public class Users extends AbstractController {
 
     public static Result showProfileForm() {
-        Form<User> form = Form.form(User.class);
         final User user = getLoggedUser();
+        final Form<User> form = Form.form(User.class).fill(user);
         return ok(profileForm.render(user, form));
     }
 
@@ -49,8 +43,8 @@ public class Users extends AbstractController {
         if (countryName != null) {
             final Country country = Country.find(Long.parseLong(countryName));
             user.setCountry(country);
-            user.update();
         }
+        user.update();
 
         return redirect("/");
     }
@@ -65,11 +59,11 @@ public class Users extends AbstractController {
         }
     }
 
-    public static User getLoggedUser(){
+    public static User getLoggedUser() {
         return User.findByEmail(session().get("email"));
     }
 
-    public static List<Project> getTopProjectsFollow(User user){
+    public static List<Project> getTopProjectsFollow(User user) {
 //        return user.getFollowedProjects();
 //        final List<Project> topFollow = Projects.getFollowedProjects(user);
 //        if(topFollow.isEmpty()) return null;
@@ -83,7 +77,7 @@ public class Users extends AbstractController {
         return null;
     }
 
-    public static List<User> getFollowedUsers(User user){
+    public static List<User> getFollowedUsers(User user) {
         return User.find().where().eq("followers.id", user.getId()).findList();
     }
 }
