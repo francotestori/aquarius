@@ -1,5 +1,12 @@
-@(user: User)
-@nav(user.getUsername, user) {
+@(loggedUser : User, user: User)
+
+@style={}
+
+@scripts={
+
+}
+
+@nav(user.getUsername, loggedUser) {
     <div class="page-content condensed">
 
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->

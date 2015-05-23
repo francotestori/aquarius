@@ -47,8 +47,8 @@
         <div id="Parks" class="just">
                 <!-- "TABLE" HEADER CONTAINING SORT BUTTONS (HIDDEN IN GRID MODE)-->
             <div class="list_header">
-                <div class="meta name active desc" id="SortByName"> Name &nbsp; <span class="sort anim150 asc active" data-sort="data-name" data-order="desc"></span> <span class="sort anim150 desc" data-sort="data-name" data-order="asc"></span> </div>
-                <div class="meta region">User</div>
+                <div class="meta name active desc" id="SortByName"> Image &nbsp; <span class="sort anim150 asc active" data-sort="data-name" data-order="desc"></span> <span class="sort anim150 desc" data-sort="data-name" data-order="asc"></span> </div>
+                <div class="meta region">User / Project</div>
                 <div class="meta rec">Email / Tags</div>
                 <div class="meta area" id="SortByArea"> Funds &nbsp; <span class="sort anim150 asc" data-sort="data-area" data-order="asc"></span> <span class="sort anim150 desc" data-sort="data-area" data-order="desc"></span> </div>
             </div>
@@ -59,25 +59,34 @@
                 @for(searchedUser : User <- userList){
                     <li class="mix northeast camping climbing fishing swimming" data-name="Acadia" data-area="47452.80">
                         <div class="meta name">
-                            <div class="img_wrapper"> <img src="" alt="" /> </div>
+                            <a href="@routes.Users.showProfile(searchedUser.getId)">
+                                <div class="img_wrapper">
+                                    <img src="" alt="" />
+                                </div>
+                            </a>
                             <div class="titles">
-                                <h2><a href="@routes.Users.showProfile(searchedUser.getId)"></a>@searchedUser.getUsername </h2>
+                                <a href="@routes.Users.showProfile(searchedUser.getId)"><h2>@searchedUser.getUsername </h2></a>
                             </div>
                         </div>
                         <div class="meta rec">
                             <ul>
-                                <li>@searchedUser.getEmail</li>
+                                <a href="@routes.Users.showProfile(searchedUser.getId)"><li>@searchedUser.getEmail</li></a>
                             </ul>
                         </div>
                         <div class="meta area">
-                            <p>@searchedUser.getFundsRaised</p>
+                            <a href="@routes.Users.showProfile(searchedUser.getId)"><p>@searchedUser.getFundsRaised</p></a>
                         </div>
                     </li>
                 }
                 @for(searchProject : Project <- projectList){
                     <li class="mix northeast camping climbing fishing swimming" data-name="Acadia" data-area="47452.80">
                         <div class="meta name">
-                            <div class="img_wrapper"> <img src="../assets/img/PuzzlePiece2.jpg" alt="" /> </div>
+                            <a href="@routes.Projects.showProject(searchProject.getId)">
+                                <div class="img_wrapper">
+                                    <img src="@if(searchProject.getImages.isEmpty){} else{
+                                        @searchProject.getImages.get(0)}" alt="" />
+                                </div>
+                            </a>
                             <div class="titles">
                                 <h2><a href="@routes.Projects.showProject(searchProject.getId)">@searchProject.getName</a></h2>
                             </div>
@@ -85,14 +94,14 @@
 
                         <div class="meta rec">
                             <ul>
-                                <p>@searchProject.getUser.getEmail</p>
+                                <a href="@routes.Projects.showProject(searchProject.getId)"><p>@searchProject.getUser.getEmail</p></a>
                                 @for(tag : Tag <- searchProject.getTags){
-                                    <li>@tag.getName</li>
+                                    <a href="@routes.Projects.showProject(searchProject.getId)"><li>@tag.getName</li></a>
                                 }
                             </ul>
                         </div>
                         <div class="meta area">
-                            <p>@searchProject.getFundsRaised</p>
+                            <a href="@routes.Projects.showProject(searchProject.getId)"><p>@searchProject.getFundsRaised</p></a>
                         </div>
                     </li>
                 }

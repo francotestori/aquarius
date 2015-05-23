@@ -14,11 +14,21 @@ import views.html.message.messageView;
 import java.util.*;
 
 
-public class Messages extends AbstractController {
+public class AqMessages extends AbstractController {
 
     public static Result showMessageForm() {
         final User user = getSessionUser();
         final Form<Message> form = Form.form(Message.class);
+
+        return ok(messageForm.render(user, form));
+    }
+
+    //Method to be used on profile to send a Message
+    public static Result sendMessageTo(long id){
+        final User user = getSessionUser();
+        final Form<Message> form = Form.form(Message.class);
+
+        form.data().put("source-tags", User.find(id).getEmail() + ",");
 
         return ok(messageForm.render(user, form));
     }

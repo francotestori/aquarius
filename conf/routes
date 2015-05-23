@@ -35,10 +35,13 @@ POST        /project/update/comments        controllers.Projects.updateComments(
 GET         /list/project                   controllers.Projects.showProjectList()
 
 # Messages
-GET         /messages/new                   controllers.Messages.showMessageForm()
-POST        /messages/new                   controllers.Messages.postMessageForm()
-GET         /inbox                          controllers.Messages.showInbox()
-GET         /inbox/:id                      controllers.Messages.showMessage(id : Long)
+GET         /messages/new                   controllers.AqMessages.showMessageForm()
+POST        /messages/new                   controllers.AqMessages.postMessageForm()
+
+POST        /messages/new/:id               controllers.AqMessages.sendMessageTo(id : Long)
+
+GET         /inbox                          controllers.AqMessages.showInbox()
+GET         /inbox/:id                      controllers.AqMessages.showMessage(id : Long)
 
 # Search
 POST        /search                         controllers.Search.search()

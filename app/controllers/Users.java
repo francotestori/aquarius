@@ -94,7 +94,7 @@ public class Users extends AbstractController {
         final User user = User.find(id);
         final User loggedUser = getLoggedUser();
         if (user != null) {
-            return ok(profile.render(user));
+            return ok(profile.render(loggedUser,user));
         } else {
             return Application.index();
         }

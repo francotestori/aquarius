@@ -33,7 +33,7 @@
                                             <li><a href="#">Separated link</a></li>
                                         </ul>
                                     </div>
-                                    <button type="button" class="btn btn-success btn-cons"><a href="@routes.Messages.showMessageForm()">
+                                    <button type="button" class="btn btn-success btn-cons"><a href="@routes.AqMessages.showMessageForm()">
                                         Compose</a></button>
 
                                 </div>
@@ -58,21 +58,21 @@
                                                     </div>
                                                 </td>
                                                 <td class="tablefull">
-                                                    <a href="@routes.Messages.showMessage(message.getId)">
+                                                    <a href="@routes.AqMessages.showMessage(message.getId)">
                                                         <span class="muted">
                                                         @message.getSender.getEmail
                                                         </span>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="@routes.Messages.showMessage(message.getId)">
+                                                    <a href="@routes.AqMessages.showMessage(message.getId)">
                                                         <span class="muted">
                                                         @message.getSubject
                                                         </span>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="@routes.Messages.showMessage(message.getId)">
+                                                    <a href="@routes.AqMessages.showMessage(message.getId)">
                                                         <span class="muted">
                                                         @message.getDate().format("MM/dd/yyyy")
                                                         </span>

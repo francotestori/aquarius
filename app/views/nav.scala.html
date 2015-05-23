@@ -43,7 +43,7 @@
                         <!-- END LOGO -->
                     <ul class="nav pull-right notifcation-center">
                         <li class="dropdown" id="header_task_bar"> <a href="@routes.Application.index()" class="dropdown-toggle active" data-toggle=""> <div class="iconset top-home"></div> </a> </li>
-                        <li class="dropdown" id="header_inbox_bar" > <a href="@routes.Messages.showInbox()" class="dropdown-toggle" ><div class="iconset top-messages"></div>
+                        <li class="dropdown" id="header_inbox_bar" > <a href="@routes.AqMessages.showInbox()" class="dropdown-toggle" ><div class="iconset top-messages"></div>
                             <span class="badge" id="msgs-badge">@user.getUnreadMessagesQty</span>
                         </a></li>
                         <li class="dropdown" id="portrait-chat-toggler" style="display:none"> <a href="#sidr" class="chat-menu-toggle"> <div class="iconset top-chat-white "></div> </a> </li>
@@ -165,7 +165,7 @@
                                     </li>
                                     <li><a href="@routes.Projects.showProjectList()"> My Projects</a>
                                     </li>
-                                    <li><a href="@routes.Messages.showInbox()"> My Inbox&nbsp;&nbsp;<span class="badge badge-important animated bounceIn">@user.getUnreadMessagesQty</span></a>
+                                    <li><a href="@routes.AqMessages.showInbox()"> My Inbox&nbsp;&nbsp;<span class="badge badge-important animated bounceIn">@user.getUnreadMessagesQty</span></a>
                                     </li>
                                     <li class="divider"></li>
                                     <li><a href="@routes.Application.logout()"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
@@ -206,7 +206,7 @@
                 <p class="menu-title">BROWSE <span class="pull-right"><a href="javascript:;"><i class="fa fa-refresh"></i></a></span></p>
                 <ul>
                     <li class="start active "> <a href="@routes.Application.index()"> <i class="icon-custom-home"></i> <span class="title">Dashboard</span> <span class="selected"></span> <span class="badge badge-important pull-right">5</span></a> </li>
-                    <li class=""> <a href="@routes.Messages.showInbox()"> <i class="fa fa-envelope"></i> <span class="title">Email</span>  <span class=" badge badge-disable pull-right ">203</span></a> </li>
+                    <li class=""> <a href="@routes.AqMessages.showInbox()"> <i class="fa fa-envelope"></i> <span class="title">Email</span>  <span class=" badge badge-disable pull-right ">203</span></a> </li>
                     <li class=""> <a href="@routes.Users.showProfile(user.getId)"> <i class="fa fa-user"></i> <span class="title">Profile</span> </a> </li>
                     <li class=""> <a href="../frontend/index.html"> <i class="fa fa-flag"></i>  <span class="title">Frontend</span></a></li>
                     <li class=""> <a href="javascript:;"> <i class="icon-custom-ui"></i> <span class="title">UI Elements</span> <span class="arrow "></span> </a>
