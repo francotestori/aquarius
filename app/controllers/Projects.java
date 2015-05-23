@@ -153,7 +153,7 @@ public class Projects extends AbstractController {
     }
 
     public static String parseDate(Date date) {
-        return new SimpleDateFormat("MM/dd/yyyy").format(date);
+        return (date != null) ? new SimpleDateFormat("MM/dd/yyyy").format(date) : "";
     }
 
     public static String getStringTag(List<Tag> tags) {
