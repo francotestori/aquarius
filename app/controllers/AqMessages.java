@@ -28,9 +28,9 @@ public class AqMessages extends AbstractController {
         final User user = getSessionUser();
         final Form<Message> form = Form.form(Message.class);
 
-        form.data().put("source-tags", User.find(id).getEmail() + ",");
+        form.data().put("source-tags",User.find(id).getEmail() + "," );
 
-        return ok(messageForm.render(user, form));
+        return ok(messageForm.render(user,form));
     }
 
     public static Result postMessageForm() {

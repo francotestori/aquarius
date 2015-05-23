@@ -37,8 +37,7 @@ GET         /list/project                   controllers.Projects.showProjectList
 # Messages
 GET         /messages/new                   controllers.AqMessages.showMessageForm()
 POST        /messages/new                   controllers.AqMessages.postMessageForm()
-
-POST        /messages/new/:id               controllers.AqMessages.sendMessageTo(id : Long)
+GET         /messages/send-to/:id           controllers.AqMessages.sendMessageTo(id : Long)
 
 GET         /inbox                          controllers.AqMessages.showInbox()
 GET         /inbox/:id                      controllers.AqMessages.showMessage(id : Long)

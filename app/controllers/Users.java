@@ -17,9 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Users extends AbstractController {
@@ -104,18 +102,13 @@ public class Users extends AbstractController {
         return User.findByEmail(session().get("email"));
     }
 
-    public static List<Project> getTopProjectsFollow(User user) {
-//        return user.getFollowedProjects();
-//        final List<Project> topFollow = Projects.getFollowedProjects(user);
-//        if(topFollow.isEmpty()) return null;
-//        topFollow.sort(new Comparator<Project>() {
-//            @Override
-//            public int compare(Project o1, Project o2) {
-//                return o1.getFundsRaised() - o2.getFundsRaised();
-//            }
-//        });
-//        return topFollow.subList(0,3);
-        return null;
+    public static List<Project> getTopFollowedProjects(long userID) {
+        List<Project> result = Project.find().where().like("user.id", "" + userID).findList();
+
+        result.sort((o1, o2) -> o2.getFollowersQty() - o1.getFollowersQty());
+
+        if(result.size() >= 3) return result.subList(0,2);
+        else return result.isEmpty() ? new ArrayList<>() : result.subList(0,result.size() - 1);
     }
 
     public static List<User> getFollowedUsers(User user) {

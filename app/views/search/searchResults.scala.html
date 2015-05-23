@@ -57,53 +57,53 @@
                 <!-- BEGIN LIST OF PARKS (MANY OF THESE ELEMENTS ARE VISIBLE ONLY IN LIST MODE)-->
             <ul>
                 @for(searchedUser : User <- userList){
+                    <a href="@routes.Users.showProfile(searchedUser.getId)">
                     <li class="mix northeast camping climbing fishing swimming" data-name="Acadia" data-area="47452.80">
                         <div class="meta name">
-                            <a href="@routes.Users.showProfile(searchedUser.getId)">
                                 <div class="img_wrapper">
                                     <img src="" alt="" />
                                 </div>
-                            </a>
                             <div class="titles">
-                                <a href="@routes.Users.showProfile(searchedUser.getId)"><h2>@searchedUser.getUsername </h2></a>
+                                <h2>@searchedUser.getUsername </h2>
                             </div>
                         </div>
                         <div class="meta rec">
                             <ul>
-                                <a href="@routes.Users.showProfile(searchedUser.getId)"><li>@searchedUser.getEmail</li></a>
+                                <li>@searchedUser.getEmail</li>
                             </ul>
                         </div>
                         <div class="meta area">
-                            <a href="@routes.Users.showProfile(searchedUser.getId)"><p>@searchedUser.getFundsRaised</p></a>
+                            <p>@searchedUser.getFundsRaised</p>
                         </div>
                     </li>
+                    </a>
                 }
                 @for(searchProject : Project <- projectList){
+                    <a href="@routes.Projects.showProject(searchProject.getId)">
                     <li class="mix northeast camping climbing fishing swimming" data-name="Acadia" data-area="47452.80">
                         <div class="meta name">
-                            <a href="@routes.Projects.showProject(searchProject.getId)">
                                 <div class="img_wrapper">
                                     <img src="@if(searchProject.getImages.isEmpty){} else{
                                         @searchProject.getImages.get(0)}" alt="" />
                                 </div>
-                            </a>
                             <div class="titles">
-                                <h2><a href="@routes.Projects.showProject(searchProject.getId)">@searchProject.getName</a></h2>
+                                <h2>@searchProject.getName</h2>
                             </div>
                         </div>
 
                         <div class="meta rec">
                             <ul>
-                                <a href="@routes.Projects.showProject(searchProject.getId)"><p>@searchProject.getUser.getEmail</p></a>
+                                <p>@searchProject.getUser.getEmail</p>
                                 @for(tag : Tag <- searchProject.getTags){
-                                    <a href="@routes.Projects.showProject(searchProject.getId)"><li>@tag.getName</li></a>
+                                    <li>@tag.getName</li>
                                 }
                             </ul>
                         </div>
                         <div class="meta area">
-                            <a href="@routes.Projects.showProject(searchProject.getId)"><p>@searchProject.getFundsRaised</p></a>
+                            <p>@searchProject.getFundsRaised</p>
                         </div>
                     </li>
+                    </a>
                 }
                     <!-- END LIST OF PARKS -->
             </ul>

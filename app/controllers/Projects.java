@@ -13,6 +13,7 @@ import views.html.project.projectView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -177,13 +178,12 @@ public class Projects extends AbstractController {
         return ok(projectView.render(project, user));
     }
 
-    public static List<Project> getFollowedProjects(User user) {
-        return null;
-//        return Project.find().where().eq("followers.id", user.getId()).findList();
-    }
+    public static List<Project> getFollowedProjects(long userID) {
+        List<Project> result = Project.find().where().like("followers.id", "" + userID).findList();
 
-    public static List<Project> getUserProjects(User user) {
-        return null;
-//        return Project.find().where().eq("user.id",user.getId()).findList();
+        result.sort((o1, o2) -> o2.getFundsRaised() - o1.getFundsRaised());
+
+        if(result.size() >= 3) return result.subList(0,2);
+        else return result.isEmpty() ? new ArrayList<>() :  result.subList(0,result.size() - 1);
     }
 }
