@@ -54,9 +54,9 @@
                 <td class="v-align-middle"><div class="checkbox check-default">
                   <input type="checkbox" value="3" onload="name(this)">
                 </div></td>
-                <td class="v-align-middle">@project.getName</td>
-                <td class="v-align-middle"><span class="muted">@project.getDescription</span></td>
-                <td><span class="muted">@project.getObjective</span></td>
+                <td class="v-align-middle"><a href="@routes.Projects.showProject(project.getId)"><span class="muted">@project.getName</span></a></td>
+                <td class="v-align-middle"><a href="@routes.Projects.showProject(project.getId)"><span class="muted">@project.getDescription</span></a></td>
+                <td><a href="@routes.Projects.showProject(project.getId)"><span class="muted">@project.getObjective</span></a></td>
                 <td class="v-align-middle">
                   <div class="progress ">
                     <div data-percentage="@project.getObjectiveCompletion"  class="progress-bar progress-bar-success animate-progress-bar"></div>

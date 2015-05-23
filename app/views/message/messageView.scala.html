@@ -25,13 +25,13 @@
             <br>
             <br>
             <h5>From: @message.getSender.getEmail</h5>
-            <h5>To: @for(recipient : User <- message.getRecipient){recipient.getEmail}</h5>
+            <h5>To: @message.getRecipientsString() </h5>
           </div>
           <div class="clearfix"></div>
           <div class="row">
             <div class="col-md-9">
-              <h4 class="semi-bold">@message.getSubject</h4>
-                <hr> @message.getMessage
+              <h4> Subject: <span class="semi-bold">@message.getSubject</span></h4>
+                <hr>@Html.apply(message.getMessage)
             </div>
           </div>
         </div>

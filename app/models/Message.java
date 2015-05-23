@@ -45,6 +45,15 @@ public class Message extends Model {
         return recipients;
     }
 
+    public String getRecipientsString() {
+        List<User> recipients = getRecipient();
+        String recipientsString = "";
+        for (User recipient : recipients) {
+            recipientsString += recipient.getEmail() + ",";
+        }
+        return recipientsString;
+    }
+
     public boolean isRead() {
         return read;
     }
