@@ -46,6 +46,7 @@ public class AqMessages extends AbstractController {
         message.setSender(user);
         message.setRead(false);
         message.setDate(new Date(System.currentTimeMillis()));
+        message.setActive(false);
 
         List<User> receptors = new ArrayList<>();
 

@@ -37,6 +37,7 @@ create table message (
   subject                   varchar(255),
   message                   varchar(255),
   date                      timestamp,
+  active                    boolean,
   sender_id                 bigint,
   read                      boolean,
   constraint pk_message primary key (id))
@@ -60,6 +61,7 @@ create table project (
   end                       timestamp,
   objective                 integer,
   html                      varchar(255),
+  active                    boolean,
   country_id                bigint,
   type_id                   bigint,
   user_id                   bigint,

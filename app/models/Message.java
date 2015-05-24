@@ -18,6 +18,7 @@ public class Message extends Model {
     private String subject;
     private String message;
     private Date date;
+    Boolean active;
     @ManyToOne
     private User sender;
     @ManyToMany(cascade = CascadeType.ALL)
@@ -90,6 +91,14 @@ public class Message extends Model {
 
     public Date getDate() {
         return date;
+    }
+
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public String validate() {

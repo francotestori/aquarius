@@ -7,9 +7,7 @@ import play.libs.Json;
 import play.mvc.Result;
 import utils.Function;
 import utils.Tuple2;
-import views.html.project.projectForm;
-import views.html.project.projectList;
-import views.html.project.projectView;
+import views.html.project.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,7 +64,7 @@ public class Projects extends AbstractController {
         Form<Project> form = Form.form(Project.class);
         final User user = getSessionUser();
 
-        return ok(projectForm.render(user, form));
+        return ok(newProject.render(user, form));
     }
 
     public static Result createProject() {
@@ -82,22 +80,13 @@ public class Projects extends AbstractController {
         }
 
         if (myProjectForm.hasErrors()) {
-            return badRequest(projectForm.render(user, Form.form(Project.class)));
+            return badRequest(newProject.render(user, Form.form(Project.class)));
         } else {
             final String id = myProjectForm.data().get("id");
             final Project project;
 
-            if((id != null) || !("".equals(id))) {
-                project = Project.find(Long.valueOf(id));
-                project.setName(myProjectForm.data().get("name"));
-                project.setObjective(Integer.valueOf(myProjectForm.data().get("objective")));
-                project.setDescription(myProjectForm.data().get("description"));
-                project.setHtml(myProjectForm.data().get("html"));
-            }
-            else {
-                project = myProjectForm.get();
-                project.setStart(new Date(System.currentTimeMillis()));
-            }
+            project = myProjectForm.get();
+            project.setStart(new Date(System.currentTimeMillis()));
 
             project.setUser(user);
 
@@ -116,6 +105,7 @@ public class Projects extends AbstractController {
                     if(!project.getTags().contains(tag)) project.addTag(tag);
                 }
             }
+            project.setActive(false);
             project.setEnd(endDate);
             project.save();
             return redirect("/project/" + project.getId());
@@ -144,13 +134,55 @@ public class Projects extends AbstractController {
         }
     }
 
-    public static Result update(long id) {
+    public static Result updateProject(){
+        final Form<Project> myProjectForm = Form.form(Project.class).bindFromRequest();
+
+        final String id = myProjectForm.data().get("id");
+        final Project project;
+
+        project = Project.find(Long.valueOf(id));
+        project.setName(myProjectForm.data().get("name"));
+        project.setObjective(Integer.valueOf(myProjectForm.data().get("objective")));
+        project.setDescription(myProjectForm.data().get("description"));
+        project.setHtml(myProjectForm.data().get("html"));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        Date endDate;
+
+        try {
+            endDate = sdf.parse(myProjectForm.data().get("aux-end"));
+        } catch (ParseException e) {
+            endDate = null;
+        }
+
+        // Add Types TODO
+        project.setType(Type.find(myProjectForm.data().get("type")));
+
+        // Add tags
+        if (myProjectForm.data().get("source-tags") != null) {
+            String[] strTags = myProjectForm.data().get("source-tags").split(",");
+            for (String strTag : strTags) {
+                Tag tag = Tag.getFinder().where().like("name", strTag).findUnique();
+                if (tag == null) {
+                    tag = new Tag(strTag);
+                    tag.save();
+                }
+                if(!project.getTags().contains(tag)) project.addTag(tag);
+            }
+        }
+
+        project.setEnd(endDate);
+        project.update();
+        return redirect("/project/" + project.getId());
+    }
+
+    public static Result showEditForm(long id) {
         final Project project = Project.find(id);
         final User user = getSessionUser();
 
         Form<Project> form = Form.form(Project.class).fill(project);
 
-        return ok(projectForm.render(user, form));
+        return ok(editProject.render(user, form));
     }
 
     public static String parseDate(Date date) {

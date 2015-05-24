@@ -30,7 +30,8 @@ GET         /confirm/:id                    controllers.Application.confirmEmail
 GET         /new-project                    controllers.Projects.showProjectForm
 POST        /new-project                    controllers.Projects.createProject
 GET         /project/:id                    controllers.Projects.showProject(id : Long)
-GET         /project/edit/:id               controllers.Projects.update(id : Long)
+GET         /project/edit/:id               controllers.Projects.showEditForm(id : Long)
+POST        /project/edit/                  controllers.Projects.updateProject
 POST        /project/comment                controllers.Projects.comment()
 POST        /project/update/comments        controllers.Projects.updateComments()
 GET         /list/project                   controllers.Projects.showProjectList()

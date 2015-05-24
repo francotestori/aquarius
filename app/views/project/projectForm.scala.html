@@ -1,36 +1,4 @@
-@(user : User, form: Form[Project])
-
-@projectName ={
-    @Projects.getName(form("name").value == null)
-}
-
-@style = {
-    <!-- BEGIN PLUGIN CSS -->
-    <link href="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.css")" rel="stylesheet" type="text/css"/>
-    <link href="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css")" rel="stylesheet" type="text/css"/>
-    <link href="@routes.Assets.at("plugins/bootstrap-datepicker/css/datepicker.css")" rel="stylesheet" type="text/css" />
-    <!-- END PLUGIN CSS -->
-    <link href="@routes.Assets.at("plugins/boostrap-slider/css/slider.css")" rel="stylesheet" type="text/css"/>
-    <link href="@routes.Assets.at("plugins/dropzone/css/dropzone.css")" rel="stylesheet" type="text/css"/>
-}
-
-@scripts = {
-    <!-- BEGIN CORE JS FRAMEWORK-->
-    <script src="@routes.Assets.at("plugins/bootstrap-select2/select2.min.js")" type="text/javascript"></script>
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="@routes.Assets.at("plugins/jquery-inputmask/jquery.inputmask.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-datepicker/js/bootstrap-datepicker.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/jquery-autonumeric/autoNumeric.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/bootstrap-tag/bootstrap-tagsinput.min.js")" type="text/javascript"></script>
-    <script src="@routes.Assets.at("plugins/dropzone/dropzone.min.js")" type="text/javascript"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-    <script src="@routes.Assets.at("js/my_js/project-form.js")" type="text/javascript"></script>
-}
-
-@nav(projectName.toString(),user,style,scripts){
-    @helper.form(routes.Projects.createProject()){
+@(user : User, form: Form[Project])(html : Html)
 
     <!-- BEGIN BASIC FORM ELEMENTS-->
     <div class="row">
@@ -167,8 +135,6 @@
         </div>
     </div>
     <!-- END DROPDOWN CONTROLS-->
-
-    <input type="hidden" name="id" value="@form("id").value">
+    @html
+    <input type="hidden" name="active">
     <button type="submit" class="btn btn-primary btn-cons"><i class="fa fa-check"></i>&nbsp;Submit</button>
-}
-}
