@@ -4,6 +4,7 @@ import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -198,6 +199,10 @@ public class User extends Model implements Serializable {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public void addProject(@NotNull Project project){
+        projects.add(project);
     }
 
     public Message getMessage(Long messageId){

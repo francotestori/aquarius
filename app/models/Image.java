@@ -13,10 +13,19 @@ public class Image extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     private String path;
 
+    static private Finder<Long, Image> find = new Finder<>(Long.class, Image.class);
+
     public Image() {
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public long getId() {
@@ -30,5 +39,13 @@ public class Image extends Model {
     public Image(String path) {
 
         this.path = path;
+    }
+
+    public static Finder<Long, Image> finder(){
+        return find;
+    }
+
+    public static Image find(long id){
+        return find.byId(id);
     }
 }
