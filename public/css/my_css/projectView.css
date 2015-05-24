@@ -1,0 +1,61 @@
+#project-info {
+    padding: 40px;
+    border-radius: 5px;
+    background-color: #fefefe;
+}
+
+#project-info .info-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#project-info p {
+    text-align: justify;
+}
+
+.info-widget h4 {
+    margin-bottom: 0;
+}
+
+.info-widget h6 {
+    margin-top: 0;
+}
+
+.info-widget .icon-container {
+    padding-top: 3px;
+    padding-right: 0;
+    text-align: right;
+    display: inline-block;
+}
+
+.info-widget .info-container {
+    padding-left: 30px;
+    display: inline-block;
+}
+
+#buttons-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#buttons-container button {
+    margin-bottom: 0;
+}
+
+#contribute-btn {
+    background-color: #0a833d;
+}
+
+#follow-btn {
+    background-color: #226fbe;
+
+}
+
+#unfollow-btn {
+    background-color: #cb4e4e;
+}
+
+.tab-content {
+    border-radius: 5px;
+}

@@ -35,6 +35,9 @@ POST        /project/edit/                  controllers.Projects.updateProject
 POST        /project/comment                controllers.Projects.comment()
 POST        /project/update/comments        controllers.Projects.updateComments()
 GET         /list/project                   controllers.Projects.showProjectList()
+POST        /follow/project                 controllers.Projects.followProject
+POST        /unfollow/project               controllers.Projects.unfollowProject
+POST        /addPledge                      controllers.Projects.addPledge
 
 # Messages
 GET         /messages/new                   controllers.AqMessages.showMessageForm()

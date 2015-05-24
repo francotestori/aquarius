@@ -2,6 +2,7 @@ package controllers;
 
 import models.*;
 import org.joda.time.DateTime;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Result;
@@ -204,10 +205,41 @@ public class Projects extends AbstractController {
     public static Result addFollower(long id) {
         final Project project = Project.find(id);
         final User user = getSessionUser();
-
         project.addFollower(user);
-
         return ok(projectView.render(project, user));
+    }
+
+    public static Result followProject(){
+        final User sessionUser = getSessionUser();
+        final String id = form().bindFromRequest().get("id");
+        final Project project = Project.find(Long.valueOf(id));
+        project.addFollower(sessionUser);
+        project.save();
+        return ok();
+    }
+
+    public static Result unfollowProject(){
+        final User sessionUser = getSessionUser();
+        final String id = form().bindFromRequest().get("id");
+        final Project project = Project.find(Long.valueOf(id));
+        project.getFollowers().remove(sessionUser);
+        project.save();
+        return ok();
+    }
+
+    public static Result addPledge(){
+        final User sessionUser = getSessionUser();
+        final DynamicForm form = form().bindFromRequest();
+        final long id = Long.valueOf(form.get("id"));
+        final Integer amount = Integer.valueOf(form.get("amount"));
+        final Project project = Project.find(id);
+
+        final Fund fund = new Fund(amount, sessionUser, project);
+        fund.save();
+
+        project.addFund(fund);
+        project.save();
+        return ok();
     }
 
     public static List<Project> getFollowedProjects(long userID) {
