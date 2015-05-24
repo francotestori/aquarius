@@ -15,3 +15,4 @@ db/*
 /RUNNING_PID
 /.settings
 projectFilesBackup
+/public/img/user/profile_pics/*
