@@ -12,7 +12,8 @@ GET         /assets/*file                   controllers.Assets.at(path="/public"
 GET         /profile/:id                    controllers.Users.showProfile(id: Long)
 GET         /edit/profile                   controllers.Users.showProfileForm
 POST        /edit/profile                   controllers.Users.updateProfile
-
+POST        /follow/user                    controllers.Users.followUser
+POST        /unfollow/user                  controllers.Users.unfollowUser
 
 #Session
 GET         /login                          controllers.Application.login

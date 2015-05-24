@@ -19,17 +19,18 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static play.data.Form.*;
 
 public class Users extends AbstractController {
 
     public static Result showProfileForm() {
-        final User user = getLoggedUser();
-        final Form<User> form = Form.form(User.class).fill(user);
+        final User user = getSessionUser();
+        final Form<User> form = form(User.class).fill(user);
         return ok(profileForm.render(user, form));
     }
 
     public static Result updateProfile() {
-        final User user = getLoggedUser();
+        final User user = getSessionUser();
         final RequestBody body = request().body();
         final FilePart picture = body.asMultipartFormData().getFile("profile-pic");
         final Map<String, String[]> data = body.asMultipartFormData().asFormUrlEncoded();
@@ -88,25 +89,38 @@ public class Users extends AbstractController {
         return redirect("/");
     }
 
+    public static Result followUser(){
+        final User sessionUser = getSessionUser();
+        final String id = form().bindFromRequest().get("id");
+        final User user = User.find(Long.valueOf(id));
+        user.addFollower(sessionUser);
+        user.save();
+        return ok();
+    }
+
+    public static Result unfollowUser(){
+        final User sessionUser = getSessionUser();
+        final String id = form().bindFromRequest().get("id");
+        final User user = User.find(Long.valueOf(id));
+        user.getFollowers().remove(sessionUser);
+        user.save();
+        return ok();
+    }
+
     public static Result showProfile(long id) {
         final User user = User.find(id);
-        final User loggedUser = getLoggedUser();
+        final User loggedUser = getSessionUser();
         if (user != null) {
-            return ok(profile.render(loggedUser,user));
+            return ok(profile.render(loggedUser,user, loggedUser.getId() == id));
         } else {
             return Application.index();
         }
     }
 
-    public static User getLoggedUser() {
-        return User.findByEmail(session().get("email"));
-    }
 
     public static List<Project> getTopFollowedProjects(long userID) {
         List<Project> result = Project.find().where().like("user.id", "" + userID).findList();
-
         result.sort((o1, o2) -> o2.getFollowersQty() - o1.getFollowersQty());
-
         if(result.size() >= 3) return result.subList(0,2);
         else return result.isEmpty() ? new ArrayList<>() : result.subList(0,result.size() - 1);
     }

@@ -1,28 +1,46 @@
-@(loggedUser : User, user: User)
+@(loggedUser: User, user: User, isMe: Boolean)
 
-@style={}
+@css = {
+    <link href="@routes.Assets.at("css/my_css/profile.css")" rel="stylesheet" type="text/css">
+}
 
-@scripts={}
+@js = {
+    <script src="@routes.Assets.at("js/my_js/profile.js")" rel="script" type="text/javascript"></script>
+}
 
-@nav(user.getUsername, loggedUser) {
+@nav(null, loggedUser, css, js) {
     <div class="page-content condensed">
+        @if(user.getFollowers.contains(loggedUser)) {
+                <!--suppress HtmlFormInputWithoutLabel -->
+            <input type="text" id="following" value="true" hidden="hidden">
+        } else {
+                <!--suppress HtmlFormInputWithoutLabel -->
+            <input type="text" id="following" value="false" hidden="hidden">
 
+        }
             <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-        <div class="content" style="padding-top : 10 px">
+        <div class="content">
             <div class="row">
                 <div class=" tiles white col-md-12 no-padding">
                     <div class="tiles green cover-pic-wrapper">
                         <div class="overlayer bottom-right">
                             <div class="overlayer-wrapper">
                                 <div class="padding-10 hidden-xs">
-                                    @if(!user.getUsername.equals(Users.getLoggedUser.getUsername)) {
+                                    @if(!isMe) {
+                                        <button type="button" class="btn btn-info" id="follow-btn" onclick="follow();">
+                                            <i class="fa fa-check"></i>&nbsp;&nbsp;Follow
+                                        </button>
+                                        <button type="button" class="btn btn-danger" id="unfollow-btn" onclick="unfollow()">
+                                            <i class="fa fa-times"></i>&nbsp;&nbsp;Unfollow
+                                        </button>
 
-                                        <button type="button" class="btn btn-primary btn-small" onclick="follow();">
-                                            <i class="fa fa-check"></i>&nbsp;&nbsp;Follow </button>
-                                        <a href="@routes.AqMessages.sendMessageTo(user.getId)"type="button"
-                                        class="btn btn-primary btn-small">Send Message</a>
+
+                                        <a href="@routes.AqMessages.sendMessageTo(user.getId)" type="button"
+                                        class="btn btn-primary" id="send-message-btn">
+                                            <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Message
+                                        </a>
                                     }
-                                    @if(user.getUsername.equals(Users.getLoggedUser.getUsername)) {
+                                    @if(isMe) {
                                         <a href="@routes.Users.showProfileForm()" type="button"
                                         class="btn btn-primary btn-small">Edit</a>
                                     }
@@ -41,7 +59,7 @@
                                     src="@routes.Assets.at(user.getProfilePicture.getPath)" alt="">
                                 </div>
                                 <div class="user-mini-description">
-                                    <h3 class="text-success semi-bold"> @user.getFollowers.size </h3>
+                                    <h3 class="text-success semi-bold" id="followers"> @user.getFollowers.size </h3>
                                     <h5>Followers</h5>
 
                                     <h3 class="text-success semi-bold">@Users.getFollowedUsers(user).size </h3>
@@ -56,7 +74,7 @@
                         </div>
 
                             <!--TOP PROJECTS-->
-                        <div class="row" style="padding : 20px">
+                        <div class="row" class="padding-20">
                             <div class="col-md-12  col-sm-4">
                                 <h5><span class="semi-bold">Top Projects</span>&nbsp;&nbsp; <a href="#"
                                 class="text-info normal-text">view
@@ -65,62 +83,63 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="friend-list">
-                                            @for(project : Project <- Users.getTopFollowedProjects(user.getId)){
-                                                <div class="friend-profile-pic">
-                                                    <div class="user-profile-pic-normal">
-                                                        <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
-                                                    </div>
-                                                </div>
-                                                <div class="friend-details-wrapper">
-                                                    <div class="friend-name">
-                                                    @project.getName
-                                                    </div>
-                                                    <div class="friend-description">
-                                                        Objective: $ @project.getObjective
-                                                    </div>
-                                                    <div class="projectView-followers">
-                                                        Followers: @project.getFollowersQty
-                                                    </div>
-                                                </div>
-                                                <div class="action-bar">
-                                                    <button class="btn btn-primary" type="button">Follow</button>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                            }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                            <!-- Make TOP 3 projects following-->
-                        <div class="row" style="padding : 20px">
-                            <div class="col-md-12  col-sm-4">
-                                <h5>
-                                    <span class="semi-bold">Top Followed Projects</span>&nbsp;&nbsp;
-                                    <a href="#" class="text-info normal-text">view more</a>
-                                </h5>
-
-                                <div class="row">
-                                        <!-- JSTL to display top 3 projects from progression standpoint-->
-                                    <div class="col-md-4">
-                                    <div class="friend-list">
-                                        @for(project : Project <- Projects.getFollowedProjects(user.getId)){
+                                        @for(project: Project <- Users.getTopFollowedProjects(user.getId)) {
                                             <div class="friend-profile-pic">
                                                 <div class="user-profile-pic-normal">
                                                     <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
                                                 </div>
                                             </div>
                                             <div class="friend-details-wrapper">
-                                                <div class="friend-name">@project.getName</div>
-                                                <div class="friend-description">Objective: $ @project.getObjective</div>
-                                                <div class="projectView-followers">Followers: @project.getFollowersQty</div>
+                                                <div class="friend-name">
+                                                @project.getName
+                                                </div>
+                                                <div class="friend-description">
+                                                        Objective: $ @project.getObjective
+                                                    </div>
+                                                <div class="projectView-followers">
+                                                        Followers: @project.getFollowersQty
+                                                    </div>
                                             </div>
-                                            <div class="action-bar pull-right">
+                                            <div class="action-bar">
                                                 <button class="btn btn-primary" type="button">Follow</button>
                                             </div>
                                             <div class="clearfix"></div>
                                         }
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+
+                                <!-- Make TOP 3 projects following-->
+                            <div class="row" class="padding-20">
+                                <div class="col-md-12  col-sm-4">
+                                    <h5>
+                                        <span class="semi-bold">Top Followed Projects</span>&nbsp;&nbsp;
+                                        <a href="#" class="text-info normal-text">view more</a>
+                                    </h5>
+
+                                    <div class="row">
+                                            <!-- JSTL to display top 3 projects from progression standpoint-->
+                                        <div class="col-md-4">
+                                            <div class="friend-list">
+                                            @for(project: Project <- Projects.getFollowedProjects(user.getId)) {
+                                                <div class="friend-profile-pic">
+                                                    <div class="user-profile-pic-normal">
+                                                        <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
+                                                    </div>
+                                                </div>
+                                                <div class="friend-details-wrapper">
+                                                    <div class="friend-name">@project.getName</div>
+                                                    <div class="friend-description">Objective: $ @project.getObjective</div>
+                                                    <div class="projectView-followers">Followers: @project.getFollowersQty</div>
+                                                </div>
+                                                <div class="action-bar pull-right">
+                                                    <button class="btn btn-primary" type="button">Follow</button>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            }
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -129,7 +148,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 }

@@ -1,0 +1,16 @@
+.content{
+    padding-top: 50px !important;
+}
+
+.padding-20{
+    padding: 20px;
+}
+
+#follow-btn{
+    background-color: #226fbe;
+
+}
+
+#unfollow-btn{
+    background-color: #cb4e4e;
+}
