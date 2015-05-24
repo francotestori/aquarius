@@ -17,21 +17,13 @@ public class Global extends GlobalSettings {
 
         //Schedule tasks
         scheduleProjectTermination(scheduler);
-        scheduleAnotherTask(scheduler); //demo TODO: remove
-        //...other task methods
+
     }
 
     private void scheduleProjectTermination(@NotNull Scheduler scheduler) {
-        final FiniteDuration initialDelay = new FiniteDuration(100l, TimeUnit.DAYS); //Delay since application start
-        final FiniteDuration interval = new FiniteDuration(100l, TimeUnit.DAYS); //Delay since last execution
+        final FiniteDuration initialDelay = new FiniteDuration(0l, TimeUnit.DAYS); //Delay since application start
+        final FiniteDuration interval = new FiniteDuration(1l, TimeUnit.DAYS); //Delay since last execution
         scheduler.schedule(initialDelay, interval, new ProjectTerminationTask(), Akka.system().dispatcher());
     }
 
-    /**
-     * Demo method
-     * @param scheduler
-     */
-    private void scheduleAnotherTask(@NotNull Scheduler scheduler){
-        //Do some scheduling!
-    }
 }

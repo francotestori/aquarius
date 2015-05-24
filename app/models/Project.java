@@ -24,7 +24,7 @@ public class Project extends Model {
     Date end;
     int objective;
     String html;
-    Boolean active;
+    boolean active;
 
     @ManyToOne
     Country country;
@@ -211,11 +211,11 @@ public class Project extends Model {
         this.id = id;
     }
 
-    public Boolean isActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
