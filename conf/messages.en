@@ -1,0 +1,13 @@
+label.facebook.login    =   Login with Facebook
+label.twitter.login     =   Login with Twitter
+label.email             =   Email
+label.password          =   Password
+label.resend            =   Resend confirmation
+label.keep.reminded     =   Keep me reminded
+label.login             =   Login
+label.register          =   Register
+message.login.one       =   Sign in to aquarius
+message.login.two       =   Use Facebook, Twitter or your email to sign in.
+message.login.three     =   Sign up Now!
+message.login.four      =    for a aquarius account,It's free and always will be..
+message.login.five      =   Trouble login in?

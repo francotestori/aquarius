@@ -1,0 +1,13 @@
+label.facebook.login    =   Inicia Sesion con Facebook
+label.twitter.login     =   Inicia Sesion con Facebook
+label.email             =   Email
+label.password          =   Contrasena
+label.resend            =   Reenviar confirmacion
+label.keep.reminded     =   Manteneme al conectado
+label.login             =   Iniciar sesion
+label.register          =   Registrarse
+message.login.one       =   Registrate en aquarius
+message.login.two       =   Usa Facebook, Twitter o tu cuenta de email para registrarte.
+message.login.three     =   Registrate ya
+message.login.four      =   ! para una cuenta de aquarius. Es gratis y siempre lo sera..
+message.login.five      =   Problemas al iniciar sesion?

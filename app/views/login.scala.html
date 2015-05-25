@@ -31,24 +31,24 @@
         <div class="container">
             <div class="row login-container column-seperation">
                 <div class="col-md-5 col-md-offset-1">
-                    <h2>Sign in to webarch</h2>
-                    <p>Use Facebook, Twitter or your email to sign in.<br>
-                        <a href="#">Sign up Now!</a> for a webarch account,It's free and always will be..</p>
+                    <h2>@Languages.message("message.login.one")</h2>
+                    <p>@Languages.message("message.login.two")<br>
+                        <a href="#">@Languages.message("message.login.three")</a>@Languages.message("message.login.four")</p>
                     <br>
 
                     <button class="btn btn-block btn-info col-md-8" type="button" tabindex="6">
                         <span class="pull-left"><i class="icon-facebook"></i></span>
-                        <span class="bold">Login with Facebook</span> </button>
+                        <span class="bold">@Languages.message("label.facebook.login")</span></button>
                     <button class="btn btn-block btn-success col-md-8" type="button" tabindex="7">
                         <span class="pull-left"><i class="icon-twitter"></i></span>
-                        <span class="bold">Login with Twitter</span>
+                        <span class="bold">@Languages.message("label.twitter.login")</span>
                     </button>
                 </div>
                 <div class="col-md-5 "> <br>
                     @helper.form(routes.Application.authenticate, 'id -> "login-form", 'class -> "login-form"){
                         <div class="row">
                             <div class="form-group col-md-10">
-                                <label class="form-label">Email</label>
+                                <label class="form-label">@Languages.message("label.email")</label>
                                 <div class="controls">
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-10">
-                                <label class="form-label">Password</label>
+                                <label class="form-label">@Languages.message("label.password")</label>
                                 <span class="help"></span>
                                 <div class="controls">
                                     <div class="input-with-icon  right">
@@ -71,23 +71,23 @@
                                 @if(form.hasGlobalErrors){
                                     <label class="error">@form.globalError.message</label>
                                     @if(form.globalError.message == AqMessage.EMAIL_CONF_REQ.en()){
-                                        <button type="button" class="btn btn-info" id="resend-conf-btn">Resend confirmation</button>
+                                        <button type="button" class="btn btn-info" id="resend-conf-btn">@Languages.message("label.resend")</button>
                                     }
                                 }
                             </div>
                         </div>
                         <div class="row">
                             <div class="control-group  col-md-10">
-                                <div class="checkbox checkbox check-success"> <a href="#">Trouble login in?</a>&nbsp;&nbsp;
+                                <div class="checkbox checkbox check-success"> <a href="#">@Languages.message("message.login.five")</a>&nbsp;&nbsp;
                                     <input type="checkbox" id="checkbox1" value="1" tabindex="3">
-                                    <label for="checkbox1">Keep me reminded </label>
+                                    <label for="checkbox1">@Languages.message("label.keep.reminded")</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-10">
-                                <button class="btn btn-primary btn-cons pull-right" type="submit" tabindex="4">Login</button>
-                                <button class="btn btn-info btn-cons pull-right" type="button" id="register-button" tabindex="5">Register</button>
+                                <button class="btn btn-primary btn-cons pull-right" type="submit" tabindex="4">@Languages.message("label.login")</button>
+                                <button class="btn btn-info btn-cons pull-right" type="button" id="register-button" tabindex="5">@Languages.message("label.register")</button>
                             </div>
                         </div>
                     }

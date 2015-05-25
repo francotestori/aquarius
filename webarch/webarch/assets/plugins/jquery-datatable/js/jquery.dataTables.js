@@ -4696,7 +4696,7 @@
 		/**
 		 * Log an error message
 		 *  @param {object} oSettings dataTables settings object
-		 *  @param {int} iLevel log error messages, or display them to the user
+		 *  @param {int} iLevel log error messages.en, or display them to the user
 		 *  @param {string} sMesg error message
 		 *  @memberof DataTable#oApi
 		 */

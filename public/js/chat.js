@@ -2,18 +2,18 @@ $(document).ready(function() {
 	var conversation = [[1,"sadsadsad"],[1,"asdsad"],[0,"asdsada"]];
 	$('.user-details-wrapper').click(function(){
 			set_user_details($(this).attr('data-user-name'),$(this).attr('data-chat-status'));
-			$('#messages-wrapper').addClass('animated');
-			$('#messages-wrapper').show();			
+			$('#messages.en-wrapper').addClass('animated');
+			$('#messages.en-wrapper').show();
 			$('#chat-users').removeClass('animated');
 			$('#chat-users').hide();
 			$('.chat-input-wrapper').show();	
 	})
 	
 	$('.chat-back').click(function(){
-			$('#messages-wrapper .chat-messages-header .status').removeClass('online');
-			$('#messages-wrapper .chat-messages-header .status').removeClass('busy');
-			$('#messages-wrapper').hide();
-			$('#messages-wrapper').removeClass('animated');
+			$('#messages.en-wrapper .chat-messages.en-header .status').removeClass('online');
+			$('#messages.en-wrapper .chat-messages.en-header .status').removeClass('busy');
+			$('#messages.en-wrapper').hide();
+			$('#messages.en-wrapper').removeClass('animated');
 			$('#chat-users').addClass('animated');
 			$('#chat-users').show();
 			$('.chat-input-wrapper').hide();
@@ -67,8 +67,8 @@ $(document).ready(function() {
 	});
 })
 	function set_user_details(username,status){
-		$('#messages-wrapper .chat-messages-header .status').addClass(status);
-		$('#messages-wrapper .chat-messages-header span').text(username);
+		$('#messages.en-wrapper .chat-messages.en-header .status').addClass(status);
+		$('#messages.en-wrapper .chat-messages.en-header span').text(username);
 	}	
 	function build_conversation(msg,isOpponent,img,retina){
 		if(isOpponent==1){

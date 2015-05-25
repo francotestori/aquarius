@@ -7,7 +7,6 @@ import scala.concurrent.duration.FiniteDuration;
 import tasks.DbPopulatorTask;
 import tasks.ProjectTerminationTask;
 
-import javax.validation.constraints.NotNull;
 import java.util.concurrent.TimeUnit;
 
 public class Global extends GlobalSettings {

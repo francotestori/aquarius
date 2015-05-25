@@ -5,6 +5,11 @@
 # Home page
 GET         /                               controllers.Application.index()
 
+# --- Language class routes START
+GET     /language/:code/*returnpath     controllers.Languages.changeLanguage(code: String, returnpath:String)
+GET     /language/:code/                controllers.Languages.changeLanguageHome(code: String)
+# --- Language class routes END
+
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                   controllers.Assets.at(path="/public", file)
 

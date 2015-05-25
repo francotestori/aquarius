@@ -43,7 +43,7 @@
                         <!-- END LOGO -->
                     <ul class="nav pull-right notifcation-center">
                         <li class="dropdown" id="header_task_bar"> <a href="@routes.Application.index()" class="dropdown-toggle active" data-toggle=""> <div class="iconset top-home"></div> </a> </li>
-                        <li class="dropdown" id="header_inbox_bar" > <a href="@routes.AqMessages.showInbox()" class="dropdown-toggle" ><div class="iconset top-messages"></div>
+                        <li class="dropdown" id="header_inbox_bar" > <a href="@routes.AqMessages.showInbox()" class="dropdown-toggle" ><div class="iconset top-messages.en"></div>
                             <span class="badge" id="msgs-badge">@user.getUnreadMessagesQty</span>
                         </a></li>
                         <li class="dropdown" id="portrait-chat-toggler" style="display:none"> <a href="#sidr" class="chat-menu-toggle"> <div class="iconset top-chat-white "></div> </a> </li>
@@ -96,7 +96,7 @@
                             </a>
                             <div id="notification-list" style="display:none">
                                 <div style="width:300px">
-                                    <div class="notification-messages info">
+                                    <div class="notification-messages.en info">
                                         <div class="user-profile">
                                             <img src="@routes.Assets.at("img/profiles/d.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/d.jpg")" data-src-retina="@routes.Assets.at("img/profiles/d2x.jpg")" width="35" height="35">
                                         </div>
@@ -113,7 +113,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="notification-messages danger">
+                                    <div class="notification-messages.en danger">
                                         <div class="iconholder">
                                             <i class="icon-warning-sign"></i>
                                         </div>
@@ -130,16 +130,16 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="notification-messages success">
+                                    <div class="notification-messages.en success">
                                         <div class="user-profile">
                                             <img src="@routes.Assets.at("img/profiles/h.jpg")"  alt="" data-src="@routes.Assets.at("img/profiles/h.jpg")" data-src-retina="@routes.Assets.at("img/profiles/h2x.jpg")" width="35" height="35">
                                         </div>
                                         <div class="message-wrapper">
                                             <div class="heading">
-										You haveve got 150 messages
+										You haveve got 150 messages.en
                                             </div>
                                             <div class="description">
-										150 newly unread messages in your inbox
+										150 newly unread messages.en in your inbox
                                             </div>
                                             <div class="date pull-left">
 									An hour ago
@@ -517,7 +517,7 @@
                         </div>
                     </div>
 
-                    <div class="chat-window-wrapper fadeIn" id="messages-wrapper" style="display:none">
+                    <div class="chat-window-wrapper fadeIn" id="messages.en-wrapper" style="display:none">
                         <div class="chat-header">
                             <div class="pull-left">
                                 <input type="text" placeholder="search">
@@ -527,11 +527,11 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="chat-messages-header">
+                        <div class="chat-messages.en-header">
                             <div class="status online"></div><span class="semi-bold">Jane Smith(Typing..)</span>
                             <a href="#" class="chat-back"><i class="icon-custom-cross"></i></a>
                         </div>
-                        <div class="chat-messages">
+                        <div class="chat-messages.en">
                             <div class="sent_time">Yesterday 11:25pm</div>
                             <div class="user-details-wrapper " >
                                 <div class="user-profile">
