@@ -46,7 +46,6 @@
                         <li class="dropdown" id="header_inbox_bar" > <a href="@routes.AqMessages.showInbox()" class="dropdown-toggle" ><div class="iconset top-messages.en"></div>
                             <span class="badge" id="msgs-badge">@user.getUnreadMessagesQty</span>
                         </a></li>
-                        <li class="dropdown" id="portrait-chat-toggler" style="display:none"> <a href="#sidr" class="chat-menu-toggle"> <div class="iconset top-chat-white "></div> </a> </li>
                     </ul>
                 </div>
                     <!-- END RESPONSIVE MENU TOGGLER -->
@@ -58,21 +57,14 @@
                                 <div class="iconset top-menu-toggle-dark"></div>
                             </a> </li>
                         </ul>
-                        @*<ul class="nav quick-section">*@
-                            @*<li class="quicklinks"> <a href="#" class="" >*@
-                                @*<div class="iconset top-reload"></div>*@
-                            @*</a> </li>*@
-                            @*<li class="quicklinks"> <span class="h-seperate"></span></li>*@
-                            @*<li class="quicklinks"> <a href="#" class="" >*@
-                                @*<div class="iconset top-tiles"></div>*@
-                            @*</a> </li>*@
+
                         <ul class="nav quick-section">
-                            <form name="searchForm" action="@routes.Search.search()">
+                            @helper.form(routes.Search.search()){
                                 <li class="m-r-10 input-prepend inside search-form no-boarder">
                                     <span class="add-on"> <span class="iconset top-search"></span></span>
                                     <input name="criteria" type="text"  class="no-boarder " placeholder="@Languages.message("placeholder.search")" style="width:250px;">
                                 </li>
-                            </form>
+                            }
                         </ul>
                     </div>
                         <!-- END TOP NAVIGATION MENU -->
@@ -171,21 +163,6 @@
                                     <li><a href="@routes.Application.logout()"><i class="fa fa-power-off"></i>&nbsp;&nbsp;@Languages.message("menu.logout")</a></li>
                                 </ul>
                             </li>
-                            <!--
-                            <li class="quicklinks"> <span class="h-seperate"></span></li>
-                            <li class="quicklinks">
-                                <a id="chat-menu-toggle" href="#sidr" class="chat-menu-toggle" ><div class="iconset top-chat-dark "><span class="badge badge-important hide" id="chat-message-count">1</span></div>
-                                </a>
-                                <div class="simple-chat-popup chat-menu-toggle hide" >
-                                    <div class="simple-chat-popup-arrow"></div><div class="simple-chat-popup-inner">
-                                    <div style="width:100px">
-                                        <div class="semi-bold">David Nester</div>
-                                        <div class="message">Hey you there </div>
-                                    </div>
-                                </div>
-                                </div>
-                            </li>
-                            -->
                         </ul>
                     </div>
                         <!-- END CHAT TOGGLER -->
@@ -197,6 +174,7 @@
         </div>
 
             <!-- END HEADER -->
+
             <!-- BEGIN CONTAINER -->
         <div class="page-container row">
                 <!-- BEGIN SIDEBAR -->
@@ -213,17 +191,19 @@
                 </ul>
                     <!-- END SIDEBAR MENU -->
             </div>
-            <div class="footer-widget">
-                <div class="progress transparent progress-small no-radius no-margin">
-                    <div class="progress-bar progress-bar-success animate-progress-bar" data-percentage="79%" style="width: 79%;"></div>
-                </div>
-                <div class="pull-right">
-                    <div class="details-status">
-                        <span class="animate-number" data-value="86" data-animation-duration="560">86</span>%
-                    </div>
-                    <a href="lockscreen.html"><i class="fa fa-power-off"></i></a></div>
-            </div>
+
+            @*<div class="footer-widget">*@
+                @*<div class="progress transparent progress-small no-radius no-margin">*@
+                    @*<div class="progress-bar progress-bar-success animate-progress-bar" data-percentage="79%" style="width: 79%;"></div>*@
+                @*</div>*@
+                @*<div class="pull-right">*@
+                    @*<div class="details-status">*@
+                        @*<span class="animate-number" data-value="86" data-animation-duration="560">86</span>%*@
+                    @*</div>*@
+                    @*<a href="lockscreen.html"><i class="fa fa-power-off"></i></a></div>*@
+            @*</div>*@
                 <!-- END SIDEBAR -->
+
                 <!-- BEGIN PAGE CONTAINER-->
             <div class="page-content">
                     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
