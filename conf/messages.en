@@ -2,12 +2,65 @@ label.facebook.login    =   Login with Facebook
 label.twitter.login     =   Login with Twitter
 label.email             =   Email
 label.password          =   Password
+label.confirm.password  =   Confirm Password
 label.resend            =   Resend confirmation
 label.keep.reminded     =   Keep me reminded
 label.login             =   Login
 label.register          =   Register
+label.follow            =   Follow
+label.unfollow          =   Unfollow
+label.send.message      =   Send Message
+label.edit              =   Edit
+label.followers         =   Followers
+label.following         =   Following
+label.reputation        =   Reputacion:
+label.top.projects      =   My Top Projects
+label.top.followed      =   Top Followed Projects
+label.view.more         =   view more
+label.objective         =   Objective
+label.personal          =   Personal
+label.first.name        =   First Name
+label.last.name         =   Last Name
+label.birthday          =   Birthday
+label.country           =   Country
+label.choose.image      =   Choose Image
+label.update            =   Update
+label.results           =   Results
+label.compose           =   Compose
+label.sender            =   Sender
+label.subject           =   Subject
+label.date              =   Date
+label.from              =   From:
+label.to                =   To:
+label.recipients        =   Recipients
+label.submit            =   Submit
+
+
+label.info              =   Info
+label.comments          =   Comments
+
 message.login.one       =   Sign in to aquarius
 message.login.two       =   Use Facebook, Twitter or your email to sign in.
 message.login.three     =   Sign up Now!
 message.login.four      =    for a aquarius account,It's free and always will be..
 message.login.five      =   Trouble login in?
+message.register.one    =   Password and confirm do not match
+message.index           =   Take a look
+message.mail            =   Write a new
+
+email.confirm.one       =   Thank you for registering!
+email.confirm.two       =   An email has been sent to you with the link for verifying your email
+email.confirm.three     =   Return to login
+
+placeholder.search      =   Search
+
+menu.edit.profile       =   Edit profile
+menu.show.profile       =   My Profile
+menu.show.project.list  =   My Projects
+menu.show.inbox         =   My Inbox
+menu.logout             =   Log Out
+
+result.image            =   Image
+results.name            =   Name
+results.email_tags      =   Email / Tags
+results.funds           =   Funds

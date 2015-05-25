@@ -70,7 +70,7 @@
                             <form name="searchForm" action="@routes.Search.search()">
                                 <li class="m-r-10 input-prepend inside search-form no-boarder">
                                     <span class="add-on"> <span class="iconset top-search"></span></span>
-                                    <input name="criteria" type="text"  class="no-boarder " placeholder="Search Dashboard" style="width:250px;">
+                                    <input name="criteria" type="text"  class="no-boarder " placeholder="@Languages.message("placeholder.search")" style="width:250px;">
                                 </li>
                             </form>
                         </ul>
@@ -159,16 +159,16 @@
                                     <div class="iconset top-settings-dark "></div>
                                 </a>
                                 <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
-                                    <li><a href="@routes.Users.showProfileForm()"> Edit profile</a>
+                                    <li><a href="@routes.Users.showProfileForm()">@Languages.message("menu.edit.profile")</a>
                                     </li>
-                                    <li><a href="@routes.Users.showProfile(user.getId)">My Profile</a>
+                                    <li><a href="@routes.Users.showProfile(user.getId)">@Languages.message("menu.show.profile")</a>
                                     </li>
-                                    <li><a href="@routes.Projects.showProjectList()"> My Projects</a>
+                                    <li><a href="@routes.Projects.showProjectList()">@Languages.message("menu.show.project.list")</a>
                                     </li>
-                                    <li><a href="@routes.AqMessages.showInbox()"> My Inbox&nbsp;&nbsp;<span class="badge badge-important animated bounceIn">@user.getUnreadMessagesQty</span></a>
+                                    <li><a href="@routes.AqMessages.showInbox()">@Languages.message("menu.show.inbox")&nbsp;&nbsp;<span class="badge badge-important animated bounceIn">@user.getUnreadMessagesQty</span></a>
                                     </li>
                                     <li class="divider"></li>
-                                    <li><a href="@routes.Application.logout()"><i class="fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                                    <li><a href="@routes.Application.logout()"><i class="fa fa-power-off"></i>&nbsp;&nbsp;@Languages.message("menu.logout")</a></li>
                                 </ul>
                             </li>
                             <!--

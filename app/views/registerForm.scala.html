@@ -33,12 +33,12 @@
                 <div class="col-md-4 form-col "> <br>
                     @helper.form(routes.Application.createUser(), 'id -> "register-form") {
                         <div class="row">
-                            <h1>Register</h1>
+                            <h1>@Languages.message("label.register")</h1>
                         </div>
                         <input type="number" name="id" class="hidden">
                         <div class="row">
                             <div class="form-group ">
-                                <label class="form-label">Email</label>
+                                <label class="form-label">@Languages.message("label.email")</label>
                                 <div class="controls">
                                     <div class="input-with-icon  right">
                                         <i class=""></i>
@@ -50,7 +50,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group ">
-                                <label class="form-label">Password</label>
+                                <label class="form-label">@Languages.message("label.password")</label>
                                 <span class="help"></span>
                                 <div class="controls">
                                     <div class="input-with-icon  right">
@@ -63,7 +63,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group ">
-                                <label class="form-label">Confirm password</label>
+                                <label class="form-label">@Languages.message("label.confirm.password")</label>
                                 <span class="help"></span>
                                 <div class="controls">
                                     <div class="input-with-icon  right">
@@ -74,13 +74,13 @@
                                 @if(form.hasGlobalErrors) {
                                     <label class="error">@form.globalError.message</label>
                                 }
-                                <label class="error hidden" id="password-mismatch">Password and confirm do not match</label>
+                                <label class="error hidden" id="password-mismatch">@Languages.message("messages.register.one")</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="">
                                 <button class="btn btn-primary btn-cons centered" id="register-button" type="button">
-                                    Register</button>
+                                    @Languages.message("label.register")</button>
                             </div>
                         </div>
                     }

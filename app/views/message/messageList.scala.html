@@ -34,7 +34,7 @@
                                         </ul>
                                     </div>
                                     <button type="button" class="btn btn-success btn-cons"><a href="@routes.AqMessages.showMessageForm()">
-                                        Compose</a></button>
+                                        @Languages.message("label.compose")</a></button>
 
                                 </div>
 
@@ -43,9 +43,9 @@
                                         <thead>
                                             <tr>
                                                 <th class="small-cell"></th>
-                                                <th>Sender</th>
-                                                <th>Subject</th>
-                                                <th>Date</th>
+                                                <th>@Languages.message("label.sender")</th>
+                                                <th>@Languages.message("label.subject")</th>
+                                                <th>@Languages.message("label.date")</th>
                                             </tr>
                                         </thead>
                                         <tbody>

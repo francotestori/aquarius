@@ -24,13 +24,13 @@
             <br>
             <br>
             <br>
-            <h5>From: @message.getSender.getEmail</h5>
-            <h5>To: @message.getRecipientsString() </h5>
+            <h5>@Languages.message("label.from") @message.getSender.getEmail</h5>
+            <h5>@Languages.message("label.to") @message.getRecipientsString() </h5>
           </div>
           <div class="clearfix"></div>
           <div class="row">
             <div class="col-md-9">
-              <h4> Subject: <span class="semi-bold">@message.getSubject</span></h4>
+              <h4> @Languages.message("label.subject"): <span class="semi-bold">@message.getSubject</span></h4>
                 <hr>@Html.apply(message.getMessage)
             </div>
           </div>

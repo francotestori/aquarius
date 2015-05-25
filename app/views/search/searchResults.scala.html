@@ -14,7 +14,7 @@
     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
     <div class="content">
         <div class="page-title"> <i class="icon-custom-left"></i>
-            <h3>Search - <span class="semi-bold">Results</span></h3>
+            <h3>@Languages.message("label.search") - <span class="semi-bold">@Languages.message("label.results")</span></h3>
         </div>
             @*<!--TODO fix dropdowns filter-->*@
             @*<%--<div class="pull-left" id="Filters">--%>*@
@@ -47,10 +47,10 @@
         <div id="Parks" class="just">
                 <!-- "TABLE" HEADER CONTAINING SORT BUTTONS (HIDDEN IN GRID MODE)-->
             <div class="list_header">
-                <div class="meta name active desc" id="SortByName"> Image &nbsp; <span class="sort anim150 asc active" data-sort="data-name" data-order="desc"></span> <span class="sort anim150 desc" data-sort="data-name" data-order="asc"></span> </div>
-                <div class="meta region">User / Project</div>
-                <div class="meta rec">Email / Tags</div>
-                <div class="meta area" id="SortByArea"> Funds &nbsp; <span class="sort anim150 asc" data-sort="data-area" data-order="asc"></span> <span class="sort anim150 desc" data-sort="data-area" data-order="desc"></span> </div>
+                <div class="meta name active desc" id="SortByName"> @Languages.message("results.image") &nbsp; <span class="sort anim150 asc active" data-sort="data-name" data-order="desc"></span> <span class="sort anim150 desc" data-sort="data-name" data-order="asc"></span> </div>
+                <div class="meta region">@Languages.message("results.name")</div>
+                <div class="meta rec">@Languages.message("results.email_tags")</div>
+                <div class="meta area" id="SortByArea"> @Languages.message("results.funds") &nbsp; <span class="sort anim150 asc" data-sort="data-area" data-order="asc"></span> <span class="sort anim150 desc" data-sort="data-area" data-order="desc"></span> </div>
             </div>
                 <!-- FAIL ELEMENT -->
             <div class="fail_element anim250">Sorry &mdash; we could not find any parks matching matching these criteria</div>

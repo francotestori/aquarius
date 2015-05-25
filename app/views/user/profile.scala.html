@@ -28,16 +28,16 @@
                                 <div class="padding-10 hidden-xs">
                                     @if(!isMe) {
                                         <button type="button" class="btn btn-info" id="follow-btn" onclick="follow();">
-                                            <i class="fa fa-check"></i>&nbsp;&nbsp;Follow
+                                            <i class="fa fa-check"></i>&nbsp;&nbsp;@Languages.message("label.follow")
                                         </button>
                                         <button type="button" class="btn btn-danger" id="unfollow-btn" onclick="unfollow()">
-                                            <i class="fa fa-times"></i>&nbsp;&nbsp;Unfollow
+                                            <i class="fa fa-times"></i>&nbsp;&nbsp;@Languages.message("label.unfollow")
                                         </button>
 
 
                                         <a href="@routes.AqMessages.sendMessageTo(user.getId)" type="button"
                                         class="btn btn-primary" id="send-message-btn">
-                                            <i class="fa fa-envelope"></i>&nbsp;&nbsp;Send Message
+                                            <i class="fa fa-envelope"></i>&nbsp;&nbsp;@Languages.message("labe.send.message")
                                         </a>
                                     }
                                     @if(isMe) {
@@ -60,25 +60,24 @@
                                 </div>
                                 <div class="user-mini-description">
                                     <h3 class="text-success semi-bold" id="followers"> @user.getFollowers.size </h3>
-                                    <h5>Followers</h5>
+                                    <h5>@Languages.message("label.followers")</h5>
 
                                     <h3 class="text-success semi-bold">@Users.getFollowedUsers(user).size </h3>
-                                    <h5>Following</h5>
+                                    <h5>@Languages.message("label.following")</h5>
                                 </div>
                             </div>
                             <div class="col-md-8 user-description-box  col-sm-8">
                                 <h3 class="semi-bold no-margin">@user.getFirstName @user.getLastName </h3>
                                 <h4 class="no-margin">@user.getUsername</h4>
-                                <h6 class="no-margin">Reputation: @user.getReputation </h6>
+                                <h6 class="no-margin">@Languages.message("label.reputation") @user.getReputation </h6>
                             </div>
                         </div>
 
                             <!--TOP PROJECTS-->
                         <div class="row" class="padding-20">
                             <div class="col-md-12  col-sm-4">
-                                <h5><span class="semi-bold">Top Projects</span>&nbsp;&nbsp; <a href="#"
-                                class="text-info normal-text">view
-                                    more</a></h5>
+                                <h5><span class="semi-bold">@Languages.message("label.top.projects")</span>&nbsp;&nbsp; <a href="#"
+                                class="text-info normal-text">@Languages.message("label.view.more")</a></h5>
 
                                 <div class="row">
                                     <div class="col-md-4">
@@ -94,10 +93,10 @@
                                                 @project.getName
                                                 </div>
                                                 <div class="friend-description">
-                                                        Objective: $ @project.getObjective
+                                                    @Languages.message("label.objective"): $ @project.getObjective
                                                     </div>
                                                 <div class="projectView-followers">
-                                                        Followers: @project.getFollowersQty
+                                                    @Languages.message("label.followers"): @project.getFollowersQty
                                                     </div>
                                             </div>
                                             <div class="action-bar">
@@ -114,7 +113,7 @@
                             <div class="row" class="padding-20">
                                 <div class="col-md-12  col-sm-4">
                                     <h5>
-                                        <span class="semi-bold">Top Followed Projects</span>&nbsp;&nbsp;
+                                        <span class="semi-bold">@Languages.message("label.top.followed")</span>&nbsp;&nbsp;
                                         <a href="#" class="text-info normal-text">view more</a>
                                     </h5>
 
@@ -130,8 +129,8 @@
                                                 </div>
                                                 <div class="friend-details-wrapper">
                                                     <div class="friend-name">@project.getName</div>
-                                                    <div class="friend-description">Objective: $ @project.getObjective</div>
-                                                    <div class="projectView-followers">Followers: @project.getFollowersQty</div>
+                                                    <div class="friend-description">@Languages.message("label.objective"): $ @project.getObjective</div>
+                                                    <div class="projectView-followers">@Languages.message("label.followers"): @project.getFollowersQty</div>
                                                 </div>
                                                 <div class="action-bar pull-right">
                                                     <button class="btn btn-primary" type="button">Follow</button>

@@ -26,7 +26,7 @@
                     </div>
                     <div class="grid-body no-border">
                         <div class="row-fluid">
-                            <label>Recipients</label>
+                            <label>@Languages.message("label.recipients")</label>
                             <input class="tags" id="source-tags" type="text" name="source-tags" value="@form("source-tags").value"/>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="grid-body no-border">
                         <div class="row-fluid">
-                            <label>Subject</label>
+                            <label>@Languages.message("label.subject")</label>
                             <input name="subject" type="text" class="form-control">
                         </div>
                     </div>
@@ -52,7 +52,7 @@
             <div class="col-md-12">
                 <div class="grid simple">
                     <div class="grid-title no-border">
-                        <h4>Write a new <span class="semi-bold">Email</span></h4>
+                        <h4>@Languages.message("message.mail") <span class="semi-bold">@Languages.message("label.email")</span></h4>
                     </div>
 
                     <div class="grid-body no-border">
@@ -64,7 +64,7 @@
             </div>
         </div>
         <!-- END HTML5 WYSIWG CONTROLS-->
-        <button type="submit" class="btn btn-primary btn-cons"><i class="fa fa-check"></i>&nbsp;Submit</button>
+        <button type="submit" class="btn btn-primary btn-cons"><i class="fa fa-check"></i>&nbsp;@Languages.message("label.submit")</button>
     }
 
 }
