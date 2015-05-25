@@ -15,7 +15,7 @@ label.followers         =   Seguidores
 label.following         =   Siguiendo
 label.reputation        =   Reputación:
 label.top.projects      =   Mis Mejores Proyectos
-label.top.followed      =   Mejores Proyectos Seguidos
+label.top.followed      =   Proyectos Seguidos
 label.view.more         =   ver más
 label.objective         =   Objetivo
 label.personal          =   Información
@@ -60,6 +60,11 @@ menu.show.profile       =   Mi Perfil
 menu.show.project.list  =   Mis Proyectos
 menu.show.inbox         =   Buzon de Mensajes
 menu.logout             =   Cerrar Sesion
+
+sidebar.index           =   Inicio
+sidebar.profile         =   Perfil de Usuario
+sidebar.projects        =   Mis Proyectos
+sidebar.notifications   =   Notificaciones
 
 result.image            =   Imagen
 results.name            =   Nombre

@@ -60,6 +60,11 @@ menu.show.project.list  =   My Projects
 menu.show.inbox         =   My Inbox
 menu.logout             =   Log Out
 
+sidebar.index           =   Index
+sidebar.profile         =   Profile
+sidebar.projects        =   My Projects
+sidebar.notifications   =   Notifications
+
 result.image            =   Image
 results.name            =   Name
 results.email_tags      =   Email / Tags

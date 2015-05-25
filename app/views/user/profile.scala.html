@@ -42,7 +42,7 @@
                                     }
                                     @if(isMe) {
                                         <a href="@routes.Users.showProfileForm()" type="button"
-                                        class="btn btn-primary btn-small">Edit</a>
+                                        class="btn btn-primary btn-small">@Languages.message("label.edit")</a>
                                     }
                                 </div>
                             </div>
@@ -108,19 +108,19 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
                                 <!-- Make TOP 3 projects following-->
-                            <div class="row" class="padding-20">
-                                <div class="col-md-12  col-sm-4">
-                                    <h5>
-                                        <span class="semi-bold">@Languages.message("label.top.followed")</span>&nbsp;&nbsp;
-                                        <a href="#" class="text-info normal-text">view more</a>
-                                    </h5>
+                        <div class="row" class="padding-20">
+                            <div class="col-md-12  col-sm-4">
+                                <h5>
+                                    <span class="semi-bold">@Languages.message("label.top.followed")</span>&nbsp;&nbsp;
+                                    <a href="#" class="text-info normal-text">@Languages.message("label.view.more")</a>
+                                </h5>
 
-                                    <div class="row">
-                                            <!-- JSTL to display top 3 projects from progression standpoint-->
-                                        <div class="col-md-4">
-                                            <div class="friend-list">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="friend-list">
                                             @for(project: Project <- Projects.getFollowedProjects(user.getId)) {
                                                 <div class="friend-profile-pic">
                                                     <div class="user-profile-pic-normal">
@@ -137,7 +137,6 @@
                                                 </div>
                                                 <div class="clearfix"></div>
                                             }
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

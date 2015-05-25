@@ -17,41 +17,50 @@ public class DbPopulatorTask implements Runnable {
     }
 
     public void createUsers(){
-        final User ns1 = new User();
-        ns1.setEmail("nschejtman@hotmail.com");
-        ns1.setFirstName("Nicolas");
-        ns1.setLastName("Schejtman");
-        ns1.setPassword(Crypto.encryptAES("nico0021"));
-        ns1.setConfirmedEmail(true);
-        ns1.setProfilePicture(image);
-        ns1.save();
 
-        final User ns2 = new User();
-        ns2.setEmail("nschejtman93@gmail.com");
-        ns2.setFirstName("Nicolas");
-        ns2.setLastName("Schejtman");
-        ns2.setPassword(Crypto.encryptAES("nico0021"));
-        ns2.setConfirmedEmail(true);
-        ns2.setProfilePicture(image);
-        ns2.save();
+        if(User.findByEmail("nschejtman@hotmail.com") != null) {
+            final User ns1 = new User();
+            ns1.setEmail("nschejtman@hotmail.com");
+            ns1.setFirstName("Nicolas");
+            ns1.setLastName("Schejtman");
+            ns1.setPassword(Crypto.encryptAES("nico0021"));
+            ns1.setConfirmedEmail(true);
+            ns1.setProfilePicture(image);
+            ns1.save();
+        }
 
-        final User ft1 = new User();
-        ft1.setEmail("franco.testori@hotmail.com");
-        ft1.setFirstName("Franco");
-        ft1.setLastName("Testori");
-        ft1.setPassword(Crypto.encryptAES("1234"));
-        ft1.setConfirmedEmail(true);
-        ft1.setProfilePicture(image);
-        ft1.save();
+        if(User.findByEmail("nschejtman93@gmail.com") != null) {
+            final User ns2 = new User();
+            ns2.setEmail("nschejtman93@gmail.com");
+            ns2.setFirstName("Nicolas");
+            ns2.setLastName("Schejtman");
+            ns2.setPassword(Crypto.encryptAES("nico0021"));
+            ns2.setConfirmedEmail(true);
+            ns2.setProfilePicture(image);
+            ns2.save();
+        }
 
-        final User ft2 = new User();
-        ft2.setEmail("franco.testori@ing.austral.edu.ar");
-        ft2.setFirstName("Franco");
-        ft2.setLastName("Testori");
-        ft2.setPassword(Crypto.encryptAES("1234"));
-        ft2.setConfirmedEmail(true);
-        ft2.setProfilePicture(image);
-        ft2.save();
+        if(User.findByEmail("franco.testori@hotmail.com") != null) {
+            final User ft1 = new User();
+            ft1.setEmail("franco.testori@hotmail.com");
+            ft1.setFirstName("Franco");
+            ft1.setLastName("Testori");
+            ft1.setPassword(Crypto.encryptAES("1234"));
+            ft1.setConfirmedEmail(true);
+            ft1.setProfilePicture(image);
+            ft1.save();
+        }
+
+        if(User.findByEmail("franco.testori@ing.austral.edu.ar") != null) {
+            final User ft2 = new User();
+            ft2.setEmail("franco.testori@ing.austral.edu.ar");
+            ft2.setFirstName("Franco");
+            ft2.setLastName("Testori");
+            ft2.setPassword(Crypto.encryptAES("1234"));
+            ft2.setConfirmedEmail(true);
+            ft2.setProfilePicture(image);
+            ft2.save();
+        }
     }
 
     public void createProjects(){
