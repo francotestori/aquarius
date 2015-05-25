@@ -1,10 +1,12 @@
 package tasks;
 
-import models.Image;
-import models.Project;
-import models.User;
+import models.*;
 import org.joda.time.DateTime;
 import play.libs.Crypto;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class DbPopulatorTask implements Runnable {
     Image image;
@@ -70,12 +72,49 @@ public class DbPopulatorTask implements Runnable {
     }
 
     public void createCountries(){
-        //TODO implement!
+
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\countries.txt")))
+        {
+
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+               if(Country.find(sCurrentLine) == null) {
+                   Country country = new Country(sCurrentLine);
+                   country.save();
+               }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void createTypes(){
+
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\types.txt")))
+        {
+
+            String sCurrentLine;
+
+            while ((sCurrentLine = br.readLine()) != null) {
+                if(Type.find(sCurrentLine) == null) {
+                    Type type = new Type(sCurrentLine);
+                    type.save();
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void run() {
+        createCountries();
+        createTypes();
         createDefaultUserProfPic();
         createUsers();
         createProjects();

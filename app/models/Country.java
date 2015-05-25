@@ -41,4 +41,6 @@ public class Country extends Model {
     public static Country find(long id) {
         return find.byId(id);
     }
+
+    public static Country find(String name){ return find.where().like("name",name).findUnique();}
 }
