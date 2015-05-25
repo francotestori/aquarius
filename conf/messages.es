@@ -36,6 +36,9 @@ label.to                =   Para:
 label.recipients        =   Receptores
 label.submit            =   Enviar
 label.tags              =   Etiquetas
+label.accept            =   Aceptar
+label.close             =   Cerrar
+
 label.info              =   Información
 label.comments          =   Comentarios
 
@@ -54,6 +57,7 @@ email.confirm.two       =   Un email te fue enviado con un link para verificar t
 email.confirm.three     =   Volver al inicio de sesión
 
 placeholder.search      =   Buscar
+placeholder.comment     =   Escribi tu comentario
 
 menu.edit.profile       =   Editar Perfil
 menu.show.profile       =   Mi Perfil
@@ -70,3 +74,11 @@ result.image            =   Imagen
 results.name            =   Nombre
 results.email_tags      =   Email / Tags
 results.funds           =   Fondos
+
+project.pledged         =   previsto
+project.raised          =   total recaudado
+project.followers       =   seguidores
+project.remaining       =   días restantes
+project.comment         =   Comentar
+project.contribute      =   Contribuir
+project.amount          =   Cantidad

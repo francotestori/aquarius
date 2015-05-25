@@ -35,7 +35,8 @@ label.to                =   To:
 label.recipients        =   Recipients
 label.submit            =   Submit
 label.tags              =   Tags
-
+label.accept            =   Accept
+label.close             =   Close
 
 label.info              =   Info
 label.comments          =   Comments
@@ -54,6 +55,7 @@ email.confirm.two       =   An email has been sent to you with the link for veri
 email.confirm.three     =   Return to login
 
 placeholder.search      =   Search
+placeholder.comment     =   Comment
 
 menu.edit.profile       =   Edit profile
 menu.show.profile       =   My Profile
@@ -70,3 +72,11 @@ result.image            =   Image
 results.name            =   Name
 results.email_tags      =   Email / Tags
 results.funds           =   Funds
+
+project.pledged         =   pledged
+project.raised          =   total raised
+project.followers       =   followers
+project.remaining       =   days remaining
+project.comment         =   Comment
+project.contribute      =   Contribute
+project.amount          =   Amount

@@ -73,9 +73,10 @@
                         <input type="text" class="hidden" id="projectId" value="@project.getId">
 
 
-                        <textarea id="comment" class="form-control user-status-box post-input" placeholder="Comment"></textarea>
+                        <textarea id="comment" class="form-control user-status-box post-input"
+                        placeholder="@Languages.message("placeholder.comment")"></textarea>
                         <button onclick="submitComment();" class="btn btn-primary pull-right" type="button">
-                            Comment
+                            @Languages.message("project.comment")
                         </button>
                     </div>
 
@@ -97,7 +98,7 @@
                                 </div>
                                 <div class="col-md-10 info-container">
                                     <h4>@project.getObjective</h4>
-                                    <h6>pledged</h6>
+                                    <h6>@Languages.message("project.pledged")</h6>
                                 </div>
                             </div>
                             <div class="row info-widget">
@@ -106,7 +107,7 @@
                                 </div>
                                 <div class="col-md-10 info-container">
                                     <h4 id="raised-qty">@project.getFundsRaised</h4>
-                                    <h6>total raised</h6>
+                                    <h6>@Languages.message("project.raised")</h6>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +118,7 @@
                                 </div>
                                 <div class="col-md-10 info-container">
                                     <h4 id="followers-qty">@project.getFollowersQty</h4>
-                                    <h6>followers</h6>
+                                    <h6>@Languages.message("project.followers")</h6>
                                 </div>
                             </div>
                             <div class="row info-widget">
@@ -126,7 +127,7 @@
                                 </div>
                                 <div class="col-md-10 info-container">
                                     <h4>@project.getDaysRemaining</h4>
-                                    <h6>days remaining</h6>
+                                    <h6>@Languages.message("project.remaining")</h6>
                                 </div>
                             </div>
                         </div>
@@ -135,18 +136,18 @@
                 <div id="buttons-container">
                 @if(!project.getUser.equals(user)) {
                     <button class="btn btn-success btn-cons" id="follow-btn" onclick="follow();">
-                        <i class="fa fa-check"></i> &nbsp;&nbsp; Follow
+                        <i class="fa fa-check"></i> &nbsp;&nbsp; @Languages.message("label.follow")
                     </button>
                     <button class="btn btn-danger btn-cons" id="unfollow-btn" onclick="unfollow();">
-                        <i class="fa fa-times"></i> &nbsp;&nbsp; Unfollow
+                        <i class="fa fa-times"></i> &nbsp;&nbsp; @Languages.message("label.unfollow")
                     </button>
                     <button class="btn btn-warning btn-cons" data-toggle="modal" data-target="#donateModal" id="contribute-btn">
-                        <i class="fa fa-smile-o"></i> &nbsp;&nbsp; Contribute
+                        <i class="fa fa-smile-o"></i> &nbsp;&nbsp; @Languages.message("project.contribute")
                     </button>
 
                 } else {
                     <a href="/project/edit/@project.getId" type="button" class="btn btn-success btn-cons">
-                        Edit
+                        @Languages.message("label.edit")
                     </a>
                 }
                 </div>
@@ -171,21 +172,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    Contribute
+                    @Languages.message("project.contribute")
                 </div>
                 <div class="modal-body">
                     <div class="row form-row">
-                        Amount
+                        @Languages.message("project.amount")
                         <!--suppress HtmlFormInputWithoutLabel -->
                         <input type="number" class="form-control" id="pledge">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" onclick="submitPledge();">
-                        Accept
+                    @Languages.message("label.accept")
                     </button>
                     <button class="btn btn-default" data-dismiss="modal" id="close-pledge-modal">
-                        Close
+                    @Languages.message("label.close")
                     </button>
                 </div>
             </div>
