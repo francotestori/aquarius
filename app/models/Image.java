@@ -48,4 +48,8 @@ public class Image extends Model {
     public static Image find(long id){
         return find.byId(id);
     }
+
+    public static Image defaultImage(){
+        return find.where().eq("path", "img/defaultuserpic.png").findUnique();
+    }
 }

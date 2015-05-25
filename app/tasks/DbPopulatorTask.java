@@ -7,10 +7,10 @@ import org.joda.time.DateTime;
 import play.libs.Crypto;
 
 public class DbPopulatorTask implements Runnable {
+    Image image;
 
     public void createDefaultUserProfPic(){
-        final Image image = new Image("img/defaultuserpic.png");
-        image.setId(1l);
+        image = new Image("img/defaultuserpic.png");
         image.save();
     }
 
@@ -21,7 +21,7 @@ public class DbPopulatorTask implements Runnable {
         ns1.setLastName("Schejtman");
         ns1.setPassword(Crypto.encryptAES("nico0021"));
         ns1.setConfirmedEmail(true);
-        ns1.setProfilePicture(Image.find(1l));
+        ns1.setProfilePicture(image);
         ns1.save();
 
         final User ns2 = new User();
@@ -30,7 +30,7 @@ public class DbPopulatorTask implements Runnable {
         ns2.setLastName("Schejtman");
         ns2.setPassword(Crypto.encryptAES("nico0021"));
         ns2.setConfirmedEmail(true);
-        ns2.setProfilePicture(Image.find(1l));
+        ns2.setProfilePicture(image);
         ns2.save();
 
         final User ft1 = new User();
@@ -39,7 +39,7 @@ public class DbPopulatorTask implements Runnable {
         ft1.setLastName("Testori");
         ft1.setPassword(Crypto.encryptAES("1234"));
         ft1.setConfirmedEmail(true);
-        ft1.setProfilePicture(Image.find(1l));
+        ft1.setProfilePicture(image);
         ft1.save();
 
         final User ft2 = new User();
@@ -48,7 +48,7 @@ public class DbPopulatorTask implements Runnable {
         ft2.setLastName("Testori");
         ft2.setPassword(Crypto.encryptAES("1234"));
         ft2.setConfirmedEmail(true);
-        ft2.setProfilePicture(Image.find(1l));
+        ft2.setProfilePicture(image);
         ft2.save();
     }
 

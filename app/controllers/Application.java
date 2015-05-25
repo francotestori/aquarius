@@ -91,7 +91,7 @@ public class Application extends Controller {
             final String encryptedPassword = Crypto.encryptAES(password);
             user.setPassword(encryptedPassword);
             user.setConfirmedEmail(false);
-            user.setProfilePicture(Image.find(1l));
+            user.setProfilePicture(Image.defaultImage());
             user.save();
             sendEmailConf(user.getEmail());
             return redirect(controllers.routes.Application.afterRegister());
