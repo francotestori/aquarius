@@ -13,7 +13,7 @@ label.send.message      =   Send Message
 label.edit              =   Edit
 label.followers         =   Followers
 label.following         =   Following
-label.reputation        =   Reputacion:
+label.reputation        =   Reputation:
 label.top.projects      =   My Top Projects
 label.top.followed      =   Top Followed Projects
 label.view.more         =   view more
@@ -34,6 +34,7 @@ label.from              =   From:
 label.to                =   To:
 label.recipients        =   Recipients
 label.submit            =   Submit
+label.tags              =   Tags
 
 
 label.info              =   Info

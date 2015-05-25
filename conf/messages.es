@@ -35,7 +35,7 @@ label.from              =   De:
 label.to                =   Para:
 label.recipients        =   Receptores
 label.submit            =   Enviar
-
+label.tags              =   Etiquetas
 label.info              =   Información
 label.comments          =   Comentarios
 

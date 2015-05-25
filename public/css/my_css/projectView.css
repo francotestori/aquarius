@@ -59,3 +59,34 @@
 .tab-content {
     border-radius: 5px;
 }
+
+.follower-tile {
+    height: 34px;
+    width: 36px;
+    margin: 5px;
+}
+
+#comment {
+    background-color: #eaeaea
+}
+
+.comment-wrapper h6{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+#comment-input-wrapper{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+#comment-input-wrapper textarea{
+    margin-bottom: 10px;
+}
+
+.nav.nav-pills{
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+

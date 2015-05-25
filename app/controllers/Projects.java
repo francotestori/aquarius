@@ -34,16 +34,15 @@ public class Projects extends AbstractController {
                 .ge("date", new DateTime(lup))
                 .orderBy("date")
                 .findList();
-
-        final List<Tuple2<String, String>> userComment =
-                stream(newComments).map(new Function<Comment, Tuple2<String, String>>() {
-                    @Override
-                    public Tuple2<String, String> execute(Comment comment) {
-                        return Tuple2.apply(comment.getUser().getUsername(), comment.getComment());
-                    }
-                }).collect();
-
-        return ok(Json.toJson(userComment));
+        final StringBuilder strb = new StringBuilder();
+        strb.append("{\"comments\":[");
+        for (final Comment comment : newComments) {
+            strb.append(comment.toJson()).append(",");
+        }
+        final int length = strb.length();
+        if(strb.charAt(length - 1) == ',') strb.deleteCharAt(length-1);
+        strb.append("]}");
+        return ok(strb.toString());
     }
 
     public static Result comment() {
@@ -58,7 +57,12 @@ public class Projects extends AbstractController {
         comment.save();
         project.addComment(comment);
         project.update();
-        return ok("ajax call!");
+        return ok("{ " +
+                "username : " + user.getUsername() + "," +
+                "date : " + DateTime.now() + "," +
+                "imgsrc : " + controllers.routes.Assets.at(user.getProfilePicture().getPath()) + "," +
+                "href : " + controllers.routes.Users.showProfile(user.getId()) +
+                "}");
     }
 
     public static Result showProjectForm() {

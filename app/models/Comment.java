@@ -63,4 +63,20 @@ public class Comment extends Model {
         return find;
     }
 
+    public String toJson(){
+        final StringBuilder strb = new StringBuilder();
+        strb.append("{");
+        strb.append("\"username\":\"").append(user.getUsername()).append("\"");
+        strb.append(",");
+        strb.append("\"date\":\"").append(DateTime.now()).append("\"");
+        strb.append(",");
+        strb.append("\"imgsrc\":\"").append(controllers.routes.Assets.at(user.getProfilePicture().getPath())).append("\"");
+        strb.append(",");
+        strb.append("\"href\":\"").append(controllers.routes.Users.showProfile(user.getId())).append("\"");
+        strb.append(",");
+        strb.append("\"comment\":\"").append(comment).append("\"");
+        strb.append("}");
+        return strb.toString();
+    }
+
 }

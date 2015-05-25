@@ -1,4 +1,5 @@
 @(project: Project, user: User)
+@import _root_.utils.ProjectUtils
 
 @style = {
     <link rel="stylesheet" type="text/css" href="@routes.Assets.at("plugins/jquery-superbox/css/style.css")">
@@ -12,6 +13,7 @@
     <script src="@routes.Assets.at("plugins/jquery-superbox/js/superbox.js")" type="text/javascript"></script>
     <script src="@routes.Assets.at("js/tabs_accordian.js")" type="text/javascript" rel="script"></script>
     <script src="@routes.Assets.at("js/my_js/projectView.js")" type="text/javascript" rel="script"></script>
+    <script src="@routes.Assets.at("js/jquery.slimscroll.min.js")" type="text/javascript" rel="script"></script>
 }
 
 @nav(null, user, style, scripts) {
@@ -24,59 +26,63 @@
 
     }
 
+    <!--Main content start ------------------------------------->
     <div class="row">
+
+            <!--Main body -------------------------------------->
         <div class="col-md-8">
-                <!--------------------------------->
+                <!--Nav-->
             <ul class="nav nav-pills" id="tab-4">
                 <li class="active">
-                    <a href="#tab4hellowWorld">@Languages.message("label.info")</a>
+                    <a href="#info-tab">@Languages.message("label.info")</a>
                 </li>
                 <li>
-                    <a href="#tab4FollowUs">@Languages.message("label.followers")</a>
-                </li>
-                <li>
-                    <a href="#tab4Inspire">@Languages.message("label.comments")</a>
+                    <a href="#comments-tab">@Languages.message("label.comments")</a>
                 </li>
             </ul>
+                <!--Tabs--->
             <div class="tab-content">
-                <div class="tab-pane active" id="tab4hellowWorld">
-                    <div class="grid simple">
-                        <div class="grid-body no-border">
-                            <div class="row-fluid">
-                                <div class="scroller" data-height="300px" data-always-visible="1">
-                                @Html.apply(project.getHtml)
-                                </div>
+                    <!--Info tab-->
+                <div class="tab-pane active" id="info-tab">
+                    <div id="info-tab-wrapper">
+                        @Html.apply(project.getHtml)
+                    </div>
+                </div>
+                    <!--Comments tab-->
+                <div class="tab-pane" id="comments-tab">
+                    <div id="comments-wrapper">
+                    @for(comment: Comment <- project.getComments) {
+                        <div class="row comment-wrapper">
+                            <div class="col-md-1">
+                                <a href="@routes.Users.showProfile(comment.getUser.getId)">
+                                    <img src="@routes.Assets.at(comment.getUser.getProfilePicture.getPath)" class="follower-tile">
+                                </a>
+                            </div>
+                            <div class="col-md-10">
+                                <h6>@comment.getUser.getUsername</h6>
+                                <p>@comment.getComment</p>
                             </div>
                         </div>
+                        <hr class="no-margin">
+                        }
                     </div>
-                </div>
-                <div class="tab-pane" id="tab4FollowUs">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>“ Nothing is<span class="semi-bold"> impossible</span>
-                                , the word itself says 'I'm <span class="semi-bold">possible</span>'! ”</h3>
-                            <p>A style represents visual customizations on top of a layout. By editing a style, you can use Squarespace's visual interface to customize your...</p>
-                            <br>
-                            <p>
-                                <button type="button" class="btn btn-white btn-cons">White</button>
-                                <button type="button" class="btn btn-success btn-cons">Success</button>
-                            </p>
-                        </div>
+                    <div id="comment-input-wrapper">
+                            <!--suppress HtmlFormInputWithoutLabel -->
+                        <input type="text" class="hidden" id="userId" value="@user.getId">
+                            <!--suppress HtmlFormInputWithoutLabel -->
+                        <input type="text" class="hidden" id="projectId" value="@project.getId">
+
+
+                        <textarea id="comment" class="form-control user-status-box post-input" placeholder="Comment"></textarea>
+                        <button onclick="submitComment();" class="btn btn-primary pull-right" type="button">
+                            Comment
+                        </button>
                     </div>
-                </div>
-                <div class="tab-pane " id="tab4Inspire">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3>Follow us & get updated!</h3>
-                            <p>Instantly connect to what's most important to you. Follow your friends, experts, favorite celebrities, and breaking news.</p>
-                            <br>
-                            <p><a href="#" class="btn-social"><i class="icon-facebook"></i></a> <a href="#" class="btn-social"><i class="icon-twitter"></i> </a> <a href="#" class="btn-social"><i class="icon-dribbble"></i></a> <a href="#" class="btn-social"><i class="icon-pinterest-sign"></i></a> <a href="#" class="btn-social"><i class="icon-tumblr"></i> </a> <a href="#" class="btn-social"><i class="icon-linkedin-sign"></i> </a> </p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
-            <!--Side info start ---------------------------------------------------->
+            <!--Side info  ------------------------------------->
         <div class="col-md-4" id="project-info">
             <div class="info-container">
                 <h2 class="project-title"><b>@project.getName </b></h2>
@@ -144,12 +150,20 @@
                     </a>
                 }
                 </div>
-
-
+                <hr>
+                <h3>@Languages.message("label.followers")</h3>
+                @for(follower: User <- ProjectUtils.get15RandomFollowers(project)) {
+                    <a href="@routes.Users.showProfile(follower.getId)">
+                        <img src="@routes.Assets.at(follower.getProfilePicture.getPath)" class="follower-tile" title="@follower.getUsername">
+                    </a>
+                }
+                <hr>
+                <h3>@Languages.message("label.tags")</h3>
+                <hr>
             </div>
         </div>
-            <!--Side info end ---------------------------------------------------->
     </div>
+    <!--Main content end --------------------------------------->
 
     <!--Pledge modal start ------------------------------------->
     <div class="modal fade" id="donateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -177,11 +191,21 @@
             </div>
         </div>
     </div>
-    <!--Pledge modal end ----------------------------------->
+    <!--Pledge modal end --------------------------------------->
 
-    <!--Template comment row ------------------------------------------>
-    <div class="row" id="template-comment-row" style="display : none ; padding-left : 20 px">
-        <h6 class="comment-user"></h6>
-        <p class="comment-message"></p>
+    <!--Template comment --------------------------------------->
+    <div class="hidden">
+        <div class="row comment-wrapper" id="template-comment">
+            <div class="col-md-1">
+                <a href="">
+                    <img src="" class="follower-tile">
+                </a>
+            </div>
+            <div class="col-md-10">
+                <h6></h6>
+                <p></p>
+            </div>
+        </div>
+        <hr class="no-margin">
     </div>
 }

@@ -1,5 +1,18 @@
 var href = window.location.href;
 var idNum = href.substring(href.lastIndexOf("/") + 1);
+
+//region Scrollbar
+$(function () {
+    $('#comments-wrapper').slimScroll({
+        height: '400px'
+    });
+    $('#info-tab-wrapper').slimScroll({
+        height: '400px'
+    });
+});
+//endregion
+
+//region Follow
 var $unfollow = $("#unfollow-btn");
 var $follow = $("#follow-btn");
 var $followers = $('#followers-qty');
@@ -33,7 +46,9 @@ function unfollow() {
             $unfollow.addClass("hidden");
         });
 }
+//endregion
 
+//region Contribute
 var $pledge = $('#pledge');
 var $raised = $('#raised-qty');
 function submitPledge() {
@@ -47,6 +62,7 @@ function submitPledge() {
             $('#donateModal').modal('toggle');
         });
 }
+//endregion
 
 
 var lUpdate = new Date().getTime();
@@ -58,15 +74,12 @@ function submitComment() {
             projectId: $("#projectId").val(),
             comment: $("#comment").val()
         },
-        function (data) {
-            var $comment = $("#comment");
-            newCommentRow($("#userId").val(), $comment.val());
-            $comment.val("");
+        function(){
+            $('#comment').val("")
         }
     );
 }
 
-//Update comments automatically
 window.setInterval(function () {
     $.post(
         "/project/update/comments",
@@ -76,17 +89,27 @@ window.setInterval(function () {
         },
         function (data) {
             lUpdate = new Date().getTime();
-            data.forEach(function (entry) {
-                newCommentRow(entry.t1, entry.t2)
+            var comments = JSON.parse(data).comments;
+            $.each(comments, function(i){
+                newCommentRow(comments[i])
             })
         }
     );
-}, 5000);
+}, 2000);
 
-function newCommentRow(username, comment) {
-    $("#template-comment-row > h6").html(username);
-    $("#template-comment-row > p").html(comment);
-    var newRow = $("#template-comment-row").clone();
-    $("#comment-wrapper").append(newRow);
-    newRow.toggle(true);
+function newCommentRow(comment) {
+    var username = comment.username;
+    var date = comment.date;
+    //noinspection JSUnresolvedVariable,SpellCheckingInspection
+    var imgsrc = comment.imgsrc;
+    var text = comment.comment;
+    var href = comment.href;
+
+    var $template = $('#template-comment');
+    $template.find("h6").html(username);
+    $template.find("p").html(text);
+    $template.find("img").attr("src", imgsrc);
+    $template.find("a").attr("href", href);
+    var clone = $template.clone();
+    $("#comments-wrapper").append(clone);
 }
