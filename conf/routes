@@ -3,56 +3,58 @@
 # ~~~~
 
 # Home page
-GET         /                               controllers.Application.index()
+GET         /                                  controllers.Application.index()
 
 # --- Language class routes START
-GET     /language/:code/*returnpath     controllers.Languages.changeLanguage(code: String, returnpath:String)
-GET     /language/:code/                controllers.Languages.changeLanguageHome(code: String)
+GET         /language/:code/*returnpath        controllers.Languages.changeLanguage(code: String, returnpath:String)
+GET         /language/:code/                   controllers.Languages.changeLanguageHome(code: String)
 # --- Language class routes END
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                   controllers.Assets.at(path="/public", file)
+GET         /assets/*file                      controllers.Assets.at(path="/public", file)
 
 # Users
-GET         /profile/:id                    controllers.Users.showProfile(id: Long)
-GET         /edit/profile                   controllers.Users.showProfileForm
-POST        /edit/profile                   controllers.Users.updateProfile
-POST        /follow/user                    controllers.Users.followUser
-POST        /unfollow/user                  controllers.Users.unfollowUser
+GET         /profile/:id                       controllers.Users.showProfile(id: Long)
+GET         /edit/profile                      controllers.Users.showProfileForm
+POST        /edit/profile                      controllers.Users.updateProfile
+POST        /follow/user                       controllers.Users.followUser
+POST        /unfollow/user                     controllers.Users.unfollowUser
+GET         /list/followers                    controllers.Users.showFollowerList()
+GET         /list/following                    controllers.Users.showFollowingList()
 
 #Session
-GET         /login                          controllers.Application.login
-POST        /login                          controllers.Application.authenticate
-GET         /logout                         controllers.Application.logout
-GET         /register                       controllers.Application.register
-POST        /register                       controllers.Application.register
-POST        /create-user                    controllers.Application.createUser
-GET         /after-register                 controllers.Application.afterRegister()
-POST        /resend-conf                    controllers.Application.resendConfirmEmail
-GET         /confirm/:id                    controllers.Application.confirmEmail(id : String)
+GET         /login                             controllers.Application.login
+POST        /login                             controllers.Application.authenticate
+GET         /logout                            controllers.Application.logout
+GET         /register                          controllers.Application.register
+POST        /register                          controllers.Application.register
+POST        /create-user                       controllers.Application.createUser
+GET         /after-register                    controllers.Application.afterRegister()
+POST        /resend-conf                       controllers.Application.resendConfirmEmail
+GET         /confirm/:id                       controllers.Application.confirmEmail(id : String)
 
 # Projects
-GET         /new-project                    controllers.Projects.showProjectForm
-POST        /new-project                    controllers.Projects.createProject
-GET         /project/:id                    controllers.Projects.showProject(id : Long)
-GET         /project/edit/:id               controllers.Projects.showEditForm(id : Long)
-POST        /project/edit/                  controllers.Projects.updateProject
-POST        /project/comment                controllers.Projects.comment()
-POST        /project/update/comments        controllers.Projects.updateComments()
-GET         /list/project                   controllers.Projects.showProjectList()
-POST        /follow/project                 controllers.Projects.followProject
-POST        /unfollow/project               controllers.Projects.unfollowProject
-POST        /addPledge                      controllers.Projects.addPledge
+GET         /new-project                       controllers.Projects.showProjectForm
+POST        /new-project                       controllers.Projects.createProject
+GET         /project/:id                       controllers.Projects.showProject(id : Long)
+GET         /project/edit/:id                  controllers.Projects.showEditForm(id : Long)
+POST        /project/edit/                     controllers.Projects.updateProject
+POST        /project/comment                   controllers.Projects.comment()
+POST        /project/update/comments           controllers.Projects.updateComments()
+GET         /list/project                      controllers.Projects.showProjectList()
+POST        /follow/project                    controllers.Projects.followProject
+POST        /unfollow/project                  controllers.Projects.unfollowProject
+POST        /addPledge                         controllers.Projects.addPledge
 
 # Messages
-GET         /messages/new                   controllers.AqMessages.showMessageForm()
-POST        /messages/new                   controllers.AqMessages.postMessageForm()
-GET         /messages/send-to/:id           controllers.AqMessages.sendMessageTo(id : Long)
+GET         /messages/new                      controllers.AqMessages.showMessageForm()
+POST        /messages/new                      controllers.AqMessages.postMessageForm()
+GET         /messages/send-to/:id              controllers.AqMessages.sendMessageTo(id : Long)
 
-GET         /inbox                          controllers.AqMessages.showInbox()
-GET         /inbox/:id                      controllers.AqMessages.showMessage(id : Long)
+GET         /inbox                             controllers.AqMessages.showInbox()
+GET         /inbox/:id                         controllers.AqMessages.showMessage(id : Long)
 
 # Search
-POST        /search                         controllers.Search.search()
-GET         /search                         controllers.Search.search()
+POST        /search                            controllers.Search.search()
+GET         /search                            controllers.Search.search()
 

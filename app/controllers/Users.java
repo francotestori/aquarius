@@ -10,6 +10,7 @@ import play.mvc.Http.RequestBody;
 import play.mvc.Result;
 import views.html.user.profile;
 import views.html.user.profileForm;
+import views.html.user.userList;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -117,6 +118,19 @@ public class Users extends AbstractController {
         }
     }
 
+    public static Result showFollowerList(){
+        final User sessionUser = getSessionUser();
+        return ok(userList.render(sessionUser.getFollowers(),sessionUser,false));
+    }
+
+    public static Result showFollowingList(){
+        final User sessionUser = getSessionUser();
+
+        List<User> following = User.find().select("*").fetch("followers").where().eq("follower_id", "" + sessionUser.getId()).findList();
+
+        return ok(userList.render(following,sessionUser,true));
+
+    }
 
     public static List<Project> getTopFollowedProjects(long userID) {
         List<Project> result = Project.find().where().like("user.id", "" + userID).findList();

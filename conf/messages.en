@@ -37,6 +37,7 @@ label.submit            =   Submit
 label.tags              =   Tags
 label.accept            =   Accept
 label.close             =   Close
+label.search            =   Search
 
 label.info              =   Info
 label.comments          =   Comments
@@ -74,6 +75,8 @@ sidebar.show.project.create =   New Project
 sidebar.message             =   Messages
 sidebar.message.inbox       =   Inbox
 sidebar.message.new         =   New Message
+sidebar.following           =   Following
+sidebar.followers           =   Followers
 
 result.image            =   Image
 results.name            =   Name

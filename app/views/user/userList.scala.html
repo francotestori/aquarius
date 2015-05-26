@@ -1,0 +1,36 @@
+@(userList : List[User], user: User, following :Boolean)
+@css = {
+  <link href="@routes.Assets.at("css/my_css/index.css")" rel="stylesheet" type="text/css">
+}
+@js = {
+  <script src="@routes.Assets.at("js/modernizr.custom.js")" rel="script"></script>
+}
+
+@nav(null, user, css, js) {
+  <h4 align="center">@if(following) {
+    @Languages.message("sidebar.following")
+  } else{
+    @Languages.message("sidebar.followers")
+  }
+  </h4>
+  <ul class="home-grid cs-style-1">
+  @for(listedUser: User <- userList) {
+    <li>
+      <figure>
+        <img src="@routes.Assets.at(listedUser.getProfilePicture.getPath)" alt="img01">
+        <figcaption>
+          <h3>@listedUser.getUsername</h3>
+          <p>@Projects.parseDate(listedUser.getBirthday)p>
+          <br>
+          <p>
+            <i class="fa fa-user"></i> @listedUser.getFollowers.size() &nbsp;
+            <b>$</b> @listedUser.getFundsRaised &nbsp;
+          </p>
+          <a href="@routes.Users.showProfile(listedUser.getId)">@Languages.message("message.index")</a>
+        </figcaption>
+      </figure>
+    </li>
+  }
+  </ul>
+
+}

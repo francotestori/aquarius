@@ -60,16 +60,16 @@
                 <td class="v-align-middle">
                   <div class="progress ">
                     @if(project.getObjectiveCompletion <= 25){
-                      <div data-percentage="@project.getObjectiveCompletion" class="progress-bar progress-bar-warning animate-progress-bar"></div>
+                      <div data-percentage="@project.getObjectiveCompletion%" class="progress-bar progress-bar-warning animate-progress-bar"></div>
                     }
                     @if((project.getObjectiveCompletion > 25) && (project.getObjectiveCompletion <= 80)){
-                      <div data-percentage="@project.getObjectiveCompletion"  class="progress-bar progress-bar-primary animate-progress-bar"></div>
+                      <div data-percentage="@project.getObjectiveCompletion%"  class="progress-bar progress-bar-primary animate-progress-bar"></div>
                     }
                     @if(project.getObjectiveCompletion > 80){
                       @if(project.getObjectiveCompletion > 100) {
-                        <div data-percentage="100" class="progress-bar progress-bar-success animate-progress-bar"></div>
+                        <div data-percentage="100%" class="progress-bar progress-bar-success animate-progress-bar"></div>
                       } else{
-                        <div data-percentage="@project.getObjectiveCompletion" class="progress-bar progress-bar-success animate-progress-bar"></div>
+                        <div data-percentage="@project.getObjectiveCompletion%" class="progress-bar progress-bar-success animate-progress-bar"></div>
                       }
                     }
                   </div>

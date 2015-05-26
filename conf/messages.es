@@ -38,6 +38,7 @@ label.submit            =   Enviar
 label.tags              =   Etiquetas
 label.accept            =   Aceptar
 label.close             =   Cerrar
+label.search            =   Buscar
 
 label.info              =   Información
 label.comments          =   Comentarios
@@ -76,6 +77,9 @@ sidebar.show.project.list   =   Mis Proyectos
 sidebar.message             =   Mensajes
 sidebar.message.inbox       =   Buzon de Mensajes
 sidebar.message.new         =   Nuevo Mensaje
+sidebar.following           =   Siguiendo
+sidebar.followers           =   Seguidores
+
 
 result.image            =   Imagen
 results.name            =   Nombre
