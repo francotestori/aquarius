@@ -21,6 +21,7 @@ import play.mvc.Security;
 import play.twirl.api.Html;
 
 import utils.AqMessage;
+import utils.IndexRecomendator;
 import utils.ProjectRecomendator;
 import views.html.index;
 import views.html.login;
@@ -40,7 +41,10 @@ public class Application extends Controller {
             return redirect(controllers.routes.Application.login());
         } else {
             final User user = User.findByEmail(email);
-            return ok(index.render(ProjectRecomendator.recommendMeSomeProjects(user), user));
+            return ok(index.render(IndexRecomendator.getBestProjectsFollowed(user),
+                    IndexRecomendator.getBestProjectsCompleted(user),
+                    IndexRecomendator.getBestProjectsPledged(user),
+                    user));
         }
     }
 

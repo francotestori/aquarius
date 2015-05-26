@@ -63,10 +63,17 @@ menu.show.project.list  =   My Projects
 menu.show.inbox         =   My Inbox
 menu.logout             =   Log Out
 
-sidebar.index           =   Index
-sidebar.profile         =   Profile
-sidebar.projects        =   My Projects
-sidebar.notifications   =   Notifications
+sidebar.index               =   Index
+sidebar.profile             =   Profile
+sidebar.profile.show        =   My Profile
+sidebar.profile.edit        =   Edit Profile
+sidebar.notifications       =   Notifications
+sidebar.show.project        =   Projects
+sidebar.show.project.list   =   My Projects
+sidebar.show.project.create =   New Project
+sidebar.message             =   Messages
+sidebar.message.inbox       =   Inbox
+sidebar.message.new         =   New Message
 
 result.image            =   Image
 results.name            =   Name
@@ -80,3 +87,7 @@ project.remaining       =   days remaining
 project.comment         =   Comment
 project.contribute      =   Contribute
 project.amount          =   Amount
+
+index.followed          =   More Followers
+index.completed         =   Almost Done
+index.pledged           =   Hot Right Now

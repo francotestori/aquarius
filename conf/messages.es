@@ -65,10 +65,17 @@ menu.show.project.list  =   Mis Proyectos
 menu.show.inbox         =   Buzon de Mensajes
 menu.logout             =   Cerrar Sesion
 
-sidebar.index           =   Inicio
-sidebar.profile         =   Perfil de Usuario
-sidebar.projects        =   Mis Proyectos
-sidebar.notifications   =   Notificaciones
+sidebar.index               =   Inicio
+sidebar.profile             =   Perfil de Usuario
+sidebar.profile.show        =   Mi Perfil
+sidebar.profile.edit        =   Editar Perfil
+sidebar.notifications       =   Notificaciones
+sidebar.show.project        =   Proyectos
+sidebar.show.project.create =   Nuevo Proyecto
+sidebar.show.project.list   =   Mis Proyectos
+sidebar.message             =   Mensajes
+sidebar.message.inbox       =   Buzon de Mensajes
+sidebar.message.new         =   Nuevo Mensaje
 
 result.image            =   Imagen
 results.name            =   Nombre
@@ -82,3 +89,7 @@ project.remaining       =   días restantes
 project.comment         =   Comentar
 project.contribute      =   Contribuir
 project.amount          =   Cantidad
+
+index.followed          =   Mas Seguidores
+index.completed         =   Casi lo Consiguen
+index.pledged           =   Rompiendola Toda

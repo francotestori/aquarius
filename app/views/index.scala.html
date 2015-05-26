@@ -1,4 +1,4 @@
-@(projects: List[Project], user: User)
+@(followed : List[Project],completed : List[Project], pledged : List[Project], user: User)
 @css = {
     <link href="@routes.Assets.at("css/my_css/index.css")" rel="stylesheet" type="text/css">
 }
@@ -7,8 +7,53 @@
 }
 
 @nav(null, user, css, js) {
+    <h4 align="center">@Languages.message("index.followed")</h4>
     <ul class="home-grid cs-style-1">
-    @for(project: Project <- projects) {
+    @for(project: Project <- followed) {
+        <li>
+            <figure>
+                <img src="@routes.Assets.at("images/1.png")" alt="img01">
+                <figcaption>
+                    <h3>@project.getName</h3>
+                    <p>@project.getDescription</p>
+                    <br>
+                    <p>
+                        <i class="fa fa-user"></i> @project.getFollowersQty &nbsp;
+                        <b>$</b> @project.getFundsRaised &nbsp;
+                        <i class="fa fa-calendar"></i> @project.getDaysRemaining
+                    </p>
+                    <a href="@routes.Projects.showProject(project.getId)">@Languages.message("message.index")</a>
+                </figcaption>
+            </figure>
+        </li>
+    }
+    </ul>
+
+    <h4 align="center">@Languages.message("index.completed")</h4>
+    <ul class="home-grid cs-style-1">
+    @for(project: Project <- completed) {
+        <li>
+            <figure>
+                <img src="@routes.Assets.at("images/1.png")" alt="img01">
+                <figcaption>
+                    <h3>@project.getName</h3>
+                    <p>@project.getDescription</p>
+                    <br>
+                    <p>
+                        <i class="fa fa-user"></i> @project.getFollowersQty &nbsp;
+                        <b>$</b> @project.getFundsRaised &nbsp;
+                        <i class="fa fa-calendar"></i> @project.getDaysRemaining
+                    </p>
+                    <a href="@routes.Projects.showProject(project.getId)">@Languages.message("message.index")</a>
+                </figcaption>
+            </figure>
+        </li>
+    }
+    </ul>
+
+    <h4 align="center">@Languages.message("index.pledged")</h4>
+    <ul class="home-grid cs-style-1">
+    @for(project: Project <- pledged) {
         <li>
             <figure>
                 <img src="@routes.Assets.at("images/1.png")" alt="img01">

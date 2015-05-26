@@ -83,22 +83,24 @@
                                     <div class="col-md-4">
                                         <div class="friend-list">
                                         @for(project: Project <- Users.getTopFollowedProjects(user.getId)) {
-                                            <div class="friend-profile-pic">
-                                                <div class="user-profile-pic-normal">
-                                                    <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
-                                                </div>
-                                            </div>
-                                            <div class="friend-details-wrapper">
-                                                <div class="friend-name">
-                                                @project.getName
-                                                </div>
-                                                <div class="friend-description">
-                                                    @Languages.message("label.objective"): $ @project.getObjective
+                                            <a href="@routes.Projects.showProject(project.getId)">
+                                                <div class="friend-profile-pic">
+                                                    <div class="user-profile-pic-normal">
+                                                        <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
                                                     </div>
-                                                <div class="projectView-followers">
-                                                    @Languages.message("label.followers"): @project.getFollowersQty
+                                                </div>
+                                                <div class="friend-details-wrapper">
+                                                    <div class="friend-name">
+                                                    @project.getName
                                                     </div>
-                                            </div>
+                                                    <div class="friend-description">
+                                                        @Languages.message("label.objective"): $ @project.getObjective
+                                                        </div>
+                                                    <div class="projectView-followers">
+                                                        @Languages.message("label.followers"): @project.getFollowersQty
+                                                    </div>
+                                                </div>
+                                            </a>
                                             <div class="action-bar">
                                                 <button class="btn btn-primary" type="button">Follow</button>
                                             </div>
@@ -122,16 +124,18 @@
                                     <div class="col-md-4">
                                         <div class="friend-list">
                                             @for(project: Project <- Projects.getFollowedProjects(user.getId)) {
-                                                <div class="friend-profile-pic">
-                                                    <div class="user-profile-pic-normal">
-                                                        <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
+                                                <a href="@routes.Projects.showProject(project.getId)">
+                                                    <div class="friend-profile-pic">
+                                                        <div class="user-profile-pic-normal">
+                                                            <img width="35" height="35" src="@routes.Assets.at("img/briefcase.png")">
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="friend-details-wrapper">
-                                                    <div class="friend-name">@project.getName</div>
-                                                    <div class="friend-description">@Languages.message("label.objective"): $ @project.getObjective</div>
-                                                    <div class="projectView-followers">@Languages.message("label.followers"): @project.getFollowersQty</div>
-                                                </div>
+                                                    <div class="friend-details-wrapper">
+                                                        <div class="friend-name">@project.getName</div>
+                                                        <div class="friend-description">@Languages.message("label.objective"): $ @project.getObjective</div>
+                                                        <div class="projectView-followers">@Languages.message("label.followers"): @project.getFollowersQty</div>
+                                                    </div>
+                                                </a>
                                                 <div class="action-bar pull-right">
                                                     <button class="btn btn-primary" type="button">Follow</button>
                                                 </div>

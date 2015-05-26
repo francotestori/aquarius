@@ -32,11 +32,11 @@ public class Search extends AbstractController {
     private static List<Project> searchProjects(String criteria){
         List<Project> result = new ArrayList<>();
 
-        List<Project> byName = Project.find().where().like("name","%" + criteria + "%").findList();
-        List<Project> byTag = Project.find().where().like("tags.name", "%" + criteria + "%").findList();
-        List<Project> byType = Project.find().where().like("type.name","%" + criteria + "%").findList();
-        List<Project> byUserEmail = Project.find().where().like("user.email","%" + criteria + "%").findList();
-        List<Project> byDescription = Project.find().where().like("description","%" + criteria + "%").findList();
+        List<Project> byName = Project.find().where().ilike("name","%" + criteria + "%").findList();
+        List<Project> byTag = Project.find().where().ilike("tags.name", "%" + criteria + "%").findList();
+        List<Project> byType = Project.find().where().ilike("type.name","%" + criteria + "%").findList();
+        List<Project> byUserEmail = Project.find().where().ilike("user.email","%" + criteria + "%").findList();
+        List<Project> byDescription = Project.find().where().ilike("description","%" + criteria + "%").findList();
 
         for(Project project : byName){
             if(!result.contains(project)) result.add(project);
@@ -65,9 +65,9 @@ public class Search extends AbstractController {
     private static List<User> searchUsers(String criteria){
         List<User> result = new ArrayList<>();
 
-        List<User> byFirstName = User.find().where().like("firstName","%" + criteria + "%").findList();
-        List<User> byLastName = User.find().where().like("lastName","%" + criteria + "%").findList();
-        List<User> byEmail = User.find().where().like("email","%" + criteria + "%").findList();
+        List<User> byFirstName = User.find().where().ilike("firstName","%" + criteria + "%").findList();
+        List<User> byLastName = User.find().where().ilike("lastName","%" + criteria + "%").findList();
+        List<User> byEmail = User.find().where().ilike("email","%" + criteria + "%").findList();
 
         for(User user : byFirstName){
             if(!result.contains(user)) result.add(user);
