@@ -21,6 +21,8 @@ POST        /follow/user                       controllers.Users.followUser
 POST        /unfollow/user                     controllers.Users.unfollowUser
 GET         /list/followers                    controllers.Users.showFollowerList()
 GET         /list/following                    controllers.Users.showFollowingList()
+POST        /getNotifications                  controllers.Users.getNotifications
+POST        /readNotifications                 controllers.Users.readNotifications
 
 #Session
 GET         /login                             controllers.Application.login

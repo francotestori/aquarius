@@ -1,10 +1,13 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Fund extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

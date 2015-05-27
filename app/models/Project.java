@@ -1,5 +1,7 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import play.db.ebean.Model;
@@ -11,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Project extends Model {
 
     //Constructor variables

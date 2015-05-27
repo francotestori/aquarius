@@ -57,6 +57,17 @@ public class Projects extends AbstractController {
         comment.save();
         project.addComment(comment);
         project.update();
+
+        final Notification notification = new Notification();
+        notification.setUser(project.getUser());
+        notification.setDate(DateTime.now().toDate());
+        notification.setRead(false);
+        final String ownerMessage = user.getUsername() +
+                Languages.message(" has commented on ")
+                + project.getName();
+        notification.setMessage(Languages.message(ownerMessage));
+        notification.save();
+
         return ok("{ " +
                 "username : " + user.getUsername() + "," +
                 "date : " + DateTime.now() + "," +
@@ -113,6 +124,19 @@ public class Projects extends AbstractController {
             project.setActive(false);
             project.setEnd(endDate);
             project.save();
+
+            for (final User follower : user.getFollowers()) {
+                final Notification notification = new Notification();
+                notification.setUser(follower);
+                notification.setDate(DateTime.now().toDate());
+                notification.setRead(false);
+                final String ownerMessage = user.getUsername() +
+                        Languages.message(" has started a new project called ") +
+                        project.getName();
+                notification.setMessage(Languages.message(ownerMessage));
+                notification.save();
+            }
+
             return redirect("/project/" + project.getId());
         }
     }
@@ -217,6 +241,16 @@ public class Projects extends AbstractController {
         final User sessionUser = getSessionUser();
         final String id = form().bindFromRequest().get("id");
         final Project project = Project.find(Long.valueOf(id));
+
+        final Notification notification = new Notification();
+        notification.setUser(project.getUser());
+        notification.setDate(DateTime.now().toDate());
+        notification.setRead(false);
+        final String ownerMessage = sessionUser.getUsername() +
+                Languages.message(" is now following ") + project.getName();
+        notification.setMessage(Languages.message(ownerMessage));
+        notification.save();
+
         project.addFollower(sessionUser);
         project.save();
         return ok();
@@ -240,6 +274,26 @@ public class Projects extends AbstractController {
 
         final Fund fund = new Fund(amount, sessionUser, project);
         fund.save();
+
+        final Notification notification = new Notification();
+        notification.setUser(project.getUser());
+        notification.setDate(DateTime.now().toDate());
+        notification.setRead(false);
+        final String ownerMessage = sessionUser.getUsername() +
+                Languages.message(" has contributed ") +
+                "$" + amount + Languages.message(" to ")
+                + project.getName();
+        notification.setMessage(Languages.message(ownerMessage));
+        notification.save();
+
+        for (final User user : project.getFollowers()) {
+            final Notification followerNotif = new Notification();
+            followerNotif.setRead(false);
+            followerNotif.setMessage(project.getName() + Languages.message(" received funds"));
+            followerNotif.setDate(DateTime.now().toDate());
+            followerNotif.setUser(user);
+            followerNotif.save();
+        }
 
         project.addFund(fund);
         project.save();

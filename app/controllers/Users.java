@@ -1,10 +1,9 @@
 package controllers;
 
-import models.Country;
-import models.Image;
-import models.Project;
-import models.User;
+import models.*;
+import org.joda.time.DateTime;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Http.RequestBody;
 import play.mvc.Result;
@@ -96,6 +95,14 @@ public class Users extends AbstractController {
         final User user = User.find(Long.valueOf(id));
         user.addFollower(sessionUser);
         user.save();
+
+        final Notification notification = new Notification();
+        notification.setDate(DateTime.now().toDate());
+        notification.setMessage(sessionUser.getUsername() + "is now following you!");
+        notification.setRead(false);
+        notification.setUser(user);
+        notification.save();
+
         return ok();
     }
 
@@ -141,5 +148,44 @@ public class Users extends AbstractController {
 
     public static List<User> getFollowedUsers(User user) {
         return User.find().where().eq("followers.id", user.getId()).findList();
+    }
+
+    public static Result getNotifications(){
+        final Map<String, String> data = form().bindFromRequest().data();
+        final Long lup = Long.valueOf(data.get("lastUpdate"));
+        final User user = getSessionUser();
+
+        assert user != null;
+        final List<Notification> notifications = Notification
+                .find()
+                .where()
+                .eq("user_id", user.getId())
+                .eq("read", false)
+                .ge("date", new Date(lup))
+                .orderBy("date")
+                .findList();
+
+        final StringBuilder strb = new StringBuilder();
+        strb.append("{\"notifications\":[");
+        for (final Notification notification : notifications) {
+            strb.append("{\"message\":\"").append(notification.getMessage()).append("\",");
+            strb.append("\"date\":\"").append(new DateTime(notification.getDate()).toString("dd MM yyyy")).append("\",");
+            strb.append("\"id\":\"").append(notification.getId()).append("\"},");
+        }
+        if(strb.charAt(strb.length() - 1) == ',') strb.deleteCharAt(strb.length() - 1);
+        strb.append("]}");
+        return ok(strb.toString());
+    }
+
+    public static Result readNotifications(){
+        final Map<String, String> data = form().bindFromRequest().data();
+        for (final String s : data.values()) {
+            if (s != null && !s.equals("") && !s.equals(" ")) {
+                final Notification notification = Notification.find().byId(Long.valueOf(s));
+                notification.setRead(true);
+                notification.save();
+            }
+        }
+        return ok();
     }
 }
